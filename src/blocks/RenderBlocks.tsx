@@ -1,51 +1,83 @@
 import React, { Fragment } from 'react'
 
 import type { Page } from '@/payload-types'
+import type { Locale } from '@/i18n/config'
 
+import { ApproachBlockComponent } from '@/blocks/Approach/Component'
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
+import { AwardsBlockComponent } from '@/blocks/Awards/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
+import { ManifestHeroBlockComponent } from '@/blocks/ManifestHero/Component'
+import { ManifestStripBlockComponent } from '@/blocks/ManifestStrip/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { PartnersBlockComponent } from '@/blocks/Partners/Component'
+import { ProductLabelsBlockComponent } from '@/blocks/ProductLabels/Component'
+import { StatementBlockComponent } from '@/blocks/Statement/Component'
 
 const blockComponents = {
+  approach: ApproachBlockComponent,
   archive: ArchiveBlock,
+  awards: AwardsBlockComponent,
   content: ContentBlock,
   cta: CallToActionBlock,
   formBlock: FormBlock,
+  manifestHero: ManifestHeroBlockComponent,
+  manifestStrip: ManifestStripBlockComponent,
   mediaBlock: MediaBlock,
+  partners: PartnersBlockComponent,
+  productLabels: ProductLabelsBlockComponent,
+  statement: StatementBlockComponent,
 }
+
+/**
+ * The marketing sections own their vertical rhythm and their own hairline
+ * separators; the blocks inherited from the template still need the wrapper.
+ */
+const selfSpaced = new Set([
+  'approach',
+  'awards',
+  'cta',
+  'manifestHero',
+  'manifestStrip',
+  'partners',
+  'productLabels',
+  'statement',
+])
 
 export const RenderBlocks: React.FC<{
   blocks: Page['layout'][0][]
-}> = (props) => {
-  const { blocks } = props
-
+  locale: Locale
+}> = ({ blocks, locale }) => {
   const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0
 
-  if (hasBlocks) {
-    return (
-      <Fragment>
-        {blocks.map((block, index) => {
-          const { blockType } = block
+  if (!hasBlocks) return null
 
-          if (blockType && blockType in blockComponents) {
-            const Block = blockComponents[blockType]
+  return (
+    <Fragment>
+      {blocks.map((block, index) => {
+        const { blockType } = block
 
-            if (Block) {
-              return (
-                <div className="my-16" key={index}>
-                  {/* @ts-expect-error there may be some mismatch between the expected types here */}
-                  <Block {...block} disableInnerContainer />
-                </div>
-              )
-            }
-          }
-          return null
-        })}
-      </Fragment>
-    )
-  }
+        if (!blockType || !(blockType in blockComponents)) return null
 
-  return null
+        const Block = blockComponents[blockType]
+
+        if (!Block) return null
+
+        const rendered = (
+          // @ts-expect-error the union of block props is wider than any single block accepts
+          <Block {...block} disableInnerContainer locale={locale} />
+        )
+
+        return selfSpaced.has(blockType) ? (
+          <Fragment key={index}>{rendered}</Fragment>
+        ) : (
+          <div className="my-16" key={index}>
+            {rendered}
+          </div>
+        )
+      })}
+    </Fragment>
+  )
 }

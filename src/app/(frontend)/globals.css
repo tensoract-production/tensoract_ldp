@@ -44,14 +44,15 @@
   --breakpoint-xl: 80rem;
   --breakpoint-2xl: 86rem;
   --font-mono: var(--font-geist-mono);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-be-vietnam);
+  --font-display: var(--font-archivo);
 }
 
 @layer utilities {
   .container {
     width: 100%;
     margin-inline: auto;
-    padding-inline: 1rem;
+    padding-inline: 1.25rem;
   }
 
   @variant sm {
@@ -86,84 +87,104 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Tensoract — "Vận đơn" (shipping manifest)
+
+   Paper-white label stock, ink black, one signal colour for the verified state.
+   The palette comes from the thing Tensoract's software actually touches: a
+   packing bench, a printed shipping label, a scanner confirming the parcel is
+   right. Bright by default; the dark theme is the same label under warehouse
+   lighting.
+--------------------------------------------------------------------------- */
+
 :root {
-  --background: oklch(100% 0 0deg);
-  --foreground: oklch(14.5% 0 0deg);
-  --card: oklch(96.5% 0.005 265deg);
-  --card-foreground: oklch(14.5% 0 0deg);
-  --popover: oklch(100% 0 0deg);
-  --popover-foreground: oklch(14.5% 0 0deg);
-  --primary: oklch(20.5% 0 0deg);
-  --primary-foreground: oklch(98.5% 0 0deg);
-  --secondary: oklch(97% 0 0deg);
-  --secondary-foreground: oklch(20.5% 0 0deg);
-  --muted: oklch(97% 0 0deg);
-  --muted-foreground: oklch(55.6% 0 0deg);
-  --accent: oklch(97% 0 0deg);
-  --accent-foreground: oklch(20.5% 0 0deg);
+  /* Brand surface + ink */
+  --paper: oklch(99.2% 0.004 100deg);
+  --paper-sunk: oklch(96.8% 0.005 100deg);
+  --paper-edge: oklch(94.2% 0.006 100deg);
+  --ink: oklch(19% 0.014 250deg);
+  --ink-soft: oklch(46% 0.012 250deg);
+  --rule: oklch(89.5% 0.006 100deg);
+
+  /* The single accent: "đã xác thực" — the scan came back clean */
+  --verified: oklch(56% 0.135 162deg);
+  --verified-deep: oklch(44% 0.115 162deg);
+  --verified-wash: oklch(96.5% 0.032 162deg);
+
+  /* shadcn/ui token surface, re-pointed at the brand */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper-sunk);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--paper-sunk);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-sunk);
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--verified-wash);
+  --accent-foreground: var(--verified-deep);
   --destructive: oklch(57.7% 0.245 27.325deg);
-  --destructive-foreground: oklch(57.7% 0.245 27.325deg);
-  --border: oklch(92.2% 0 0deg);
-  --input: oklch(92.2% 0 0deg);
-  --ring: oklch(70.8% 0 0deg);
-  --chart-1: oklch(64.6% 0.222 41.116deg);
+  --destructive-foreground: oklch(98.5% 0 0deg);
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--verified);
+  --chart-1: var(--verified);
   --chart-2: oklch(60% 0.118 184.704deg);
   --chart-3: oklch(39.8% 0.07 227.392deg);
   --chart-4: oklch(82.8% 0.189 84.429deg);
   --chart-5: oklch(76.9% 0.188 70.08deg);
-  --radius: 0.625rem;
+  --radius: 0.25rem;
   --sidebar: oklch(98.5% 0 0deg);
-  --sidebar-foreground: oklch(14.5% 0 0deg);
-  --sidebar-primary: oklch(20.5% 0 0deg);
-  --sidebar-primary-foreground: oklch(98.5% 0 0deg);
-  --sidebar-accent: oklch(97% 0 0deg);
-  --sidebar-accent-foreground: oklch(20.5% 0 0deg);
-  --sidebar-border: oklch(92.2% 0 0deg);
-  --sidebar-ring: oklch(70.8% 0 0deg);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--paper);
+  --sidebar-accent: var(--paper-sunk);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--rule);
+  --sidebar-ring: var(--verified);
   --success: oklch(78% 0.08 200deg);
   --warning: oklch(89% 0.1 75deg);
   --error: oklch(75% 0.15 25deg);
 }
 
 [data-theme='dark'] {
-  --background: oklch(14.5% 0 0deg);
-  --foreground: oklch(98.5% 0 0deg);
-  --card: oklch(17% 0 0deg);
-  --card-foreground: oklch(98.5% 0 0deg);
-  --popover: oklch(14.5% 0 0deg);
-  --popover-foreground: oklch(98.5% 0 0deg);
-  --primary: oklch(98.5% 0 0deg);
-  --primary-foreground: oklch(20.5% 0 0deg);
-  --secondary: oklch(26.9% 0 0deg);
-  --secondary-foreground: oklch(98.5% 0 0deg);
-  --muted: oklch(26.9% 0 0deg);
-  --muted-foreground: oklch(70.8% 0 0deg);
-  --accent: oklch(26.9% 0 0deg);
-  --accent-foreground: oklch(98.5% 0 0deg);
-  --destructive: oklch(39.6% 0.141 25.723deg);
-  --destructive-foreground: oklch(63.7% 0.237 25.331deg);
-  --border: oklch(26.9% 0 0deg);
-  --input: oklch(26.9% 0 0deg);
-  --ring: oklch(43.9% 0 0deg);
-  --chart-1: oklch(48.8% 0.243 264.376deg);
+  --paper: oklch(17.5% 0.012 250deg);
+  --paper-sunk: oklch(21.5% 0.012 250deg);
+  --paper-edge: oklch(25% 0.012 250deg);
+  --ink: oklch(96.5% 0.004 100deg);
+  --ink-soft: oklch(70% 0.01 250deg);
+  --rule: oklch(28.5% 0.012 250deg);
+
+  --verified: oklch(74% 0.15 162deg);
+  --verified-deep: oklch(82% 0.13 162deg);
+  --verified-wash: oklch(25% 0.045 162deg);
+
+  --destructive: oklch(63.7% 0.237 25.331deg);
+  --destructive-foreground: oklch(98.5% 0 0deg);
   --chart-2: oklch(69.6% 0.17 162.48deg);
   --chart-3: oklch(76.9% 0.188 70.08deg);
   --chart-4: oklch(62.7% 0.265 303.9deg);
   --chart-5: oklch(64.5% 0.246 16.439deg);
-  --sidebar: oklch(20.5% 0 0deg);
-  --sidebar-foreground: oklch(98.5% 0 0deg);
-  --sidebar-primary: oklch(48.8% 0.243 264.376deg);
-  --sidebar-primary-foreground: oklch(98.5% 0 0deg);
-  --sidebar-accent: oklch(26.9% 0 0deg);
-  --sidebar-accent-foreground: oklch(98.5% 0 0deg);
-  --sidebar-border: oklch(26.9% 0 0deg);
-  --sidebar-ring: oklch(43.9% 0 0deg);
+  --sidebar: var(--paper-sunk);
   --success: oklch(28% 0.1 200deg);
   --warning: oklch(35% 0.08 70deg);
   --error: oklch(45% 0.1 25deg);
 }
 
 @theme inline {
+  --color-paper: var(--paper);
+  --color-paper-sunk: var(--paper-sunk);
+  --color-paper-edge: var(--paper-edge);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-rule: var(--rule);
+  --color-verified: var(--verified);
+  --color-verified-deep: var(--verified-deep);
+  --color-verified-wash: var(--verified-wash);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -188,10 +209,10 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -209,13 +230,106 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--verified-wash);
+    color: var(--verified-deep);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--verified);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Freight signage: Archivo pushed wide, set tight. Used for headlines only. */
+  .display {
+    font-family: var(--font-display), var(--font-sans), sans-serif;
+    font-variation-settings: 'wdth' 112;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    line-height: 0.94;
+    text-wrap: balance;
+  }
+
+  /* Manifest data: the small mono type that runs along a label. */
+  .manifest {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* A printed label: hairline box, ink header rule, paper fill. */
+  .label-card {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-top: 2px solid var(--ink);
+  }
+
+}
+
+/* The one orchestrated moment: on load the headline lines lift into place and
+   the label settles onto the page, as if it had just been printed. */
+@keyframes tsr-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes tsr-settle {
+  from {
+    opacity: 0;
+    transform: rotate(-4.5deg) translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-1.2deg);
+  }
+}
+
+@layer utilities {
+  .anim-rise {
+    animation: tsr-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .anim-settle {
+    animation: tsr-settle 0.9s cubic-bezier(0.2, 0.8, 0.25, 1) 0.25s both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
 html {
   opacity: 0;
+  scroll-behavior: smooth;
 }
 
 html[data-theme='dark'],

@@ -8,6 +8,7 @@ import { Categories } from './collections/Categories'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
+import { Products } from './collections/Products'
 import { Users } from './collections/Users'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
@@ -60,8 +61,18 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URL,
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [Pages, Posts, Products, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
+  localization: {
+    locales: [
+      { code: 'vi', label: 'Tiếng Việt' },
+      { code: 'en', label: 'English' },
+    ],
+    defaultLocale: 'vi',
+    // English falls back to the Vietnamese copy until an editor translates it,
+    // so a half-translated page never renders as blank.
+    fallback: true,
+  },
   globals: [Header, Footer],
   plugins,
   secret: process.env.PAYLOAD_SECRET,

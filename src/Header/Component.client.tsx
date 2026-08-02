@@ -1,41 +1,102 @@
 'use client'
-import { useHeaderTheme } from '@/providers/HeaderTheme'
+
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { SearchIcon } from 'lucide-react'
 
 import type { Header } from '@/payload-types'
+import type { Locale } from '@/i18n/config'
 
+import { CMSLink } from '@/components/Link'
+import { LocaleSwitcher } from '@/components/LocaleSwitcher'
 import { Logo } from '@/components/Logo/Logo'
-import { HeaderNav } from './Nav'
+import { getDictionary } from '@/i18n/dictionaries'
+import { cn } from '@/utilities/ui'
 
-interface HeaderClientProps {
-  data: Header
-}
+const navLinkClass = 'manifest text-ink-soft transition-colors hover:text-verified-deep'
 
-export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
-  /* Storing the value in a useState to avoid hydration errors */
-  const [theme, setTheme] = useState<string | null>(null)
-  const { headerTheme, setHeaderTheme } = useHeaderTheme()
+export const HeaderClient: React.FC<{ data: Header; locale: Locale }> = ({ data, locale }) => {
+  const [open, setOpen] = useState(false)
   const pathname = usePathname()
+  const dict = getDictionary(locale)
+  const navItems = data?.navItems || []
+  const cta = data?.ctaLinks?.[0]?.link
 
+  // Close the panel whenever navigation actually happens.
   useEffect(() => {
-    setHeaderTheme(null)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setOpen(false)
   }, [pathname])
 
-  useEffect(() => {
-    if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerTheme])
-
   return (
-    <header className="container relative z-20   " {...(theme ? { 'data-theme': theme } : {})}>
-      <div className="py-8 flex justify-between">
-        <Link href="/">
-          <Logo loading="eager" priority="high" className="invert dark:invert-0" />
+    <header className="sticky top-0 z-40 border-b border-rule bg-paper/85 backdrop-blur-md">
+      <div className="container flex h-16 items-center justify-between gap-6 md:h-[4.5rem]">
+        <Link
+          aria-label="Tensoract"
+          className="shrink-0 transition-colors hover:text-verified-deep"
+          href={`/${locale}`}
+        >
+          <Logo />
         </Link>
-        <HeaderNav data={data} />
+
+        <nav className="hidden items-center gap-7 lg:flex">
+          {navItems.map(({ link }, i) => (
+            <CMSLink className={navLinkClass} key={i} locale={locale} {...link} />
+          ))}
+        </nav>
+
+        <div className="hidden items-center gap-5 md:flex">
+          <LocaleSwitcher locale={locale} />
+          <Link
+            className="text-ink-soft transition-colors hover:text-verified-deep"
+            href={`/${locale}/search`}
+          >
+            <span className="sr-only">{dict.nav.search}</span>
+            <SearchIcon className="w-[1.15rem]" />
+          </Link>
+          {cta && (
+            <CMSLink
+              appearance="default"
+              className="h-10 px-5"
+              locale={locale}
+              size="lg"
+              {...cta}
+            />
+          )}
+        </div>
+
+        <button
+          aria-controls="mobile-nav"
+          aria-expanded={open}
+          className="manifest -mr-2 px-2 py-2 text-ink md:hidden"
+          onClick={() => setOpen((value) => !value)}
+          type="button"
+        >
+          {open ? dict.nav.close : dict.nav.menu}
+        </button>
+      </div>
+
+      <div
+        className={cn('border-t border-rule bg-paper md:hidden', !open && 'hidden')}
+        id="mobile-nav"
+      >
+        <nav className="container flex flex-col py-2">
+          {navItems.map(({ link }, i) => (
+            <CMSLink
+              className="manifest border-b border-rule py-4 text-ink"
+              key={i}
+              locale={locale}
+              {...link}
+            />
+          ))}
+          <Link className="manifest border-b border-rule py-4 text-ink" href={`/${locale}/search`}>
+            {dict.nav.search}
+          </Link>
+          <div className="flex items-center justify-between py-4">
+            <LocaleSwitcher locale={locale} />
+            {cta && <CMSLink appearance="default" locale={locale} size="lg" {...cta} />}
+          </div>
+        </nav>
       </div>
     </header>
   )

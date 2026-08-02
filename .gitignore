@@ -21,3 +21,11 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 tsconfig.tsbuildinfo
+
+# AI tooling installed into the project (vendored skill files, local settings).
+# PRODUCT.md and .impeccable/live/config.json are project context and stay tracked.
+.claude/skills/
+.claude/settings.local.json
+.gemini/
+.impeccable/live/sessions/
+.impeccable/live/roots.json
