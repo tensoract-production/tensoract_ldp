@@ -8,10 +8,18 @@ web
 
 ## Users
 
-**Primary: B2B partners and prospective business counterparties.** People evaluating
-whether Tensoract is a credible company to work with — partners, enterprise
-buyers, and organisations considering a relationship. Their job on this site is
-to decide whether the company is real, capable, and worth engaging.
+**Primary: B2B partners and prospective business counterparties**, confirmed as
+two groups:
+
+- **Investors.** Assessing whether this team executes. They need evidence of
+  shipping and momentum — never a statement about funding posture.
+- **Enterprises buying for internal use.** Assessing whether the software can
+  run inside their own operation. They need scale, reliability, and
+  operational-commitment signals.
+
+Their job on this site is to decide whether the company is real, capable, and
+worth engaging. **The action they should take is to email the company directly**
+— no booking flow, no gated download.
 
 This site is a company profile, not a product funnel. Individual products are
 sold on their own properties (e.g. goihangchuan.vn); end users of those products
@@ -107,7 +115,9 @@ pending.
 
 - No customer testimonials, case studies, named clients, or press coverage.
 - No revenue, user-count, retention, or performance metrics.
-- No product screenshots, demo footage, team photos, or partner logo files.
+- No product screenshots, demo footage, team photos, or partner logo files. The
+  user asked for office/team imagery to be **authored as illustration** and
+  treated as synthetic until real photography exists.
 - No verified contact email or phone number.
 - No awards beyond the single Startup Wheel 2024 entry.
 

@@ -1,5 +1,7 @@
 import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest } from 'payload'
 
+import { revalidateTag } from 'next/cache'
+
 import { contactForm as contactFormData } from './tensoract/contact-form'
 import { aboutPage, contactPage, footerGlobal, headerGlobal, homePage } from './tensoract/pages'
 import { categories as categorySeeds, posts as postSeeds } from './tensoract/posts'
@@ -255,6 +257,14 @@ export const seed = async ({
       context: { disableRevalidate: true },
       data: withIdsFrom(created, build('en')),
     })
+  }
+
+  // Every write above ran with `disableRevalidate`, so the globals' cache tags
+  // were never busted. Without this the header and footer keep serving the
+  // previous seed from `unstable_cache` — which survives a server restart,
+  // because that cache is written to disk.
+  for (const global of globals) {
+    revalidateTag(`global_${global}`, 'max')
   }
 
   payload.logger.info('Seeded Tensoract content successfully.')

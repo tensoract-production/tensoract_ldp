@@ -3,62 +3,53 @@ import React from 'react'
 import type { AwardsBlock } from '@/payload-types'
 import type { Locale } from '@/i18n/config'
 
-import { getDictionary } from '@/i18n/dictionaries'
+import { ArrowUpRight } from '@/components/Icon'
 import { Section, SectionHeader } from '@/components/Section'
-import { Stamp } from '@/components/Stamp'
+import { getDictionary } from '@/i18n/dictionaries'
 
 type Props = AwardsBlock & { locale: Locale }
 
 /**
- * A ledger, not a trophy shelf: one hairline-separated row per award, year in
- * the margin, and the stamp only where an outside body actually ruled on it.
+ * The seal lives here. It is pressed only against a result an outside body
+ * ruled on, which is why it means anything at all — a decorative seal on every
+ * section would be a sticker.
  */
-export const AwardsBlockComponent: React.FC<Props> = ({
-  eyebrow,
-  heading,
-  intro,
-  items,
-  locale,
-}) => (
+export const AwardsBlockComponent: React.FC<Props> = ({ heading, intro, items, locale }) => (
   <Section id="awards">
     <div className="container">
-      <SectionHeader eyebrow={eyebrow} heading={heading} intro={intro} />
+      <SectionHeader heading={heading} intro={intro} />
 
       {items && items.length > 0 && (
-        <ol className="mt-14 border-t border-rule">
+        <ol className="mt-16 border-t border-rule">
           {items.map((item, i) => (
             <li
-              className="grid gap-4 border-b border-rule py-8 md:grid-cols-12 md:gap-8"
+              className="grid gap-6 border-b border-rule py-10 md:grid-cols-12 md:gap-10"
               key={item.id ?? i}
             >
-              <p className="font-mono text-xl tabular-nums text-ink-soft md:col-span-2">
-                {item.year}
-              </p>
+              <p className="record tnum text-ink-soft md:col-span-2">{item.year}</p>
 
               <div className="md:col-span-7">
-                <h3 className="display text-[1.35rem]">{item.title}</h3>
-                <p className="manifest mt-2 text-ink-soft">{item.organisation}</p>
+                <h3 className="serif text-[1.6rem]">{item.title}</h3>
+                <p className="mt-2 text-ink-soft">{item.organisation}</p>
                 {item.description && (
-                  <p className="mt-3.5 max-w-[54ch] leading-relaxed text-ink-soft">
-                    {item.description}
-                  </p>
+                  <p className="measure mt-4 leading-relaxed text-ink-soft">{item.description}</p>
                 )}
                 {item.url && (
                   <a
-                    className="manifest mt-4 inline-flex items-center gap-1.5 text-ink underline decoration-rule underline-offset-4 transition-colors hover:text-verified-deep hover:decoration-verified"
+                    className="mt-5 inline-flex items-center gap-2 text-ink underline decoration-rule decoration-1 underline-offset-[6px] transition-colors hover:text-son-deep hover:decoration-son"
                     href={item.url}
                     rel="noopener noreferrer"
                     target="_blank"
                   >
                     {getDictionary(locale).awards.source}
-                    <span aria-hidden="true">↗</span>
+                    <ArrowUpRight />
                   </a>
                 )}
               </div>
 
               {item.result && (
-                <div className="md:col-span-3 md:justify-self-end md:pt-1">
-                  <Stamp>{item.result}</Stamp>
+                <div className="md:col-span-3 md:justify-self-end md:pt-2">
+                  <span className="seal">{item.result}</span>
                 </div>
               )}
             </li>

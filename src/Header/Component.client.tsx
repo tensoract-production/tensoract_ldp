@@ -3,18 +3,19 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { SearchIcon } from 'lucide-react'
 
 import type { Header } from '@/payload-types'
 import type { Locale } from '@/i18n/config'
 
 import { CMSLink } from '@/components/Link'
+import { Search } from '@/components/Icon'
 import { LocaleSwitcher } from '@/components/LocaleSwitcher'
 import { Logo } from '@/components/Logo/Logo'
 import { getDictionary } from '@/i18n/dictionaries'
 import { cn } from '@/utilities/ui'
 
-const navLinkClass = 'manifest text-ink-soft transition-colors hover:text-verified-deep'
+const navLink =
+  'text-ink-soft underline decoration-transparent decoration-1 underline-offset-[7px] transition-colors hover:text-son-deep hover:decoration-son'
 
 export const HeaderClient: React.FC<{ data: Header; locale: Locale }> = ({ data, locale }) => {
   const [open, setOpen] = useState(false)
@@ -23,36 +24,35 @@ export const HeaderClient: React.FC<{ data: Header; locale: Locale }> = ({ data,
   const navItems = data?.navItems || []
   const cta = data?.ctaLinks?.[0]?.link
 
-  // Close the panel whenever navigation actually happens.
   useEffect(() => {
     setOpen(false)
   }, [pathname])
 
   return (
-    <header className="sticky top-0 z-40 border-b border-rule bg-paper/85 backdrop-blur-md">
-      <div className="container flex h-16 items-center justify-between gap-6 md:h-[4.5rem]">
+    <header className="sticky top-0 z-40 border-b border-rule bg-paper/90 backdrop-blur-sm">
+      <div className="container flex h-[4.5rem] items-center justify-between gap-8">
         <Link
           aria-label="Tensoract"
-          className="shrink-0 transition-colors hover:text-verified-deep"
+          className="shrink-0 text-ink transition-colors hover:text-son-deep"
           href={`/${locale}`}
         >
           <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-8 lg:flex">
           {navItems.map(({ link }, i) => (
-            <CMSLink className={navLinkClass} key={i} locale={locale} {...link} />
+            <CMSLink className={navLink} key={i} locale={locale} {...link} />
           ))}
         </nav>
 
-        <div className="hidden items-center gap-5 md:flex">
+        <div className="hidden items-center gap-6 md:flex">
           <LocaleSwitcher locale={locale} />
           <Link
-            className="text-ink-soft transition-colors hover:text-verified-deep"
+            className="text-ink-soft transition-colors hover:text-son-deep"
             href={`/${locale}/search`}
           >
             <span className="sr-only">{dict.nav.search}</span>
-            <SearchIcon className="w-[1.15rem]" />
+            <Search />
           </Link>
           {cta && (
             <CMSLink
@@ -68,7 +68,7 @@ export const HeaderClient: React.FC<{ data: Header; locale: Locale }> = ({ data,
         <button
           aria-controls="mobile-nav"
           aria-expanded={open}
-          className="manifest -mr-2 px-2 py-2 text-ink md:hidden"
+          className="-mr-2 px-2 py-2 text-ink md:hidden"
           onClick={() => setOpen((value) => !value)}
           type="button"
         >
@@ -83,16 +83,16 @@ export const HeaderClient: React.FC<{ data: Header; locale: Locale }> = ({ data,
         <nav className="container flex flex-col py-2">
           {navItems.map(({ link }, i) => (
             <CMSLink
-              className="manifest border-b border-rule py-4 text-ink"
+              className="border-b border-rule py-4 text-ink"
               key={i}
               locale={locale}
               {...link}
             />
           ))}
-          <Link className="manifest border-b border-rule py-4 text-ink" href={`/${locale}/search`}>
+          <Link className="border-b border-rule py-4 text-ink" href={`/${locale}/search`}>
             {dict.nav.search}
           </Link>
-          <div className="flex items-center justify-between py-4">
+          <div className="flex items-center justify-between gap-4 py-5">
             <LocaleSwitcher locale={locale} />
             {cta && <CMSLink appearance="default" locale={locale} size="lg" {...cta} />}
           </div>

@@ -8,11 +8,7 @@ import { Media } from '@/components/Media'
 import { defaultLocale } from '@/i18n/config'
 import { formatAuthors } from '@/utilities/formatAuthors'
 
-/**
- * Posts open the way the rest of the site does: hairline rules, mono metadata,
- * the title set wide on paper. The hero image sits below the headline rather
- * than behind it, so nothing has to fight a gradient for contrast.
- */
+/** A post opens the way the rest of the sheet does: title, then the record line. */
 export const PostHero: React.FC<{
   post: Post
   locale?: Locale
@@ -27,26 +23,30 @@ export const PostHero: React.FC<{
     .filter(Boolean)
 
   return (
-    <header className="border-b border-rule pt-14 pb-12 md:pt-20">
+    <header className="border-b border-rule pt-16 pb-14 md:pt-24">
       <div className="container">
-        <div className="mx-auto max-w-[48rem]">
+        <div className="mx-auto max-w-[46rem]">
           {categoryNames.length > 0 && (
-            <p className="manifest text-ink-soft">{categoryNames.join(', ')}</p>
+            <p className="record text-ink-soft">{categoryNames.join(', ')}</p>
           )}
 
-          <h1 className="display mt-5 text-[clamp(2.1rem,5.5vw,3.75rem)]">{title}</h1>
+          <h1 className="serif mt-5 text-[clamp(2.1rem,5.2vw,3.6rem)]">{title}</h1>
 
-          <dl className="manifest mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-rule pt-5 text-ink-soft">
+          <dl className="mt-10 flex flex-wrap gap-x-12 gap-y-4 border-t border-rule pt-5">
             {hasAuthors && (
               <div>
-                <dt>{locale === 'vi' ? 'Tác giả' : 'Author'}</dt>
-                <dd className="mt-1 text-ink normal-case">{formatAuthors(populatedAuthors)}</dd>
+                <dt className="record text-ink-soft">
+                  {locale === 'vi' ? 'Tác giả' : 'Author'}
+                </dt>
+                <dd className="mt-1">{formatAuthors(populatedAuthors)}</dd>
               </div>
             )}
             {publishedAt && (
               <div>
-                <dt>{locale === 'vi' ? 'Đăng ngày' : 'Published'}</dt>
-                <dd className="mt-1 text-ink">
+                <dt className="record text-ink-soft">
+                  {locale === 'vi' ? 'Đăng ngày' : 'Published'}
+                </dt>
+                <dd className="mt-1">
                   <time dateTime={publishedAt}>{formatDateTime(publishedAt)}</time>
                 </dd>
               </div>
@@ -55,12 +55,12 @@ export const PostHero: React.FC<{
         </div>
 
         {heroImage && typeof heroImage !== 'string' && (
-          <div className="mx-auto mt-12 max-w-[56rem] border border-rule">
+          <div className="mx-auto mt-14 max-w-[54rem] border border-rule">
             <Media
               imgClassName="w-full object-cover"
               priority
               resource={heroImage}
-              size="(min-width: 56rem) 56rem, 100vw"
+              size="(min-width: 54rem) 54rem, 100vw"
             />
           </div>
         )}

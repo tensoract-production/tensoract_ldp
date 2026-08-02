@@ -41,7 +41,6 @@ export default async function Page({ params }: Args) {
       <PageIntro
         heading={dict.blog.title}
         intro={dict.blog.lead}
-        meta={`${posts.totalDocs} ${locale === 'vi' ? 'bài viết' : 'posts'}`}
       />
 
       <div className="py-14 md:py-16">

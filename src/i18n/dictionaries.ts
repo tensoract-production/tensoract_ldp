@@ -40,7 +40,7 @@ export const dictionaries = {
     },
     blog: {
       title: 'Blog',
-      lead: 'Ghi chép về sản phẩm, kỹ thuật và chuyện làm SaaS tự nuôi mình.',
+      lead: 'Ghi chép về sản phẩm, kỹ thuật và chuyện vận hành một đội nhỏ.',
       readPost: 'Đọc bài',
       empty: 'Chưa có bài viết nào.',
       relatedTitle: 'Bài liên quan',
@@ -97,7 +97,7 @@ export const dictionaries = {
     },
     blog: {
       title: 'Blog',
-      lead: 'Notes on product, engineering, and building a bootstrapped SaaS.',
+      lead: 'Notes on product, engineering, and running a small team.',
       readPost: 'Read post',
       empty: 'No posts yet.',
       relatedTitle: 'Related posts',

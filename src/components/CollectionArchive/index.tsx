@@ -19,23 +19,15 @@ export const CollectionArchive: React.FC<Props> = ({
 }) => {
   return (
     <div className={cn('container', className)}>
-      <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="border-b border-rule">
         {posts?.map((result, index) => {
           if (typeof result !== 'object' || result === null) return null
 
           return (
-            <li className="flex" key={index}>
-              <Card
-                className="w-full"
-                doc={result}
-                locale={locale}
-                relationTo="posts"
-                showCategories
-              />
-            </li>
+            <Card doc={result} key={index} locale={locale} relationTo="posts" showCategories />
           )
         })}
-      </ul>
+      </div>
     </div>
   )
 }

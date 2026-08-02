@@ -3,97 +3,89 @@ import React from 'react'
 import type { ManifestHeroBlock } from '@/payload-types'
 import type { Locale } from '@/i18n/config'
 
-import { Barcode } from '@/components/Barcode'
 import { CMSLink } from '@/components/Link'
-import { Eyebrow } from '@/components/Section'
-import { Stamp } from '@/components/Stamp'
+import { PlateWorkroom } from '@/components/Woodblock'
 
 type Props = ManifestHeroBlock & { locale?: Locale }
 
+/**
+ * The first viewport is the thesis: the headline at press scale on bare paper,
+ * a plate of the workroom beside it, and beneath both a single printed line of
+ * registration facts closed by the seal. No hero card, no metric band.
+ */
 export const ManifestHeroBlockComponent: React.FC<Props> = ({
-  eyebrow,
   headline,
   labelCode,
   labelRows,
   labelStamp,
-  labelTitle,
   lead,
   links,
   locale,
 }) => {
   const lines = headline.split('\n').filter((line) => line.trim().length > 0)
-  const code = labelCode || 'TSR-2022'
 
   return (
     <section className="pt-14 pb-20 md:pt-20 md:pb-28">
-      <div className="container grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
-        <div className="lg:col-span-7">
-          {eyebrow && <Eyebrow className="anim-rise">{eyebrow}</Eyebrow>}
-
-          <h1 className="display mt-6 text-[clamp(2.75rem,8.5vw,6rem)]">
-            {lines.map((line, i) => (
-              <span
-                className="anim-rise block"
-                key={i}
-                style={{ animationDelay: `${0.06 * (i + 1)}s` }}
-              >
-                {line}{' '}
-              </span>
-            ))}
-          </h1>
-
-          {lead && (
-            <p
-              className="anim-rise mt-7 max-w-[46ch] text-lg leading-relaxed text-ink-soft md:text-xl"
-              style={{ animationDelay: `${0.06 * (lines.length + 1)}s` }}
-            >
-              {lead}
-            </p>
-          )}
-
-          {links && links.length > 0 && (
-            <div
-              className="anim-rise mt-9 flex flex-wrap gap-3"
-              style={{ animationDelay: `${0.06 * (lines.length + 2)}s` }}
-            >
-              {links.map(({ link }, i) => (
-                <CMSLink key={i} locale={locale} size="lg" {...link} />
+      <div className="container">
+        <div className="grid items-end gap-14 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-7">
+            <h1 className="serif anim-settle text-[clamp(2.5rem,6.6vw,5rem)]">
+              {lines.map((line, i) => (
+                <span className="block" key={i}>
+                  {line}{' '}
+                </span>
               ))}
-            </div>
-          )}
-        </div>
+            </h1>
 
-        {/* The signature: a printed shipping label, freshly stamped. */}
-        <div className="lg:col-span-5">
-          <div className="anim-settle label-card mx-auto max-w-[26rem] shadow-[0_18px_40px_-28px_rgb(0_0_0/0.35)]">
-            <div className="flex items-start justify-between gap-4 border-b border-rule px-5 py-3.5">
-              <span className="manifest pt-1.5 text-ink-soft">{code}</span>
-              {labelStamp && <Stamp>{labelStamp}</Stamp>}
-            </div>
-
-            {labelTitle && (
-              <p className="display px-5 pt-6 pb-5 text-[1.75rem]">{labelTitle}</p>
+            {lead && (
+              <p
+                className="measure anim-settle mt-8 text-lg leading-relaxed text-ink-soft md:text-xl"
+                style={{ animationDelay: '0.1s' }}
+              >
+                {lead}
+              </p>
             )}
 
-            {labelRows && labelRows.length > 0 && (
-              <dl className="px-5 pb-6">
-                {labelRows.map((row) => (
-                  <div className="border-t border-rule py-3.5 first:border-t-0" key={row.id}>
-                    <dt className="manifest text-ink-soft">{row.label}</dt>
-                    <dd className="mt-1.5 leading-snug">{row.value}</dd>
-                  </div>
+            {links && links.length > 0 && (
+              <div
+                className="anim-settle mt-10 flex flex-wrap items-center gap-x-8 gap-y-4"
+                style={{ animationDelay: '0.18s' }}
+              >
+                {links.map(({ link }, i) => (
+                  <CMSLink key={i} locale={locale} size={i === 0 ? 'lg' : undefined} {...link} />
                 ))}
-              </dl>
-            )}
-
-            <div className="border-t border-rule px-5 pt-4 pb-4">
-              <div className="text-ink">
-                <Barcode count={54} height={34} value={code} />
               </div>
-              <p className="manifest mt-2.5 text-ink-soft">{code}</p>
-            </div>
+            )}
           </div>
+
+          <figure
+            className="anim-settle lg:col-span-5"
+            style={{ animationDelay: '0.26s' }}
+          >
+            <PlateWorkroom label="Xưởng làm việc của Tensoract, dựng theo lối tranh khắc gỗ" />
+            <figcaption className="record mt-4 text-ink-soft">
+              Tranh khắc dựng tay — chưa phải ảnh chụp thật
+            </figcaption>
+          </figure>
         </div>
+
+        {/* The registration line: the facts a public record already holds. */}
+        {labelRows && labelRows.length > 0 && (
+          <dl className="mt-20 flex flex-wrap items-center gap-x-10 gap-y-5 border-t border-rule pt-6 md:mt-24">
+            {labelCode && <dt className="record sr-only">{labelCode}</dt>}
+            {labelRows.map((row) => (
+              <div className="flex items-baseline gap-3" key={row.id}>
+                <dt className="record text-ink-soft">{row.label}</dt>
+                <dd className="text-ink">{row.value}</dd>
+              </div>
+            ))}
+            {labelStamp && (
+              <dd className="seal ml-auto" title={labelCode ?? undefined}>
+                {labelStamp}
+              </dd>
+            )}
+          </dl>
+        )}
       </div>
     </section>
   )

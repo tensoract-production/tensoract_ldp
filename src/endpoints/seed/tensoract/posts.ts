@@ -80,7 +80,7 @@ export const posts: PostSeed[] = [
       title: 'Bảy người thì tổ chức việc thế nào',
       content: doc(
         p(
-          'Chúng tôi có bảy người và năm sản phẩm đang chạy. Con số đó buộc mọi quyết định về quy trình phải rất tiết kiệm.',
+          'Chúng tôi có bảy người và bốn sản phẩm đang chạy. Con số đó buộc mọi quyết định về quy trình phải rất tiết kiệm.',
         ),
         h('h2', 'Ba quy ước chúng tôi giữ'),
         ul([
@@ -96,14 +96,14 @@ export const posts: PostSeed[] = [
       meta: {
         title: 'Bảy người thì tổ chức việc thế nào',
         description:
-          'Ba quy ước giúp một đội bảy người duy trì năm sản phẩm mà không cần thêm tầng quản lý.',
+          'Ba quy ước giúp một đội bảy người duy trì bốn sản phẩm mà không cần thêm tầng quản lý.',
       },
     },
     en: {
       title: 'How seven people organise the work',
       content: doc(
         p(
-          'We are seven people with five products in operation. That number forces every process decision to be frugal.',
+          'We are seven people with four products in operation. That number forces every process decision to be frugal.',
         ),
         h('h2', 'Three rules we keep'),
         ul([
@@ -119,42 +119,42 @@ export const posts: PostSeed[] = [
       meta: {
         title: 'How seven people organise the work',
         description:
-          'Three rules that let a seven-person team maintain five products without adding a management layer.',
+          'Three rules that let a seven-person team maintain four products without adding a management layer.',
       },
     },
   },
   {
-    slug: 'chon-ha-tang-khi-khong-co-von-ngoai',
+    slug: 'chon-ha-tang-cho-mot-doi-nho',
     categoryKey: 'engineering',
     vi: {
-      title: 'Chọn hạ tầng khi không có vốn ngoài',
+      title: 'Chọn hạ tầng cho một đội nhỏ',
       content: doc(
         p(
-          'Tự nuôi mình có một hệ quả rất trực tiếp lên kỹ thuật: hoá đơn hạ tầng tháng này là tiền thật của tháng này, không phải một dòng trong bảng đốt vốn.',
+          'Bảy người vận hành bốn sản phẩm thì mỗi giờ dành cho hạ tầng là một giờ không dành cho sản phẩm. Ranh giới giữa thuê và tự làm vì thế phải rất rõ.',
         ),
         h('h2', 'Thuê thì thuê hẳn'),
         p(
-          'Chúng tôi không tự dựng trung tâm dữ liệu, không tự vận hành cụm Kubernetes cho vui. Máy chủ, CDN và phần mô hình đều thuê của Google Cloud, AWS, Microsoft và Cloudflare — những chỗ mà chi phí có thể dự đoán và có thể tắt bớt khi cần.',
+          'Chúng tôi không tự dựng trung tâm dữ liệu, không tự vận hành cụm Kubernetes cho vui. Máy chủ, CDN và phần mô hình đều thuê của Google Cloud, AWS, Microsoft và Cloudflare — những chỗ chi phí dự đoán được và tắt bớt được khi cần.',
         ),
         h('h2', 'Phần nào thì tự viết'),
         p(
           'Ngược lại, toàn bộ logic sản phẩm là của đội. Đó là phần khách hàng trả tiền, và cũng là phần duy nhất mà việc phụ thuộc vào nhà cung cấp sẽ khiến chúng tôi mất quyền quyết định.',
         ),
         p(
-          'Ranh giới đó không phải triết lý. Nó đơn giản là chỗ chúng tôi vẽ ra để hoá đơn cuối tháng còn dự đoán được.',
+          'Ranh giới đó không phải triết lý. Nó đơn giản là chỗ chúng tôi vẽ ra để một đội nhỏ vẫn kiểm soát được thứ mình vận hành.',
         ),
       ),
       meta: {
-        title: 'Chọn hạ tầng khi không có vốn ngoài',
+        title: 'Chọn hạ tầng cho một đội nhỏ',
         description:
           'Vì sao chúng tôi thuê toàn bộ hạ tầng và chỉ tự viết phần logic sản phẩm.',
       },
     },
     en: {
-      title: 'Choosing infrastructure without investor money',
+      title: 'Choosing infrastructure for a small team',
       content: doc(
         p(
-          'Being bootstrapped has a very direct consequence for engineering: this month’s infrastructure bill is this month’s real money, not a line in a burn chart.',
+          'Seven people running four products means every hour spent on infrastructure is an hour not spent on the products. The line between renting and building has to be sharp.',
         ),
         h('h2', 'If you rent, rent properly'),
         p(
@@ -165,11 +165,11 @@ export const posts: PostSeed[] = [
           'The product logic, on the other hand, is entirely ours. That is what customers pay for, and it is the one place where depending on a vendor would cost us the ability to decide.',
         ),
         p(
-          'That line is not a philosophy. It is simply where we drew it so the end-of-month bill stays predictable.',
+          'That line is not a philosophy. It is simply where we drew it so a small team still controls what it operates.',
         ),
       ),
       meta: {
-        title: 'Choosing infrastructure without investor money',
+        title: 'Choosing infrastructure for a small team',
         description: 'Why we rent all of our infrastructure and only write the product logic.',
       },
     },

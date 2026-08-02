@@ -44,7 +44,6 @@ export default async function Page({ params }: Args) {
       <PageIntro
         heading={dict.blog.title}
         intro={dict.blog.lead}
-        meta={`${locale === 'vi' ? 'Trang' : 'Page'} ${sanitizedPageNumber} / ${posts.totalPages}`}
       />
 
       <div className="py-14 md:py-16">

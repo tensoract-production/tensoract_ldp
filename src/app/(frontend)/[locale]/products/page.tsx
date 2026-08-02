@@ -3,8 +3,7 @@ import type { Metadata } from 'next/types'
 import React from 'react'
 
 import { PageIntro } from '@/components/PageIntro'
-import { ProductCard, productGridCols } from '@/components/ProductCard'
-import { cn } from '@/utilities/ui'
+import { ProductRow } from '@/components/ProductCard'
 import { toLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 import { findProducts } from '@/utilities/getProducts'
@@ -22,27 +21,16 @@ export default async function Page({ params }: Args) {
 
   return (
     <div>
-      <PageIntro
-        heading={dict.products.indexTitle}
-        intro={dict.products.indexLead}
-        meta={`${products.length} ${locale === 'vi' ? 'sản phẩm' : 'products'}`}
-      />
+      <PageIntro heading={dict.products.indexTitle} intro={dict.products.indexLead} />
 
-      <div className="py-14 md:py-16">
+      <div className="py-4 md:py-8">
         <div className="container">
           {products.length === 0 ? (
-            <p className="text-ink-soft">{dict.products.empty}</p>
+            <p className="py-16 text-ink-soft">{dict.products.empty}</p>
           ) : (
-            <ul className={cn('grid gap-5', productGridCols(products.length))}>
+            <ul className="border-b border-rule">
               {products.map((product) => (
-                <li className="flex" key={product.id}>
-                  <ProductCard
-                    className="w-full"
-                    dict={dict}
-                    locale={locale}
-                    product={product}
-                  />
-                </li>
+                <ProductRow dict={dict} key={product.id} locale={locale} product={product} />
               ))}
             </ul>
           )}

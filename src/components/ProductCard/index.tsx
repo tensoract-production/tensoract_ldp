@@ -5,17 +5,9 @@ import type { Product } from '@/payload-types'
 import type { Locale } from '@/i18n/config'
 import type { Dictionary } from '@/i18n/dictionaries'
 
-import { Barcode } from '@/components/Barcode'
-import { StatusChip } from '@/components/StatusChip'
+import { ArrowRight } from '@/components/Icon'
+import { plateForSlug } from '@/components/Woodblock'
 import { cn } from '@/utilities/ui'
-
-/**
- * Four label cards fill a four-column row exactly; anything else reads better
- * in threes. Keeps the grid from ending on a lone orphan card.
- */
-export function productGridCols(count: number): string {
-  return count % 4 === 0 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-2 lg:grid-cols-3'
-}
 
 export function hostOf(url?: string | null): string | null {
   if (!url) return null
@@ -27,63 +19,49 @@ export function hostOf(url?: string | null): string | null {
 }
 
 /**
- * A product printed as a shipping label: tracking code and status on the
- * header rule, the name set large, a barcode along the tear line, and the
- * destination on the footer rule.
+ * A product reads as an entry in a printed index, not a card in a grid: each
+ * row is a different length because each product is a different size, and the
+ * rules between them are the only container needed.
  */
-export const ProductCard: React.FC<{
+export const ProductRow: React.FC<{
   product: Product
   locale: Locale
   dict: Dictionary
   className?: string
-}> = ({ product, locale, dict, className }) => {
+}> = ({ className, dict, locale, product }) => {
+  const Plate = plateForSlug(product.slug)
   const host = hostOf(product.externalUrl)
 
   return (
-    <article
-      className={cn(
-        'label-card group relative flex flex-col transition-[transform,border-color] duration-200',
-        'hover:-translate-y-0.5 hover:border-ink/25',
-        className,
-      )}
-    >
-      <div className="flex items-center justify-between gap-3 border-b border-rule px-5 py-3">
-        <span className="manifest text-ink-soft">{product.code}</span>
-        <StatusChip label={dict.products.status[product.status]} status={product.status} />
-      </div>
+    <li className={cn('border-t border-rule', className)}>
+      <Link
+        className="group grid items-start gap-6 py-10 md:grid-cols-12 md:gap-8 md:py-12"
+        href={`/${locale}/products/${product.slug}`}
+      >
+        <div className="w-28 md:col-span-2 md:w-full md:max-w-[8.5rem]">
+          <Plate />
+        </div>
 
-      <div className="flex flex-1 flex-col gap-2.5 px-5 pt-7 pb-8">
-        <h3 className="display text-[1.55rem]">
-          <Link
-            className="outline-none after:absolute after:inset-0 after:content-['']"
-            href={`/${locale}/products/${product.slug}`}
-          >
+        <div className="md:col-span-6">
+          <h3 className="serif text-[clamp(1.6rem,3vw,2.15rem)] transition-colors group-hover:text-son-deep">
             {product.title}
-          </Link>
-        </h3>
-        {product.tagline && (
-          <p className="leading-relaxed text-ink-soft">{product.tagline}</p>
-        )}
-      </div>
+          </h3>
+          {product.tagline && (
+            <p className="measure mt-3 leading-relaxed text-ink-soft">{product.tagline}</p>
+          )}
+        </div>
 
-      <div className="px-5 text-ink/80 transition-colors duration-200 group-hover:text-verified">
-        <Barcode count={38} height={24} value={`${product.code}-${product.slug}`} />
-      </div>
-
-      <div className="mt-3 flex items-center justify-between gap-3 border-t border-rule px-5 py-3">
-        <span className="manifest truncate text-ink-soft">
-          {host ?? dict.products.category[product.category ?? 'ecommerce']}
-        </span>
-        <span className="manifest inline-flex shrink-0 items-center gap-1.5 text-ink transition-colors group-hover:text-verified-deep">
-          {dict.products.readMore}
-          <span
-            aria-hidden="true"
-            className="transition-transform duration-200 group-hover:translate-x-0.5"
-          >
-            →
+        <div className="flex flex-col gap-2 md:col-span-4 md:items-end md:text-right">
+          <span className="record text-ink-soft">
+            {product.code} · {dict.products.status[product.status]}
           </span>
-        </span>
-      </div>
-    </article>
+          {host && <span className="record text-ink-soft">{host}</span>}
+          <span className="mt-2 inline-flex items-center gap-2 text-ink transition-colors group-hover:text-son-deep">
+            {dict.products.readMore}
+            <ArrowRight className="transition-transform duration-200 group-hover:translate-x-1" />
+          </span>
+        </div>
+      </Link>
+    </li>
   )
 }

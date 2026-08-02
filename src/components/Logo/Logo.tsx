@@ -3,40 +3,33 @@ import React from 'react'
 
 interface Props {
   className?: string
-  /** Kept for call-site compatibility with the template; the mark is inline SVG. */
   loading?: 'lazy' | 'eager'
   priority?: 'auto' | 'high' | 'low'
   showWordmark?: boolean
 }
 
 /**
- * The mark is four bars in a box: a barcode read at a glance, and the closest
- * thing to a tensor the shipping-label world has. The wordmark is the display
- * face pushed to its widest, which is where Archivo looks most like signage.
+ * A cut mark: one square block with the counter carved out of it, the way a
+ * seal is cut in reverse. Solid ink, no stroke — a block prints or it does not.
  */
 export const Logo = ({ className, showWordmark = true }: Props) => (
   <span className={clsx('inline-flex items-center gap-2.5', className)}>
     <svg
       aria-hidden="true"
-      className="h-5 w-5 shrink-0"
-      fill="none"
+      className="h-[1.15rem] w-[1.15rem] shrink-0"
+      fill="currentColor"
       viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect height="19" rx="1.5" stroke="currentColor" strokeWidth="1" width="19" x="0.5" y="0.5" />
-      <rect fill="currentColor" height="10" width="2" x="4" y="5" />
-      <rect fill="currentColor" height="10" width="1" x="7.5" y="5" />
-      <rect fill="currentColor" height="10" width="3" x="10" y="5" />
-      <rect fill="currentColor" height="10" width="1" x="15" y="5" />
+      <path d="M0 0h20v20H0V0zm4 4v3.4h4.3V16h3.4V7.4H16V4H4z" />
     </svg>
     {showWordmark && (
       <span
-        className="text-[1.0625rem] leading-none"
+        className="text-[1.2rem] leading-none"
         style={{
-          fontFamily: 'var(--font-archivo), sans-serif',
-          fontVariationSettings: "'wdth' 118",
+          fontFamily: 'var(--font-petrona), Georgia, serif',
           fontWeight: 600,
-          letterSpacing: '0.01em',
+          letterSpacing: '-0.015em',
         }}
       >
         Tensoract

@@ -20,11 +20,14 @@ export const LocaleSwitcher: React.FC<{ locale: Locale; className?: string }> = 
   const rest = pathname.replace(new RegExp(`^/(${locales.join('|')})(?=/|$)`), '')
 
   return (
-    <nav aria-label={getDictionary(locale).langSwitch} className={cn('manifest flex items-center', className)}>
+    <nav
+      aria-label={getDictionary(locale).langSwitch}
+      className={cn('record flex items-center', className)}
+    >
       {locales.map((code, i) => (
         <Fragment key={code}>
           {i > 0 && (
-            <span aria-hidden="true" className="px-1.5 text-ink-soft/50">
+            <span aria-hidden="true" className="px-1.5 text-rule">
               /
             </span>
           )}
@@ -32,7 +35,7 @@ export const LocaleSwitcher: React.FC<{ locale: Locale; className?: string }> = 
             aria-current={code === locale ? 'true' : undefined}
             className={cn(
               'transition-colors',
-              code === locale ? 'text-ink' : 'text-ink-soft hover:text-verified-deep',
+              code === locale ? 'text-ink' : 'text-ink-soft hover:text-son-deep',
             )}
             href={`/${code}${rest}`}
             hrefLang={code}

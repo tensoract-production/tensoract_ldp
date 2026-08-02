@@ -2,31 +2,23 @@ import React from 'react'
 
 import type { StatementBlock as Props } from '@/payload-types'
 
-import { Eyebrow, Section } from '@/components/Section'
+import { Section } from '@/components/Section'
 
 export const StatementBlockComponent: React.FC<Props> = ({
   attribution,
   attributionRole,
-  eyebrow,
   text,
 }) => (
   <Section tone="sunk">
     <div className="container">
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-
-      <blockquote className="display mt-7 max-w-[22ch] text-[clamp(1.9rem,5vw,3.5rem)]">
+      <blockquote className="serif max-w-[20ch] text-[clamp(2rem,5.4vw,3.9rem)]">
         {text}
       </blockquote>
 
       {attribution && (
-        <footer className="manifest mt-9 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-ink-soft">
+        <footer className="mt-10 flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <span className="text-ink">{attribution}</span>
-          {attributionRole && (
-            <>
-              <span aria-hidden="true">/</span>
-              <span>{attributionRole}</span>
-            </>
-          )}
+          {attributionRole && <span className="record text-ink-soft">{attributionRole}</span>}
         </footer>
       )}
     </div>

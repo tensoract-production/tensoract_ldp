@@ -10,10 +10,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-verified-deep',
+        default: 'bg-primary text-primary-foreground hover:bg-son-deep',
         destructive: 'bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/90',
         outline:
-          'border border-ink/25 bg-transparent hover:border-ink hover:bg-transparent hover:text-verified-deep',
+          'border border-ink/30 bg-transparent hover:border-son hover:bg-transparent hover:text-son-deep',
         secondary: 'bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
@@ -22,8 +22,8 @@ const buttonVariants = cva(
         clear: '',
         default: 'h-10 px-4 py-2 has-[>svg]:px-3',
         sm: 'h-9 rounded-md px-3 has-[>svg]:px-2.5',
-        // Primary page actions read like an instruction printed on the label.
-        lg: 'h-12 rounded-sm px-7 font-mono text-xs uppercase tracking-[0.13em] has-[>svg]:px-5',
+        // Printed, not chromed: a solid impression with generous bearing.
+        lg: 'h-12 rounded-sm px-7 text-[0.95rem] has-[>svg]:px-6',
         icon: 'size-10',
       },
     },

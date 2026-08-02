@@ -7,12 +7,17 @@ import React, { Fragment } from 'react'
 import type { Post } from '@/payload-types'
 import type { Locale } from '@/i18n/config'
 
+import { ArrowRight } from '@/components/Icon'
 import { Media } from '@/components/Media'
 import { defaultLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 
 export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
 
+/**
+ * A post is an entry in the same printed index the products use — one rule
+ * between each, length set by the writing rather than by a card.
+ */
 export const Card: React.FC<{
   alignItems?: 'center'
   className?: string
@@ -44,62 +49,54 @@ export const Card: React.FC<{
 
   return (
     <article
-      className={cn(
-        'label-card group flex cursor-pointer flex-col transition-[transform,border-color] duration-200',
-        'hover:-translate-y-0.5 hover:border-ink/25',
-        className,
-      )}
+      className={cn('group cursor-pointer border-t border-rule', className)}
       ref={card.ref}
     >
-      {metaImage && typeof metaImage !== 'string' && (
-        <div className="border-b border-rule bg-paper-sunk">
-          <Media
-            imgClassName="aspect-[16/9] w-full object-cover"
-            resource={metaImage}
-            size="33vw"
-          />
-        </div>
-      )}
-
-      {showCategories && hasCategories && (
-        <div className="manifest border-b border-rule px-5 py-3 text-ink-soft">
-          {categories?.map((category, index) => {
-            if (typeof category !== 'object' || category === null) return null
-
-            const categoryTitle = category.title || '—'
-            const isLast = index === categories.length - 1
-
-            return (
-              <Fragment key={index}>
-                {categoryTitle}
-                {!isLast && <Fragment>,&nbsp;</Fragment>}
-              </Fragment>
-            )
-          })}
-        </div>
-      )}
-
-      <div className="flex flex-1 flex-col gap-2.5 px-5 pt-6 pb-7">
-        {titleToUse && (
-          <h3 className="display text-[1.3rem]">
-            <Link className="outline-none" href={href} ref={link.ref}>
-              {titleToUse}
-            </Link>
-          </h3>
+      <div className="grid items-start gap-6 py-10 md:grid-cols-12 md:gap-8 md:py-12">
+        {metaImage && typeof metaImage !== 'string' && (
+          <div className="md:col-span-2">
+            <Media
+              imgClassName="aspect-[4/3] w-full border border-rule object-cover"
+              resource={metaImage}
+              size="20vw"
+            />
+          </div>
         )}
-        {sanitizedDescription && (
-          <p className="line-clamp-3 leading-relaxed text-ink-soft">{sanitizedDescription}</p>
-        )}
-      </div>
 
-      <div className="manifest flex items-center justify-between border-t border-rule px-5 py-3 text-ink transition-colors group-hover:text-verified-deep">
-        {dict.blog.readPost}
-        <span
-          aria-hidden="true"
-          className="transition-transform duration-200 group-hover:translate-x-0.5"
-        >
-          →
-        </span>
+        <div className={cn('md:col-span-7', !metaImage && 'md:col-start-1')}>
+          {showCategories && hasCategories && (
+            <p className="record mb-3 text-ink-soft">
+              {categories?.map((category, index) => {
+                if (typeof category !== 'object' || category === null) return null
+                const isLast = index === categories.length - 1
+                return (
+                  <Fragment key={index}>
+                    {category.title || '—'}
+                    {!isLast && <Fragment>,&nbsp;</Fragment>}
+                  </Fragment>
+                )
+              })}
+            </p>
+          )}
+
+          {titleToUse && (
+            <h3 className="serif text-[clamp(1.5rem,2.8vw,2rem)] transition-colors group-hover:text-son-deep">
+              <Link className="outline-none" href={href} ref={link.ref}>
+                {titleToUse}
+              </Link>
+            </h3>
+          )}
+          {sanitizedDescription && (
+            <p className="measure mt-3 leading-relaxed text-ink-soft">{sanitizedDescription}</p>
+          )}
+        </div>
+
+        <div className="md:col-span-2 md:col-start-11 md:justify-self-end md:pt-2">
+          <span className="inline-flex items-center gap-2 text-ink transition-colors group-hover:text-son-deep">
+            {dict.blog.readPost}
+            <ArrowRight className="transition-transform duration-200 group-hover:translate-x-1" />
+          </span>
+        </div>
       </div>
     </article>
   )

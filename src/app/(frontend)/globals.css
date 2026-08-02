@@ -45,14 +45,14 @@
   --breakpoint-2xl: 86rem;
   --font-mono: var(--font-geist-mono);
   --font-sans: var(--font-be-vietnam);
-  --font-display: var(--font-archivo);
+  --font-serif: var(--font-petrona);
 }
 
 @layer utilities {
   .container {
     width: 100%;
     margin-inline: auto;
-    padding-inline: 1.25rem;
+    padding-inline: 1.5rem;
   }
 
   @variant sm {
@@ -64,7 +64,7 @@
   @variant md {
     .container {
       max-width: var(--breakpoint-md);
-      padding-inline: 2rem;
+      padding-inline: 2.5rem;
     }
   }
 
@@ -88,30 +88,27 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Tensoract — "Vận đơn" (shipping manifest)
+   Tensoract — Giấy dó & mộc bản
 
-   Paper-white label stock, ink black, one signal colour for the verified state.
-   The palette comes from the thing Tensoract's software actually touches: a
-   packing bench, a printed shipping label, a scanner confirming the parcel is
-   right. Bright by default; the dark theme is the same label under warehouse
-   lighting.
+   Vietnamese handmade paper and woodblock print. The ground is dó paper with
+   its fibre still visible; the ink is the warm black of a cut block, never a
+   neutral grey-black. Cinnabar is a seal, not an accent: it appears only where
+   somebody outside this company attested to something.
 --------------------------------------------------------------------------- */
 
 :root {
-  /* Brand surface + ink */
-  --paper: oklch(99.2% 0.004 100deg);
-  --paper-sunk: oklch(96.8% 0.005 100deg);
-  --paper-edge: oklch(94.2% 0.006 100deg);
-  --ink: oklch(19% 0.014 250deg);
-  --ink-soft: oklch(46% 0.012 250deg);
-  --rule: oklch(89.5% 0.006 100deg);
+  --paper: oklch(95.2% 0.012 84deg);
+  --paper-sunk: oklch(92.4% 0.016 82deg);
+  --paper-edge: oklch(89% 0.018 80deg);
+  --ink: oklch(23% 0.014 60deg);
+  --ink-soft: oklch(50% 0.016 62deg);
+  --rule: oklch(84.5% 0.018 80deg);
 
-  /* The single accent: "đã xác thực" — the scan came back clean */
-  --verified: oklch(56% 0.135 162deg);
-  --verified-deep: oklch(44% 0.115 162deg);
-  --verified-wash: oklch(96.5% 0.032 162deg);
+  /* Son — cinnabar seal ink. Reserved for attested facts. */
+  --son: oklch(52% 0.155 34deg);
+  --son-deep: oklch(43% 0.14 33deg);
+  --son-wash: oklch(93% 0.03 40deg);
 
-  /* shadcn/ui token surface, re-pointed at the brand */
   --background: var(--paper);
   --foreground: var(--ink);
   --card: var(--paper-sunk);
@@ -124,54 +121,50 @@
   --secondary-foreground: var(--ink);
   --muted: var(--paper-sunk);
   --muted-foreground: var(--ink-soft);
-  --accent: var(--verified-wash);
-  --accent-foreground: var(--verified-deep);
-  --destructive: oklch(57.7% 0.245 27.325deg);
-  --destructive-foreground: oklch(98.5% 0 0deg);
+  --accent: var(--son-wash);
+  --accent-foreground: var(--son-deep);
+  --destructive: oklch(52% 0.19 27deg);
+  --destructive-foreground: oklch(98% 0 0deg);
   --border: var(--rule);
   --input: var(--rule);
-  --ring: var(--verified);
-  --chart-1: var(--verified);
-  --chart-2: oklch(60% 0.118 184.704deg);
-  --chart-3: oklch(39.8% 0.07 227.392deg);
-  --chart-4: oklch(82.8% 0.189 84.429deg);
-  --chart-5: oklch(76.9% 0.188 70.08deg);
-  --radius: 0.25rem;
-  --sidebar: oklch(98.5% 0 0deg);
+  --ring: var(--son);
+  --chart-1: var(--son);
+  --chart-2: oklch(55% 0.09 150deg);
+  --chart-3: oklch(45% 0.07 240deg);
+  --chart-4: oklch(70% 0.12 70deg);
+  --chart-5: oklch(60% 0.1 20deg);
+  --radius: 0.125rem;
+  --sidebar: var(--paper);
   --sidebar-foreground: var(--ink);
   --sidebar-primary: var(--ink);
   --sidebar-primary-foreground: var(--paper);
   --sidebar-accent: var(--paper-sunk);
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: var(--rule);
-  --sidebar-ring: var(--verified);
-  --success: oklch(78% 0.08 200deg);
-  --warning: oklch(89% 0.1 75deg);
-  --error: oklch(75% 0.15 25deg);
+  --sidebar-ring: var(--son);
+  --success: oklch(55% 0.09 150deg);
+  --warning: oklch(70% 0.12 70deg);
+  --error: oklch(52% 0.19 27deg);
 }
 
+/* Dark is the same paper under a low lamp: the ink inverts, the cinnabar
+   brightens just enough to stay legible, and nothing turns neutral grey. */
 [data-theme='dark'] {
-  --paper: oklch(17.5% 0.012 250deg);
-  --paper-sunk: oklch(21.5% 0.012 250deg);
-  --paper-edge: oklch(25% 0.012 250deg);
-  --ink: oklch(96.5% 0.004 100deg);
-  --ink-soft: oklch(70% 0.01 250deg);
-  --rule: oklch(28.5% 0.012 250deg);
+  --paper: oklch(21% 0.014 62deg);
+  --paper-sunk: oklch(25% 0.014 62deg);
+  --paper-edge: oklch(29% 0.014 62deg);
+  --ink: oklch(93% 0.012 82deg);
+  --ink-soft: oklch(72% 0.014 74deg);
+  --rule: oklch(33% 0.014 62deg);
 
-  --verified: oklch(74% 0.15 162deg);
-  --verified-deep: oklch(82% 0.13 162deg);
-  --verified-wash: oklch(25% 0.045 162deg);
+  --son: oklch(68% 0.14 36deg);
+  --son-deep: oklch(76% 0.12 40deg);
+  --son-wash: oklch(29% 0.045 34deg);
 
-  --destructive: oklch(63.7% 0.237 25.331deg);
-  --destructive-foreground: oklch(98.5% 0 0deg);
-  --chart-2: oklch(69.6% 0.17 162.48deg);
-  --chart-3: oklch(76.9% 0.188 70.08deg);
-  --chart-4: oklch(62.7% 0.265 303.9deg);
-  --chart-5: oklch(64.5% 0.246 16.439deg);
-  --sidebar: var(--paper-sunk);
-  --success: oklch(28% 0.1 200deg);
-  --warning: oklch(35% 0.08 70deg);
-  --error: oklch(45% 0.1 25deg);
+  --destructive: oklch(64% 0.2 27deg);
+  --success: oklch(65% 0.1 150deg);
+  --warning: oklch(76% 0.12 70deg);
+  --error: oklch(64% 0.2 27deg);
 }
 
 @theme inline {
@@ -181,9 +174,9 @@
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-rule: var(--rule);
-  --color-verified: var(--verified);
-  --color-verified-deep: var(--verified-deep);
-  --color-verified-wash: var(--verified-wash);
+  --color-son: var(--son);
+  --color-son-deep: var(--son-deep);
+  --color-son-wash: var(--son-wash);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -209,10 +202,10 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 2px);
+  --radius-sm: var(--radius);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 2px);
-  --radius-xl: calc(var(--radius) + 6px);
+  --radius-xl: calc(var(--radius) + 4px);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -228,43 +221,67 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
 
   body {
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+
+  /* The fibre in the sheet. Fixed so the whole site reads as one pressing,
+     and behind everything so it never touches text rendering. */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23f)' opacity='0.14'/%3E%3C/svg%3E");
+  }
+
+  [data-theme='dark'] body::before {
+    mix-blend-mode: screen;
+    opacity: 0.22;
+  }
+
+  body > * {
+    position: relative;
+    z-index: 1;
   }
 
   ::selection {
-    background: var(--verified-wash);
-    color: var(--verified-deep);
+    background: var(--son-wash);
+    color: var(--son-deep);
   }
 
   :focus-visible {
-    outline: 2px solid var(--verified);
+    outline: 2px solid var(--son);
     outline-offset: 3px;
   }
 }
 
 @layer components {
-  /* Freight signage: Archivo pushed wide, set tight. Used for headlines only. */
-  .display {
-    font-family: var(--font-display), var(--font-sans), sans-serif;
-    font-variation-settings: 'wdth' 112;
-    font-weight: 600;
-    letter-spacing: -0.022em;
-    line-height: 0.94;
+  /* Petrona, cut rather than drawn. Display type carries the page. */
+  .serif {
+    font-family: var(--font-serif), Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    line-height: 1.04;
     text-wrap: balance;
   }
 
-  /* Manifest data: the small mono type that runs along a label. */
-  .manifest {
+  /* Only for measured record data — codes, years, counts. Never as costume. */
+  .record {
     font-family: var(--font-mono), ui-monospace, monospace;
-    font-size: 0.6875rem;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
     font-variant-numeric: tabular-nums;
   }
 
@@ -272,22 +289,41 @@
     font-variant-numeric: tabular-nums;
   }
 
-  /* A printed label: hairline box, ink header rule, paper fill. */
-  .label-card {
-    position: relative;
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    border-top: 2px solid var(--ink);
+  /* Comfortable reading measure for prose passages. */
+  .measure {
+    max-width: 68ch;
   }
 
+  /* A printed edge, thicker and warmer than a UI hairline. */
+  .edge-top {
+    border-top: 1px solid var(--rule);
+  }
+
+  /* The seal: pressed by hand, so never quite square, and the ink sits
+     unevenly. Used only where something was attested from outside. */
+  .seal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-4.5deg);
+    border: 2px solid var(--son);
+    border-radius: 2px;
+    padding: 0.4rem 0.7rem;
+    color: var(--son-deep);
+    font-family: var(--font-mono), monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.92;
+  }
 }
 
-/* The one orchestrated moment: on load the headline lines lift into place and
-   the label settles onto the page, as if it had just been printed. */
-@keyframes tsr-rise {
+/* One authored moment: the page arrives as a sheet being laid down —
+   the headline settles first, the plate after it. */
+@keyframes tsr-settle {
   from {
     opacity: 0;
-    transform: translateY(0.45em);
+    transform: translateY(0.5rem);
   }
   to {
     opacity: 1;
@@ -295,24 +331,9 @@
   }
 }
 
-@keyframes tsr-settle {
-  from {
-    opacity: 0;
-    transform: rotate(-4.5deg) translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: rotate(-1.2deg);
-  }
-}
-
 @layer utilities {
-  .anim-rise {
-    animation: tsr-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  }
-
   .anim-settle {
-    animation: tsr-settle 0.9s cubic-bezier(0.2, 0.8, 0.25, 1) 0.25s both;
+    animation: tsr-settle 0.85s cubic-bezier(0.16, 0.84, 0.24, 1) both;
   }
 }
 

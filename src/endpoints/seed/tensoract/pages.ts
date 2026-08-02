@@ -4,6 +4,17 @@ import { doc, h, p } from './lexical'
 
 const pick = <T,>(locale: Locale, vi: T, en: T): T => (locale === 'vi' ? vi : en)
 
+/**
+ * Written for the audience PRODUCT.md confirms: investors judging execution and
+ * enterprises judging whether this can run inside their operation.
+ *
+ * Two things are load-bearing and must not drift back:
+ * - no claim about funding posture, in either language;
+ * - no copy addressed to individual online sellers, who buy on the product sites.
+ */
+
+const EMAIL = 'hello@tensoract.vn'
+
 /* -------------------------------------------------------------------------- */
 /* Home                                                                        */
 /* -------------------------------------------------------------------------- */
@@ -16,91 +27,81 @@ export const homePage = (locale: Locale) => ({
   meta: {
     title: pick(
       locale,
-      'Tensoract — SaaS cho thương mại điện tử',
-      'Tensoract — SaaS for e-commerce',
+      'Tensoract — phần mềm vận hành cho thương mại điện tử',
+      'Tensoract — operations software for e-commerce',
     ),
     description: pick(
       locale,
-      'Công ty SaaS tự nuôi tại Thủ Đức, TP.HCM. Chúng tôi làm phần mềm cho người bán hàng online: video đóng gói, quản lý vận đơn và thiết kế bằng AI.',
-      'A bootstrapped SaaS company in Thu Duc, Ho Chi Minh City. We build software for online sellers: packing video, parcel management, and AI-assisted design.',
+      'Công ty phần mềm tại Thủ Đức, TP.HCM. Bốn sản phẩm đang vận hành trong khâu đóng gói, vận đơn, thiết kế và tuyển sinh.',
+      'A software company in Thu Duc, Ho Chi Minh City. Four products running in packing, shipping, design and school admissions.',
     ),
   },
   layout: [
     {
       blockType: 'manifestHero' as const,
-      eyebrow: pick(
-        locale,
-        'SaaS tự nuôi · Thủ Đức, TP.HCM · Từ 2022',
-        'Bootstrapped SaaS · Thu Duc, HCMC · Since 2022',
-      ),
       headline: pick(
         locale,
-        'Bảy người,\nnăm phần mềm\nđang chạy thật.',
-        'Seven people,\nfive products\nrunning today.',
+        'Chúng tôi làm\nphần mềm vận hành\ncho thương mại\nđiện tử.',
+        'We build\noperations software\nfor e-commerce.',
       ),
       lead: pick(
         locale,
-        'Tensoract làm SaaS cho thương mại điện tử: quay video đóng gói để giảm tranh chấp hoàn hàng, quản lý vận đơn, và dựng thiết kế bằng AI. Tự nuôi từ 2022, không gọi vốn ngoài.',
-        'Tensoract builds SaaS for e-commerce: video proof of packing to cut return disputes, parcel management, and AI-assisted design. Bootstrapped since 2022, no outside capital.',
+        'Tensoract là công ty phần mềm tại Thủ Đức, TP.HCM. Bốn sản phẩm của chúng tôi đang chạy thật trong khâu đóng gói, vận đơn, thiết kế và tuyển sinh — do một đội bảy người xây và tự vận hành.',
+        'Tensoract is a software company in Thu Duc, Ho Chi Minh City. Four products are running today across packing, shipping, design and school admissions — built and operated by a team of seven.',
       ),
       links: [
         {
           link: {
             type: 'custom' as const,
-            label: pick(locale, 'Xem sản phẩm', 'See the products'),
-            url: '/products',
+            label: EMAIL,
+            url: `mailto:${EMAIL}`,
             appearance: 'default' as const,
           },
         },
         {
           link: {
             type: 'custom' as const,
-            label: pick(locale, 'Liên hệ', 'Get in touch'),
-            url: '/lien-he',
+            label: pick(locale, 'Xem sản phẩm', 'See the products'),
+            url: '/products',
             appearance: 'outline' as const,
           },
         },
       ],
       labelCode: 'TSR-2022',
       labelTitle: 'Tensoract Co., Ltd',
-      labelStamp: pick(locale, 'Tự nuôi', 'Bootstrapped'),
+      labelStamp: pick(locale, 'Đăng ký 2022', 'Registered 2022'),
       labelRows: [
         {
           label: pick(locale, 'Trụ sở', 'Registered'),
           value: pick(locale, 'Thủ Đức, TP. Hồ Chí Minh', 'Thu Duc, Ho Chi Minh City'),
         },
-        {
-          label: pick(locale, 'Thành lập', 'Founded'),
-          value: pick(locale, '2022 · Không vốn ngoài', '2022 · No outside capital'),
-        },
         { label: pick(locale, 'Đội ngũ', 'Team'), value: pick(locale, '7 người', '7 people') },
         {
           label: pick(locale, 'Sản phẩm', 'Products'),
-          value: pick(locale, '5 đang vận hành', '5 in operation'),
+          value: pick(locale, '4 đang vận hành', '4 in operation'),
         },
       ],
     },
     {
       blockType: 'manifestStrip' as const,
       items: [
-        { value: '2022', label: pick(locale, 'Năm thành lập', 'Founded') },
-        { value: '7', label: pick(locale, 'Người trong đội', 'People on the team') },
-        { value: '5', label: pick(locale, 'Sản phẩm đang chạy', 'Products running') },
-        { value: '100+', label: pick(locale, 'Buổi seminar đã tổ chức', 'Seminars run') },
+        { value: '2022', label: pick(locale, 'thành lập', 'founded') },
+        { value: '7', label: pick(locale, 'người trong đội', 'people on the team') },
+        { value: '4', label: pick(locale, 'sản phẩm đang chạy', 'products running') },
+        { value: '100+', label: pick(locale, 'buổi seminar đã tổ chức', 'seminars run') },
       ],
     },
     {
       blockType: 'productLabels' as const,
-      eyebrow: pick(locale, 'Danh mục sản phẩm', 'Product manifest'),
       heading: pick(
         locale,
-        'Mỗi sản phẩm giải một việc cụ thể.',
-        'Each product solves one specific job.',
+        'Bốn sản phẩm, mỗi cái giải một việc cụ thể.',
+        'Four products, each solving one specific job.',
       ),
       intro: pick(
         locale,
-        'Không có nền tảng tất-cả-trong-một. Mỗi sản phẩm bắt đầu từ một việc mà người bán hàng đang phải làm tay mỗi ngày.',
-        'No all-in-one platform. Each product started from something a seller was still doing by hand every day.',
+        'Không có nền tảng tất-cả-trong-một. Mỗi sản phẩm bắt đầu từ một khâu vận hành mà phần mềm lớn bỏ qua, và được vận hành như một dịch vụ riêng.',
+        'No all-in-one platform. Each product started from an operational step the large systems skip, and each runs as its own service.',
       ),
       source: 'featured' as const,
       limit: 6,
@@ -117,66 +118,63 @@ export const homePage = (locale: Locale) => ({
     },
     {
       blockType: 'approach' as const,
-      eyebrow: pick(locale, 'Cách làm việc', 'How we work'),
-      heading: pick(locale, 'Tự nuôi mình nghĩa là gì', 'What bootstrapped actually means'),
+      heading: pick(locale, 'Cách chúng tôi làm việc', 'How we work'),
       intro: pick(
         locale,
-        'Không có vốn ngoài, nên mọi thứ chúng tôi xây đều phải tự sống được. Điều đó quyết định cách chúng tôi chọn việc.',
-        'With no outside capital, everything we build has to pay for itself. That decides what we take on.',
+        'Bảy người không thể làm mọi thứ, nên phần lớn công việc là chọn đúng thứ để làm.',
+        'Seven people cannot do everything, so most of the work is choosing the right thing to do.',
       ),
       items: [
         {
-          title: pick(locale, 'Sản phẩm phải tự nuôi được', 'A product has to pay for itself'),
+          title: pick(locale, 'Mỗi sản phẩm giải đúng một việc', 'One product, one job'),
           description: pick(
             locale,
-            'Chúng tôi không xây tính năng để đi gọi vốn. Một sản phẩm chỉ đi tiếp nếu có người trả tiền để dùng nó.',
-            'We do not build features to raise money. A product only continues if someone pays to use it.',
+            'Chúng tôi không gộp bốn sản phẩm thành một nền tảng. Mỗi cái có khách riêng, vòng đời riêng, và có thể bị dừng riêng nếu không còn ai cần.',
+            'We do not merge four products into a platform. Each has its own customers, its own lifecycle, and can be retired on its own if nobody needs it.',
           ),
         },
         {
-          title: pick(locale, 'AI đặt đúng chỗ', 'AI where it earns its place'),
+          title: pick(locale, 'AI đặt ở khâu tốn công nhất', 'AI where the work actually is'),
           description: pick(
             locale,
-            'Chúng tôi dùng AI ở khâu tốn công nhất — đọc video đóng gói, dựng bản thiết kế nháp, gợi ý tổ hợp môn — chứ không dán nhãn AI lên mọi nút bấm.',
-            'We use AI on the most laborious step — reading packing footage, drafting artwork, suggesting subject combinations — not as a badge on every button.',
+            'Đọc video đóng gói, dựng bản thiết kế nháp, gợi ý tổ hợp môn. Đó là những chỗ mô hình thay được sức người; phần còn lại vẫn là phần mềm bình thường và nên như vậy.',
+            'Reading packing footage, drafting artwork, suggesting subject combinations. Those are the places a model replaces real labour; the rest is ordinary software and should stay that way.',
           ),
         },
         {
-          title: pick(locale, 'Ra bản nhỏ, ra sớm', 'Ship small, ship early'),
+          title: pick(locale, 'Ra bản dùng được sớm', 'Ship something usable early'),
           description: pick(
             locale,
-            'Bảy người thì không giấu được một sản phẩm suốt nửa năm. Chúng tôi đưa bản dùng được ra sớm rồi sửa theo người dùng thật.',
-            'Seven people cannot hide a product for six months. We put a usable version out early and fix it against real users.',
+            'Một đội nhỏ không giấu được sản phẩm suốt nửa năm. Chúng tôi đưa bản chạy được ra tay người dùng thật rồi sửa theo cái họ thực sự làm.',
+            'A small team cannot hide a product for six months. We put a working version in real hands and fix it against what people actually do.',
           ),
         },
         {
-          title: pick(locale, 'Hạ tầng thì thuê, sản phẩm thì tự viết', 'Rent the rack, own the product'),
+          title: pick(locale, 'Hạ tầng thuê, logic tự viết', 'Rent the rack, own the logic'),
           description: pick(
             locale,
-            'Máy chủ, CDN và phần mô hình đều thuê. Toàn bộ logic sản phẩm thì đội tự viết, vì đó là phần khách hàng trả tiền.',
-            'Servers, CDN, and model capacity are rented. The product logic we write ourselves, because that is what customers pay for.',
+            'Máy chủ, CDN và phần mô hình thuê của Google Cloud, AWS, Microsoft và Cloudflare. Toàn bộ logic sản phẩm do đội tự viết, vì đó là phần không thể thuê ngoài.',
+            'Servers, CDN and model capacity are rented from Google Cloud, AWS, Microsoft and Cloudflare. The product logic is written in-house, because that is the part nobody can rent out.',
           ),
         },
       ],
     },
     {
       blockType: 'statement' as const,
-      eyebrow: pick(locale, 'Tầm nhìn', 'Vision'),
       text: pick(
         locale,
-        'Trở thành công ty Bootstrapped SaaS tiên phong tại Việt Nam, bằng những sản phẩm đơn giản và mạnh.',
-        'To become the leading bootstrapped SaaS company in Vietnam, through products that stay simple and stay strong.',
+        'Làm ra những phần mềm đơn giản và mạnh, cho đúng những khâu vận hành mà hệ thống lớn bỏ qua.',
+        'Make software that stays simple and stays strong, for the operational steps large systems leave alone.',
       ),
       attribution: 'Võ Quốc Thịnh',
       attributionRole: pick(locale, 'Nhà sáng lập', 'Founder'),
     },
     {
       blockType: 'awards' as const,
-      eyebrow: pick(locale, 'Ghi nhận', 'Recognition'),
-      heading: pick(locale, 'Giải thưởng & ghi nhận', 'Awards & recognition'),
+      heading: pick(locale, 'Ghi nhận', 'Recognition'),
       intro: pick(
         locale,
-        'Những lần chúng tôi mang sản phẩm ra khỏi văn phòng và để người khác chấm.',
+        'Những lần chúng tôi mang sản phẩm ra khỏi văn phòng và để bên ngoài chấm.',
         'The times we took a product out of the office and let someone else judge it.',
       ),
       items: [
@@ -199,8 +197,11 @@ export const homePage = (locale: Locale) => ({
     },
     {
       blockType: 'partners' as const,
-      eyebrow: pick(locale, 'Đối tác', 'Partners'),
-      heading: pick(locale, 'Chúng tôi dựng trên hạ tầng của ai', 'Whose infrastructure we build on'),
+      heading: pick(
+        locale,
+        'Chúng tôi dựng trên hạ tầng của ai',
+        'Whose infrastructure we build on',
+      ),
       intro: pick(
         locale,
         'Một đội bảy người không tự xây trung tâm dữ liệu. Đây là nơi chúng tôi thuê hạ tầng, và những tổ chức đã đồng hành.',
@@ -230,19 +231,12 @@ export const homePage = (locale: Locale) => ({
     {
       blockType: 'cta' as const,
       richText: doc(
-        h(
-          'h2',
-          pick(
-            locale,
-            'Đang có một việc lặp đi lặp lại mỗi ngày?',
-            'Something you repeat by hand every day?',
-          ),
-        ),
+        h('h2', pick(locale, 'Muốn làm việc cùng chúng tôi?', 'Want to work with us?')),
         p(
           pick(
             locale,
-            'Kể cho chúng tôi nghe. Phần lớn sản phẩm của Tensoract bắt đầu đúng từ một câu chuyện như vậy.',
-            'Tell us about it. Most Tensoract products started from exactly that kind of story.',
+            'Viết thư thẳng cho đội. Không có biểu mẫu sàng lọc, không có lịch hẹn phải đặt trước — chúng tôi đọc hết và thường trả lời trong vài ngày làm việc.',
+            'Write to the team directly. No qualification form, no calendar to book — we read everything and usually reply within a few working days.',
           ),
         ),
       ),
@@ -250,8 +244,8 @@ export const homePage = (locale: Locale) => ({
         {
           link: {
             type: 'custom' as const,
-            label: pick(locale, 'Liên hệ', 'Contact us'),
-            url: '/lien-he',
+            label: EMAIL,
+            url: `mailto:${EMAIL}`,
             appearance: 'default' as const,
           },
         },
@@ -273,19 +267,22 @@ export const aboutPage = (locale: Locale) => ({
     title: pick(locale, 'Về Tensoract', 'About Tensoract'),
     description: pick(
       locale,
-      'Tensoract là công ty SaaS tự nuôi thành lập năm 2022 tại Thủ Đức, TP.HCM, làm phần mềm cho lĩnh vực thương mại điện tử.',
-      'Tensoract is a bootstrapped SaaS company founded in 2022 in Thu Duc, Ho Chi Minh City, building software for e-commerce.',
+      'Tensoract thành lập năm 2022 tại Thủ Đức, TP.HCM, làm phần mềm vận hành cho lĩnh vực thương mại điện tử.',
+      'Tensoract was founded in 2022 in Thu Duc, Ho Chi Minh City, building operations software for e-commerce.',
     ),
   },
   layout: [
     {
       blockType: 'manifestHero' as const,
-      eyebrow: pick(locale, 'Hồ sơ công ty', 'Company record'),
-      headline: pick(locale, 'Một công ty\nnhỏ, làm việc\ncông khai.', 'A small company,\nworking\nin the open.'),
+      headline: pick(
+        locale,
+        'Một công ty nhỏ,\nlàm việc công khai.',
+        'A small company,\nworking in the open.',
+      ),
       lead: pick(
         locale,
-        'Tensoract thành lập năm 2022 tại Thủ Đức, TP.HCM. Chúng tôi làm phần mềm dạng SaaS cho lĩnh vực thương mại điện tử và tự trang trải bằng doanh thu từ sản phẩm.',
-        'Tensoract was founded in 2022 in Thu Duc, Ho Chi Minh City. We build SaaS software for e-commerce and pay for it with revenue from the products.',
+        'Thành lập năm 2022 tại Thủ Đức, TP.HCM. Chúng tôi xây và tự vận hành phần mềm dạng SaaS cho ngành thương mại điện tử, và công bố những gì có thể kiểm chứng được.',
+        'Founded in 2022 in Thu Duc, Ho Chi Minh City. We build and operate SaaS software for e-commerce, and publish what can be checked.',
       ),
       links: [
         {
@@ -299,7 +296,7 @@ export const aboutPage = (locale: Locale) => ({
       ],
       labelCode: 'TSR-HS-01',
       labelTitle: 'Tensoract Co., Ltd',
-      labelStamp: pick(locale, 'Đang hoạt động', 'Active'),
+      labelStamp: pick(locale, 'Đăng ký 2022', 'Registered 2022'),
       labelRows: [
         {
           label: pick(locale, 'Địa chỉ', 'Address'),
@@ -313,15 +310,10 @@ export const aboutPage = (locale: Locale) => ({
           label: pick(locale, 'Lĩnh vực', 'Field'),
           value: pick(locale, 'Phần mềm SaaS · Thương mại điện tử', 'SaaS software · E-commerce'),
         },
-        {
-          label: pick(locale, 'Mô hình', 'Model'),
-          value: pick(locale, 'Tự nuôi, không vốn ngoài', 'Bootstrapped, no outside capital'),
-        },
       ],
     },
     {
       blockType: 'statement' as const,
-      eyebrow: pick(locale, 'Sứ mệnh', 'Mission'),
       text: pick(
         locale,
         'Tạo ra các sản phẩm SaaS đơn giản và mạnh mẽ.',
@@ -338,31 +330,31 @@ export const aboutPage = (locale: Locale) => ({
             p(
               pick(
                 locale,
-                'Công ty ra đời năm 2022 với một quan sát đơn giản: phần lớn phần mềm cho người bán hàng online ở Việt Nam hoặc quá lớn và đắt, hoặc là một file Excel. Khoảng giữa gần như bỏ trống.',
-                'The company started in 2022 from a simple observation: most software for online sellers in Vietnam is either too large and expensive, or it is a spreadsheet. The middle was mostly empty.',
+                'Công ty ra đời năm 2022 từ một quan sát đơn giản: phần mềm cho ngành thương mại điện tử ở Việt Nam hoặc quá lớn và đắt, hoặc là một file Excel. Khoảng giữa gần như bỏ trống.',
+                'The company started in 2022 from a simple observation: software for Vietnamese e-commerce is either too large and expensive, or it is a spreadsheet. The middle was mostly empty.',
               ),
             ),
             p(
               pick(
                 locale,
-                'Chúng tôi chọn chỗ đó. Mỗi sản phẩm nhắm vào một việc cụ thể mà người bán đang phải làm tay, và được định giá để một cửa hàng nhỏ vẫn trả nổi.',
-                'We took that middle. Each product targets one specific job a seller is still doing by hand, priced so that a small shop can afford it.',
+                'Chúng tôi chọn khoảng giữa đó. Mỗi sản phẩm nhắm vào một khâu vận hành cụ thể, và được định giá để một doanh nghiệp vừa vẫn trả nổi.',
+                'We took that middle. Each product targets one specific operational step, priced so a mid-sized business can afford it.',
               ),
             ),
-            h('h2', pick(locale, 'Vì sao không gọi vốn', 'Why we did not raise')),
+            h('h2', pick(locale, 'Đội ngũ', 'The team')),
             p(
               pick(
                 locale,
-                'Không gọi vốn nghĩa là chúng tôi phải có doanh thu từ sớm, và điều đó buộc chúng tôi nói chuyện với người dùng thật ngay từ tháng đầu. Đội ngũ nhỏ hơn, tốc độ chậm hơn, nhưng những gì còn lại đều đã được ai đó trả tiền.',
-                'Not raising money meant we needed revenue early, which forced us to talk to real users from the first month. The team is smaller and the pace is slower, but everything still standing has been paid for by someone.',
+                'Bảy người, tất cả đều làm việc trực tiếp trên sản phẩm. Mỗi sản phẩm có đúng một người chịu trách nhiệm cuối, không có tầng điều phối ở giữa.',
+                'Seven people, all working directly on the products. Each product has exactly one person accountable for it, with no coordination layer in between.',
               ),
             ),
             h('h2', pick(locale, 'Ngoài sản phẩm', 'Beyond the products')),
             p(
               pick(
                 locale,
-                'Chúng tôi tổ chức seminar và khoá học ngắn về kỹ thuật và vận hành thương mại điện tử — hơn một trăm buổi cho tới nay. Đó cũng là cách chúng tôi gặp phần lớn người dùng đầu tiên.',
-                'We run seminars and short courses on e-commerce engineering and operations — over a hundred sessions so far. It is also how we met most of our early users.',
+                'Chúng tôi tổ chức seminar và khoá học ngắn về kỹ thuật và vận hành thương mại điện tử — hơn một trăm buổi cho tới nay.',
+                'We run seminars and short courses on e-commerce engineering and operations — over a hundred sessions so far.',
               ),
             ),
           ),
@@ -372,10 +364,10 @@ export const aboutPage = (locale: Locale) => ({
     {
       blockType: 'manifestStrip' as const,
       items: [
-        { value: '2022', label: pick(locale, 'Năm thành lập', 'Founded') },
-        { value: '7', label: pick(locale, 'Người trong đội', 'People on the team') },
-        { value: '5', label: pick(locale, 'Sản phẩm', 'Products') },
-        { value: '3', label: pick(locale, 'Khoá học đã mở', 'Courses run') },
+        { value: '2022', label: pick(locale, 'thành lập', 'founded') },
+        { value: '7', label: pick(locale, 'người trong đội', 'people on the team') },
+        { value: '4', label: pick(locale, 'sản phẩm', 'products') },
+        { value: '3', label: pick(locale, 'khoá học đã mở', 'courses run') },
       ],
     },
     {
@@ -394,8 +386,8 @@ export const aboutPage = (locale: Locale) => ({
         {
           link: {
             type: 'custom' as const,
-            label: pick(locale, 'Liên hệ', 'Contact us'),
-            url: '/lien-he',
+            label: EMAIL,
+            url: `mailto:${EMAIL}`,
             appearance: 'default' as const,
           },
         },
@@ -417,23 +409,32 @@ export const contactPage = ({ formId, locale }: { formId: string; locale: Locale
     title: pick(locale, 'Liên hệ Tensoract', 'Contact Tensoract'),
     description: pick(
       locale,
-      'Gửi câu hỏi cho đội Tensoract, hoặc ghé văn phòng tại Thủ Đức, TP.HCM.',
-      'Send the Tensoract team a question, or visit the office in Thu Duc, Ho Chi Minh City.',
+      'Viết thư cho đội Tensoract, hoặc ghé văn phòng tại Thủ Đức, TP.HCM.',
+      'Write to the Tensoract team, or visit the office in Thu Duc, Ho Chi Minh City.',
     ),
   },
   layout: [
     {
       blockType: 'manifestHero' as const,
-      eyebrow: pick(locale, 'Liên hệ', 'Contact'),
-      headline: pick(locale, 'Kể cho\nchúng tôi\nnghe.', 'Tell us\nwhat you\nneed.'),
+      headline: pick(locale, 'Viết thư\ncho chúng tôi.', 'Write to us.'),
       lead: pick(
         locale,
-        'Bạn đang bán hàng và có một khâu tốn công mỗi ngày? Hoặc muốn hợp tác? Điền vào biểu mẫu bên dưới, hoặc viết thẳng email.',
-        'Selling online and stuck with a step that costs you every day? Or looking to work together? Use the form below, or just email us.',
+        'Cách nhanh nhất là gửi email thẳng cho đội. Nếu bạn thích biểu mẫu hơn thì dùng phần bên dưới, cùng đến một hộp thư.',
+        'The fastest route is an email straight to the team. If you prefer a form, the one below lands in the same inbox.',
       ),
+      links: [
+        {
+          link: {
+            type: 'custom' as const,
+            label: EMAIL,
+            url: `mailto:${EMAIL}`,
+            appearance: 'default' as const,
+          },
+        },
+      ],
       labelCode: 'TSR-LH',
       labelTitle: pick(locale, 'Văn phòng', 'Office'),
-      labelStamp: pick(locale, 'Mở cửa', 'Open'),
+      labelStamp: pick(locale, 'Thứ 2 – Thứ 6', 'Mon – Fri'),
       labelRows: [
         {
           label: pick(locale, 'Địa chỉ', 'Address'),
@@ -443,10 +444,10 @@ export const contactPage = ({ formId, locale }: { formId: string; locale: Locale
             '215 Street 138, Tang Nhon Phu Ward, Ho Chi Minh City',
           ),
         },
-        { label: 'Email', value: 'hello@tensoract.vn' },
+        { label: 'Email', value: EMAIL },
         {
           label: pick(locale, 'Giờ làm việc', 'Hours'),
-          value: pick(locale, 'Thứ 2 – Thứ 6, 9:00 – 18:00', 'Mon – Fri, 9:00 – 18:00'),
+          value: '9:00 – 18:00',
         },
       ],
     },
@@ -455,12 +456,12 @@ export const contactPage = ({ formId, locale }: { formId: string; locale: Locale
       enableIntro: true,
       form: formId,
       introContent: doc(
-        h('h2', pick(locale, 'Gửi tin nhắn', 'Send a message')),
+        h('h2', pick(locale, 'Hoặc gửi qua biểu mẫu', 'Or use the form')),
         p(
           pick(
             locale,
-            'Càng cụ thể càng tốt — bạn đang bán gì, khâu nào đang tắc.',
-            'The more specific the better — what you sell, and where it gets stuck.',
+            'Càng cụ thể càng tốt — bạn là bên nào, đang cần gì ở chúng tôi.',
+            'The more specific the better — who you are, and what you need from us.',
           ),
         ),
       ),
@@ -504,8 +505,8 @@ export const headerGlobal = (locale: Locale) => ({
 export const footerGlobal = (locale: Locale) => ({
   tagline: pick(
     locale,
-    'Công ty SaaS tự nuôi tại Thủ Đức, TP.HCM. Chúng tôi làm phần mềm cho người bán hàng online.',
-    'A bootstrapped SaaS company in Thu Duc, Ho Chi Minh City. We build software for online sellers.',
+    'Công ty phần mềm tại Thủ Đức, TP.HCM. Chúng tôi xây và vận hành sản phẩm SaaS cho ngành thương mại điện tử.',
+    'A software company in Thu Duc, Ho Chi Minh City. We build and operate SaaS products for e-commerce.',
   ),
   columns: [
     {
@@ -551,7 +552,7 @@ export const footerGlobal = (locale: Locale) => ({
       '215 đường 138, P. Tăng Nhơn Phú\nTP. Hồ Chí Minh, Việt Nam',
       '215 Street 138, Tang Nhon Phu Ward\nHo Chi Minh City, Vietnam',
     ),
-    email: 'hello@tensoract.vn',
+    email: EMAIL,
   },
   socials: [
     { label: 'LinkedIn', url: 'https://www.linkedin.com/company/tensoractio' },
