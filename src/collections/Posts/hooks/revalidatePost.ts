@@ -3,6 +3,11 @@ import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'paylo
 import { revalidatePath, revalidateTag } from 'next/cache'
 
 import type { Post } from '../../../payload-types'
+import { locales } from '../../../i18n/config'
+
+/** One document, two language trees — bust both, plus the index. */
+const pathsFor = (slug: string | null | undefined) =>
+  locales.flatMap((locale) => [`/${locale}/posts`, `/${locale}/posts/${slug}`])
 
 export const revalidatePost: CollectionAfterChangeHook<Post> = ({
   doc,
@@ -11,21 +16,17 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
 }) => {
   if (!context.disableRevalidate) {
     if (doc._status === 'published') {
-      const path = `/posts/${doc.slug}`
+      payload.logger.info(`Revalidating post: ${doc.slug}`)
 
-      payload.logger.info(`Revalidating post at path: ${path}`)
-
-      revalidatePath(path)
+      pathsFor(doc.slug).forEach((path) => revalidatePath(path))
       revalidateTag('posts-sitemap', 'max')
     }
 
     // If the post was previously published, we need to revalidate the old path
     if (previousDoc._status === 'published' && doc._status !== 'published') {
-      const oldPath = `/posts/${previousDoc.slug}`
+      payload.logger.info(`Revalidating old post: ${previousDoc.slug}`)
 
-      payload.logger.info(`Revalidating old post at path: ${oldPath}`)
-
-      revalidatePath(oldPath)
+      pathsFor(previousDoc.slug).forEach((path) => revalidatePath(path))
       revalidateTag('posts-sitemap', 'max')
     }
   }
@@ -34,9 +35,7 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
 
 export const revalidateDelete: CollectionAfterDeleteHook<Post> = ({ doc, req: { context } }) => {
   if (!context.disableRevalidate) {
-    const path = `/posts/${doc?.slug}`
-
-    revalidatePath(path)
+    pathsFor(doc?.slug).forEach((path) => revalidatePath(path))
     revalidateTag('posts-sitemap', 'max')
   }
 

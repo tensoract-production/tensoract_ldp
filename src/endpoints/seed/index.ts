@@ -1,20 +1,19 @@
-import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest, File } from 'payload'
+import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest } from 'payload'
 
-import { contactForm as contactFormData } from './contact-form'
-import { contact as contactPageData } from './contact-page'
-import { home } from './home'
-import { image1 } from './image-1'
-import { image2 } from './image-2'
-import { imageHero1 } from './image-hero-1'
-import { post1 } from './post-1'
-import { post2 } from './post-2'
-import { post3 } from './post-3'
+import { revalidateTag } from 'next/cache'
+
+import { contactForm as contactFormData } from './tensoract/contact-form'
+import { aboutPage, contactPage, footerGlobal, headerGlobal, homePage } from './tensoract/pages'
+import { categories as categorySeeds, posts as postSeeds } from './tensoract/posts'
+import { products as productSeeds } from './tensoract/products'
 
 const collections: CollectionSlug[] = [
   'categories',
   'media',
   'pages',
   'posts',
+  'products',
+  'releases',
   'forms',
   'form-submissions',
   'search',
@@ -22,12 +21,38 @@ const collections: CollectionSlug[] = [
 
 const globals: GlobalSlug[] = ['header', 'footer']
 
-const categories = ['Technology', 'News', 'Finance', 'Design', 'Software', 'Engineering']
+/**
+ * Copies Payload's generated row/block `id`s from a document that already
+ * exists onto the payload for a second locale.
+ *
+ * Without this, updating a document in `en` with a fresh blocks array reads as
+ * "delete every block and add new ones", which throws away the Vietnamese text
+ * stored alongside it. The two locales share a structure here, so walking the
+ * trees in parallel and lifting the ids across is enough.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function withIdsFrom(source: any, target: any): any {
+  if (Array.isArray(source) && Array.isArray(target)) {
+    return target.map((item, index) => withIdsFrom(source[index], item))
+  }
 
-// Next.js revalidation errors are normal when seeding the database without a server running
-// i.e. running `yarn seed` locally instead of using the admin UI within an active app
-// The app is not running to revalidate the pages and so the API routes are not available
-// These error messages can be ignored: `Error hitting revalidate route for...`
+  if (source && target && typeof source === 'object' && typeof target === 'object') {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const merged: any = { ...target }
+
+    if (typeof source.id === 'string') merged.id = source.id
+
+    for (const key of Object.keys(target)) {
+      if (source[key] !== undefined) merged[key] = withIdsFrom(source[key], target[key])
+    }
+
+    return merged
+  }
+
+  return target
+}
+
+// Next.js revalidation errors are normal when seeding without a server running.
 export const seed = async ({
   payload,
   req,
@@ -35,26 +60,17 @@ export const seed = async ({
   payload: Payload
   req: PayloadRequest
 }): Promise<void> => {
-  payload.logger.info('Seeding database...')
+  payload.logger.info('Seeding Tensoract content...')
 
-  // we need to clear the media directory before seeding
-  // as well as the collections and globals
-  // this is because while `yarn seed` drops the database
-  // the custom `/api/seed` endpoint does not
-  payload.logger.info(`— Clearing collections and globals...`)
+  payload.logger.info('— Clearing collections and globals...')
 
-  // clear the database
   await Promise.all(
     globals.map((global) =>
       payload.updateGlobal({
         slug: global,
-        data: {
-          navItems: [],
-        },
+        data: {},
         depth: 0,
-        context: {
-          disableRevalidate: true,
-        },
+        context: { disableRevalidate: true },
       }),
     ),
   )
@@ -69,230 +85,222 @@ export const seed = async ({
       .map((collection) => payload.db.deleteVersions({ collection, req, where: {} })),
   )
 
-  payload.logger.info(`— Seeding demo author and user...`)
+  payload.logger.info('— Seeding author...')
 
   await payload.delete({
     collection: 'users',
     depth: 0,
-    where: {
-      email: {
-        equals: 'demo-author@example.com',
-      },
+    where: { email: { equals: 'hello@tensoract.vn' } },
+  })
+
+  const author = await payload.create({
+    collection: 'users',
+    data: {
+      name: 'Tensoract',
+      email: 'hello@tensoract.vn',
+      password: 'tensoract',
     },
   })
 
-  payload.logger.info(`— Seeding media...`)
+  payload.logger.info('— Seeding categories...')
 
-  const [image1Buffer, image2Buffer, image3Buffer, hero1Buffer] = await Promise.all([
-    fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/3.x/templates/website/src/endpoints/seed/image-post1.webp',
-    ),
-    fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/3.x/templates/website/src/endpoints/seed/image-post2.webp',
-    ),
-    fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/3.x/templates/website/src/endpoints/seed/image-post3.webp',
-    ),
-    fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/3.x/templates/website/src/endpoints/seed/image-hero1.webp',
-    ),
-  ])
+  const categoryIds: Record<string, string> = {}
 
-  const [demoAuthor, image1Doc, image2Doc, image3Doc, imageHomeDoc] = await Promise.all([
-    payload.create({
-      collection: 'users',
+  for (const category of categorySeeds) {
+    const created = await payload.create({
+      collection: 'categories',
+      depth: 0,
+      locale: 'vi',
+      data: { title: category.vi, slug: category.slug },
+    })
+
+    await payload.update({
+      collection: 'categories',
+      id: created.id,
+      locale: 'en',
+      data: { title: category.en },
+    })
+
+    categoryIds[category.key] = created.id
+  }
+
+  payload.logger.info('— Seeding products...')
+
+  for (const product of productSeeds) {
+    const created = await payload.create({
+      collection: 'products',
+      depth: 0,
+      locale: 'vi',
+      context: { disableRevalidate: true },
       data: {
-        name: 'Demo Author',
-        email: 'demo-author@example.com',
-        password: 'password',
+        slug: product.slug,
+        _status: 'published',
+        code: product.code,
+        tier: product.tier,
+        status: product.status,
+        category: product.category,
+        externalUrl: product.externalUrl,
+        featured: product.featured,
+        order: product.order,
+        ...product.vi,
       },
-    }),
-    payload.create({
-      collection: 'media',
-      data: image1,
-      file: image1Buffer,
-    }),
-    payload.create({
-      collection: 'media',
-      data: image2,
-      file: image2Buffer,
-    }),
-    payload.create({
-      collection: 'media',
-      data: image2,
-      file: image3Buffer,
-    }),
-    payload.create({
-      collection: 'media',
-      data: imageHero1,
-      file: hero1Buffer,
-    }),
-    categories.map((category) =>
-      payload.create({
-        collection: 'categories',
-        data: {
-          title: category,
-          slug: category,
-        },
-      }),
-    ),
-  ])
+    })
 
-  payload.logger.info(`— Seeding posts...`)
+    await payload.update({
+      collection: 'products',
+      id: created.id,
+      locale: 'en',
+      depth: 0,
+      context: { disableRevalidate: true },
+      data: withIdsFrom(created, product.en),
+    })
+  }
 
-  // Do not create posts with `Promise.all` because we want the posts to be created in order
-  // This way we can sort them by `createdAt` or `publishedAt` and they will be in the expected order
-  const post1Doc = await payload.create({
-    collection: 'posts',
+  payload.logger.info('— Seeding a placeholder release...')
+
+  // One obviously-marked row so the section is visibly wired. Real release
+  // history is not something this seed can invent for a shipping product.
+  const flagship = await payload.find({
+    collection: 'products',
+    limit: 1,
+    where: { slug: { equals: 'ecombox' } },
+  })
+
+  const releaseVi = await payload.create({
+    collection: 'releases',
     depth: 0,
-    context: {
-      disableRevalidate: true,
+    locale: 'vi',
+    context: { disableRevalidate: true },
+    data: {
+      version: '—',
+      title: '[Chờ nội dung] Thêm bản phát hành thật trong admin',
+      releasedAt: new Date().toISOString(),
+      product: flagship.docs[0]?.id,
+      _status: 'published',
     },
-    data: post1({ heroImage: image1Doc, blockImage: image2Doc, author: demoAuthor }),
   })
 
-  const post2Doc = await payload.create({
-    collection: 'posts',
+  await payload.update({
+    collection: 'releases',
+    id: releaseVi.id,
+    locale: 'en',
     depth: 0,
-    context: {
-      disableRevalidate: true,
-    },
-    data: post2({ heroImage: image2Doc, blockImage: image3Doc, author: demoAuthor }),
+    context: { disableRevalidate: true },
+    data: { title: '[Content pending] Add real releases in the admin' },
   })
 
-  const post3Doc = await payload.create({
-    collection: 'posts',
-    depth: 0,
-    context: {
-      disableRevalidate: true,
-    },
-    data: post3({ heroImage: image3Doc, blockImage: image1Doc, author: demoAuthor }),
-  })
+  payload.logger.info('— Seeding posts...')
 
-  // update each post with related posts
-  await payload.update({
-    id: post1Doc.id,
-    collection: 'posts',
-    data: {
-      relatedPosts: [post2Doc.id, post3Doc.id],
-    },
-  })
-  await payload.update({
-    id: post2Doc.id,
-    collection: 'posts',
-    data: {
-      relatedPosts: [post1Doc.id, post3Doc.id],
-    },
-  })
-  await payload.update({
-    id: post3Doc.id,
-    collection: 'posts',
-    data: {
-      relatedPosts: [post1Doc.id, post2Doc.id],
-    },
-  })
+  const postIds: string[] = []
 
-  payload.logger.info(`— Seeding contact form...`)
+  // Created in sequence so `publishedAt` ordering matches the order written here.
+  for (const post of postSeeds) {
+    const created = await payload.create({
+      collection: 'posts',
+      depth: 0,
+      locale: 'vi',
+      context: { disableRevalidate: true },
+      data: {
+        slug: post.slug,
+        _status: 'published',
+        authors: [author.id],
+        categories: [categoryIds[post.categoryKey]],
+        ...post.vi,
+      },
+    })
 
-  const contactForm = await payload.create({
+    await payload.update({
+      collection: 'posts',
+      id: created.id,
+      locale: 'en',
+      depth: 0,
+      context: { disableRevalidate: true },
+      data: withIdsFrom(created, post.en),
+    })
+
+    postIds.push(created.id)
+  }
+
+  for (const [index, id] of postIds.entries()) {
+    await payload.update({
+      collection: 'posts',
+      id,
+      depth: 0,
+      context: { disableRevalidate: true },
+      data: { relatedPosts: postIds.filter((_, i) => i !== index) },
+    })
+  }
+
+  payload.logger.info('— Seeding contact form...')
+
+  const contactFormDoc = await payload.create({
     collection: 'forms',
     depth: 0,
     data: contactFormData,
   })
 
-  payload.logger.info(`— Seeding pages...`)
+  payload.logger.info('— Seeding pages...')
 
-  const [_, contactPage] = await Promise.all([
-    payload.create({
+  const pageSeeds = [
+    { vi: homePage('vi'), en: homePage('en') },
+    { vi: aboutPage('vi'), en: aboutPage('en') },
+    {
+      vi: contactPage({ formId: contactFormDoc.id, locale: 'vi' }),
+      en: contactPage({ formId: contactFormDoc.id, locale: 'en' }),
+    },
+  ]
+
+  for (const page of pageSeeds) {
+    const created = await payload.create({
       collection: 'pages',
       depth: 0,
-      data: home({ heroImage: imageHomeDoc, metaImage: image2Doc }),
-    }),
-    payload.create({
+      locale: 'vi',
+      context: { disableRevalidate: true },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: page.vi as any,
+    })
+
+    await payload.update({
       collection: 'pages',
+      id: created.id,
+      locale: 'en',
       depth: 0,
-      data: contactPageData({ contactForm: contactForm }),
-    }),
-  ])
-
-  payload.logger.info(`— Seeding globals...`)
-
-  await Promise.all([
-    payload.updateGlobal({
-      slug: 'header',
-      data: {
-        navItems: [
-          {
-            link: {
-              type: 'custom',
-              label: 'Posts',
-              url: '/posts',
-            },
-          },
-          {
-            link: {
-              type: 'reference',
-              label: 'Contact',
-              reference: {
-                relationTo: 'pages',
-                value: contactPage.id,
-              },
-            },
-          },
-        ],
-      },
-    }),
-    payload.updateGlobal({
-      slug: 'footer',
-      data: {
-        navItems: [
-          {
-            link: {
-              type: 'custom',
-              label: 'Admin',
-              url: '/admin',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: 'Source Code',
-              newTab: true,
-              url: 'https://github.com/payloadcms/payload/tree/3.x/templates/website',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: 'Payload',
-              newTab: true,
-              url: 'https://payloadcms.com/',
-            },
-          },
-        ],
-      },
-    }),
-  ])
-
-  payload.logger.info('Seeded database successfully!')
-}
-
-async function fetchFileByURL(url: string): Promise<File> {
-  const res = await fetch(url, {
-    credentials: 'include',
-    method: 'GET',
-  })
-
-  if (!res.ok) {
-    throw new Error(`Failed to fetch file from ${url}, status: ${res.status}`)
+      context: { disableRevalidate: true },
+      data: withIdsFrom(created, page.en),
+    })
   }
 
-  const data = await res.arrayBuffer()
+  payload.logger.info('— Seeding globals...')
 
-  return {
-    name: url.split('/').pop() || `file-${Date.now()}`,
-    data: Buffer.from(data),
-    mimetype: `image/${url.split('.').pop()}`,
-    size: data.byteLength,
+  for (const [slug, build] of [
+    ['header', headerGlobal],
+    ['footer', footerGlobal],
+  ] as const) {
+    const created = await payload.updateGlobal({
+      slug,
+      depth: 0,
+      locale: 'vi',
+      context: { disableRevalidate: true },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      data: build('vi') as any,
+    })
+
+    await payload.updateGlobal({
+      slug,
+      depth: 0,
+      locale: 'en',
+      context: { disableRevalidate: true },
+      data: withIdsFrom(created, build('en')),
+    })
   }
+
+  // Every write above ran with `disableRevalidate`, so the globals' cache tags
+  // were never busted. Without this the header and footer keep serving the
+  // previous seed from `unstable_cache` — which survives a server restart,
+  // because that cache is written to disk.
+  for (const global of globals) {
+    revalidateTag(`global_${global}`, 'max')
+  }
+
+  payload.logger.info('Seeded Tensoract content successfully.')
 }

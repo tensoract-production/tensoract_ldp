@@ -5,37 +5,41 @@ import React, { useState, useEffect } from 'react'
 import { useDebounce } from '@/utilities/useDebounce'
 import { useRouter } from 'next/navigation'
 
-export const Search: React.FC = () => {
+import type { Locale } from '@/i18n/config'
+import { defaultLocale } from '@/i18n/config'
+import { getDictionary } from '@/i18n/dictionaries'
+
+export const Search: React.FC<{ locale?: Locale }> = ({ locale = defaultLocale }) => {
   const [value, setValue] = useState('')
   const router = useRouter()
+  const dict = getDictionary(locale)
 
   const debouncedValue = useDebounce(value)
 
   useEffect(() => {
-    router.push(`/search${debouncedValue ? `?q=${debouncedValue}` : ''}`)
-  }, [debouncedValue, router])
+    const query = debouncedValue ? `?q=${encodeURIComponent(debouncedValue)}` : ''
+    router.push(`/${locale}/search${query}`)
+  }, [debouncedValue, locale, router])
 
   return (
-    <div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
+    <form
+      onSubmit={(e) => {
+        e.preventDefault()
+      }}
+    >
+      <Label className="sr-only" htmlFor="search">
+        {dict.nav.search}
+      </Label>
+      <Input
+        id="search"
+        onChange={(event) => {
+          setValue(event.target.value)
         }}
-      >
-        <Label htmlFor="search" className="sr-only">
-          Search
-        </Label>
-        <Input
-          id="search"
-          onChange={(event) => {
-            setValue(event.target.value)
-          }}
-          placeholder="Search"
-        />
-        <button type="submit" className="sr-only">
-          submit
-        </button>
-      </form>
-    </div>
+        placeholder={dict.nav.search}
+      />
+      <button className="sr-only" type="submit">
+        {dict.nav.search}
+      </button>
+    </form>
   )
 }

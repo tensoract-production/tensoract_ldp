@@ -6,13 +6,23 @@ import React from 'react'
 import RichText from '@/components/RichText'
 
 import { CollectionArchive } from '@/components/CollectionArchive'
+import { type Locale, defaultLocale } from '@/i18n/config'
 
 export const ArchiveBlock: React.FC<
   ArchiveBlockProps & {
     id?: string
+    locale?: Locale
   }
 > = async (props) => {
-  const { id, categories, introContent, limit: limitFromProps, populateBy, selectedDocs } = props
+  const {
+    id,
+    categories,
+    introContent,
+    limit: limitFromProps,
+    locale = defaultLocale,
+    populateBy,
+    selectedDocs,
+  } = props
 
   const limit = limitFromProps || 3
 
@@ -30,6 +40,7 @@ export const ArchiveBlock: React.FC<
       collection: 'posts',
       depth: 1,
       limit,
+      locale,
       ...(flattenedCategories && flattenedCategories.length > 0
         ? {
             where: {
@@ -59,7 +70,7 @@ export const ArchiveBlock: React.FC<
           <RichText className="ms-0 max-w-[48rem]" data={introContent} enableGutter={false} />
         </div>
       )}
-      <CollectionArchive posts={posts} />
+      <CollectionArchive locale={locale} posts={posts} />
     </div>
   )
 }

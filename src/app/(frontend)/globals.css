@@ -44,14 +44,15 @@
   --breakpoint-xl: 80rem;
   --breakpoint-2xl: 86rem;
   --font-mono: var(--font-geist-mono);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-be-vietnam);
+  --font-serif: var(--font-petrona);
 }
 
 @layer utilities {
   .container {
     width: 100%;
     margin-inline: auto;
-    padding-inline: 1rem;
+    padding-inline: 1.5rem;
   }
 
   @variant sm {
@@ -63,7 +64,7 @@
   @variant md {
     .container {
       max-width: var(--breakpoint-md);
-      padding-inline: 2rem;
+      padding-inline: 2.5rem;
     }
   }
 
@@ -86,84 +87,97 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Tensoract — Giấy dó & mộc bản
+
+   Vietnamese handmade paper and woodblock print. The ground is dó paper with
+   its fibre still visible; the ink is the warm black of a cut block, never a
+   neutral grey-black. Cinnabar is a seal, not an accent: it appears only where
+   somebody outside this company attested to something.
+--------------------------------------------------------------------------- */
+
 :root {
-  --background: oklch(100% 0 0deg);
-  --foreground: oklch(14.5% 0 0deg);
-  --card: oklch(96.5% 0.005 265deg);
-  --card-foreground: oklch(14.5% 0 0deg);
-  --popover: oklch(100% 0 0deg);
-  --popover-foreground: oklch(14.5% 0 0deg);
-  --primary: oklch(20.5% 0 0deg);
-  --primary-foreground: oklch(98.5% 0 0deg);
-  --secondary: oklch(97% 0 0deg);
-  --secondary-foreground: oklch(20.5% 0 0deg);
-  --muted: oklch(97% 0 0deg);
-  --muted-foreground: oklch(55.6% 0 0deg);
-  --accent: oklch(97% 0 0deg);
-  --accent-foreground: oklch(20.5% 0 0deg);
-  --destructive: oklch(57.7% 0.245 27.325deg);
-  --destructive-foreground: oklch(57.7% 0.245 27.325deg);
-  --border: oklch(92.2% 0 0deg);
-  --input: oklch(92.2% 0 0deg);
-  --ring: oklch(70.8% 0 0deg);
-  --chart-1: oklch(64.6% 0.222 41.116deg);
-  --chart-2: oklch(60% 0.118 184.704deg);
-  --chart-3: oklch(39.8% 0.07 227.392deg);
-  --chart-4: oklch(82.8% 0.189 84.429deg);
-  --chart-5: oklch(76.9% 0.188 70.08deg);
-  --radius: 0.625rem;
-  --sidebar: oklch(98.5% 0 0deg);
-  --sidebar-foreground: oklch(14.5% 0 0deg);
-  --sidebar-primary: oklch(20.5% 0 0deg);
-  --sidebar-primary-foreground: oklch(98.5% 0 0deg);
-  --sidebar-accent: oklch(97% 0 0deg);
-  --sidebar-accent-foreground: oklch(20.5% 0 0deg);
-  --sidebar-border: oklch(92.2% 0 0deg);
-  --sidebar-ring: oklch(70.8% 0 0deg);
-  --success: oklch(78% 0.08 200deg);
-  --warning: oklch(89% 0.1 75deg);
-  --error: oklch(75% 0.15 25deg);
+  --paper: oklch(95.2% 0.012 84deg);
+  --paper-sunk: oklch(92.4% 0.016 82deg);
+  --paper-edge: oklch(89% 0.018 80deg);
+  --ink: oklch(23% 0.014 60deg);
+  --ink-soft: oklch(50% 0.016 62deg);
+  --rule: oklch(84.5% 0.018 80deg);
+
+  /* Son — cinnabar seal ink. Reserved for attested facts. */
+  --son: oklch(52% 0.155 34deg);
+  --son-deep: oklch(43% 0.14 33deg);
+  --son-wash: oklch(93% 0.03 40deg);
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper-sunk);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--paper-sunk);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-sunk);
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--son-wash);
+  --accent-foreground: var(--son-deep);
+  --destructive: oklch(52% 0.19 27deg);
+  --destructive-foreground: oklch(98% 0 0deg);
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: var(--son);
+  --chart-1: var(--son);
+  --chart-2: oklch(55% 0.09 150deg);
+  --chart-3: oklch(45% 0.07 240deg);
+  --chart-4: oklch(70% 0.12 70deg);
+  --chart-5: oklch(60% 0.1 20deg);
+  --radius: 0.125rem;
+  --sidebar: var(--paper);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--paper);
+  --sidebar-accent: var(--paper-sunk);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--rule);
+  --sidebar-ring: var(--son);
+  --success: oklch(55% 0.09 150deg);
+  --warning: oklch(70% 0.12 70deg);
+  --error: oklch(52% 0.19 27deg);
 }
 
+/* Dark is the same paper under a low lamp: the ink inverts, the cinnabar
+   brightens just enough to stay legible, and nothing turns neutral grey. */
 [data-theme='dark'] {
-  --background: oklch(14.5% 0 0deg);
-  --foreground: oklch(98.5% 0 0deg);
-  --card: oklch(17% 0 0deg);
-  --card-foreground: oklch(98.5% 0 0deg);
-  --popover: oklch(14.5% 0 0deg);
-  --popover-foreground: oklch(98.5% 0 0deg);
-  --primary: oklch(98.5% 0 0deg);
-  --primary-foreground: oklch(20.5% 0 0deg);
-  --secondary: oklch(26.9% 0 0deg);
-  --secondary-foreground: oklch(98.5% 0 0deg);
-  --muted: oklch(26.9% 0 0deg);
-  --muted-foreground: oklch(70.8% 0 0deg);
-  --accent: oklch(26.9% 0 0deg);
-  --accent-foreground: oklch(98.5% 0 0deg);
-  --destructive: oklch(39.6% 0.141 25.723deg);
-  --destructive-foreground: oklch(63.7% 0.237 25.331deg);
-  --border: oklch(26.9% 0 0deg);
-  --input: oklch(26.9% 0 0deg);
-  --ring: oklch(43.9% 0 0deg);
-  --chart-1: oklch(48.8% 0.243 264.376deg);
-  --chart-2: oklch(69.6% 0.17 162.48deg);
-  --chart-3: oklch(76.9% 0.188 70.08deg);
-  --chart-4: oklch(62.7% 0.265 303.9deg);
-  --chart-5: oklch(64.5% 0.246 16.439deg);
-  --sidebar: oklch(20.5% 0 0deg);
-  --sidebar-foreground: oklch(98.5% 0 0deg);
-  --sidebar-primary: oklch(48.8% 0.243 264.376deg);
-  --sidebar-primary-foreground: oklch(98.5% 0 0deg);
-  --sidebar-accent: oklch(26.9% 0 0deg);
-  --sidebar-accent-foreground: oklch(98.5% 0 0deg);
-  --sidebar-border: oklch(26.9% 0 0deg);
-  --sidebar-ring: oklch(43.9% 0 0deg);
-  --success: oklch(28% 0.1 200deg);
-  --warning: oklch(35% 0.08 70deg);
-  --error: oklch(45% 0.1 25deg);
+  --paper: oklch(21% 0.014 62deg);
+  --paper-sunk: oklch(25% 0.014 62deg);
+  --paper-edge: oklch(29% 0.014 62deg);
+  --ink: oklch(93% 0.012 82deg);
+  --ink-soft: oklch(72% 0.014 74deg);
+  --rule: oklch(33% 0.014 62deg);
+
+  --son: oklch(68% 0.14 36deg);
+  --son-deep: oklch(76% 0.12 40deg);
+  --son-wash: oklch(29% 0.045 34deg);
+
+  --destructive: oklch(64% 0.2 27deg);
+  --success: oklch(65% 0.1 150deg);
+  --warning: oklch(76% 0.12 70deg);
+  --error: oklch(64% 0.2 27deg);
 }
 
 @theme inline {
+  --color-paper: var(--paper);
+  --color-paper-sunk: var(--paper-sunk);
+  --color-paper-edge: var(--paper-edge);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-rule: var(--rule);
+  --color-son: var(--son);
+  --color-son-deep: var(--son-deep);
+  --color-son-wash: var(--son-wash);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -188,9 +202,9 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
   --radius-xl: calc(var(--radius) + 4px);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
@@ -207,15 +221,191 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+
+  /* The fibre in the sheet. Fixed so the whole site reads as one pressing,
+     and behind everything so it never touches text rendering. */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 1;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62 0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23f)' opacity='0.42'/%3E%3C/svg%3E");
+  }
+
+  [data-theme='dark'] body::before {
+    mix-blend-mode: screen;
+    opacity: 0.3;
+  }
+
+  body > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Rich-text headings are set in the display face like every other heading;
+     without this the CMS-authored sections drift to the body face. */
+  .prose :is(h1, h2, h3, h4) {
+    font-family: var(--font-serif), Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    line-height: 1.14;
+  }
+
+  ::selection {
+    background: var(--son-wash);
+    color: var(--son-deep);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--son);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Petrona, cut rather than drawn. Display type carries the page. */
+  .serif {
+    font-family: var(--font-serif), Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  /* The one step below `title`: item headings inside a section — approach
+     entries, partner names, release lines, the "what it does" list. They were
+     drifting across four different literal sizes doing the same job. */
+  .subhead {
+    font-family: var(--font-serif), Georgia, serif;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    letter-spacing: -0.014em;
+  }
+
+  /* Only for measured record data — codes, years, counts. Never as costume. */
+  .record {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Comfortable reading measure for prose passages. */
+  .measure {
+    max-width: 68ch;
+  }
+
+  /* A printed edge: an inked rule that wavers the way a pressed line does.
+     Replaces the 1px UI hairline everywhere a section boundary is drawn. */
+  .edge-print {
+    border-top: 0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='3' preserveAspectRatio='none'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.35' numOctaves='2'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='2.1'/%3E%3C/filter%3E%3Crect x='0' y='1' width='320' height='1.1' fill='%23241f1a' opacity='0.34' filter='url(%23w)'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-position: top left;
+    background-size: 320px 3px;
+  }
+
+  .edge-print-b {
+    border-bottom: 0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='3' preserveAspectRatio='none'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.35' numOctaves='2'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='2.1'/%3E%3C/filter%3E%3Crect x='0' y='1' width='320' height='1.1' fill='%23241f1a' opacity='0.34' filter='url(%23w)'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-position: bottom left;
+    background-size: 320px 3px;
+  }
+
+  [data-theme='dark'] .edge-print-b,
+  [data-theme='dark'] .edge-print {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='3' preserveAspectRatio='none'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.35' numOctaves='2'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='2.1'/%3E%3C/filter%3E%3Crect x='0' y='1' width='320' height='1.1' fill='%23efe9dd' opacity='0.3' filter='url(%23w)'/%3E%3C/svg%3E");
+  }
+
+  /* The email address as the page's one action: ink, at text scale, underlined
+     the way a printed reference is — not a chromed pill. */
+  .ink-action {
+    font-family: var(--font-serif), Georgia, serif;
+    font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.28em;
+    text-decoration-color: var(--son);
+    transition: color 0.2s;
+  }
+
+  .ink-action:hover {
+    color: var(--son-deep);
+  }
+
+  /* The seal: pressed by hand, so never quite square, and the ink sits
+     unevenly. Used only where something was attested from outside. */
+  .seal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-4.5deg);
+    border: 2px solid var(--son);
+    border-radius: 2px;
+    padding: 0.4rem 0.7rem;
+    color: var(--son-deep);
+    font-family: var(--font-mono), monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.92;
+  }
+}
+
+/* One authored moment: the page arrives as a sheet being laid down —
+   the headline settles first, the plate after it. */
+@keyframes tsr-settle {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@layer utilities {
+  .anim-settle {
+    animation: tsr-settle 0.85s cubic-bezier(0.16, 0.84, 0.24, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
 html {
   opacity: 0;
+  scroll-behavior: smooth;
 }
 
 html[data-theme='dark'],

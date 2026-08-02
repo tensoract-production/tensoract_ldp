@@ -3,6 +3,8 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { unstable_cache } from 'next/cache'
 
+import { locales } from '@/i18n/config'
+
 const getPagesSitemap = unstable_cache(
   async () => {
     const payload = await getPayload({ config })
@@ -31,27 +33,25 @@ const getPagesSitemap = unstable_cache(
 
     const dateFallback = new Date().toISOString()
 
-    const defaultSitemap = [
-      {
-        loc: `${SITE_URL}/search`,
+    // Both language trees are public, so both belong in the sitemap.
+    const defaultSitemap = locales.flatMap((locale) =>
+      ['search', 'posts', 'products'].map((path) => ({
+        loc: `${SITE_URL}/${locale}/${path}`,
         lastmod: dateFallback,
-      },
-      {
-        loc: `${SITE_URL}/posts`,
-        lastmod: dateFallback,
-      },
-    ]
+      })),
+    )
 
-    const sitemap = results.docs
-      ? results.docs
-          .filter((page) => Boolean(page?.slug))
-          .map((page) => {
-            return {
-              loc: page?.slug === 'home' ? `${SITE_URL}/` : `${SITE_URL}/${page?.slug}`,
-              lastmod: page.updatedAt || dateFallback,
-            }
-          })
-      : []
+    const sitemap = (results.docs ?? [])
+      .filter((page) => Boolean(page?.slug))
+      .flatMap((page) =>
+        locales.map((locale) => ({
+          loc:
+            page.slug === 'home'
+              ? `${SITE_URL}/${locale}`
+              : `${SITE_URL}/${locale}/${page.slug}`,
+          lastmod: page.updatedAt || dateFallback,
+        })),
+      )
 
     return [...defaultSitemap, ...sitemap]
   },

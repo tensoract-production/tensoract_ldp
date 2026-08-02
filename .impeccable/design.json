@@ -1,0 +1,322 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-02T00:00:00Z",
+  "title": "Design System: Tensoract",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Giấy Dó Paper",
+        "canonical": "oklch(95.2% 0.012 84deg)",
+        "tonalRamp": [
+          "oklch(15% 0.012 84deg)",
+          "oklch(26% 0.012 84deg)",
+          "oklch(37% 0.012 84deg)",
+          "oklch(48% 0.012 84deg)",
+          "oklch(59% 0.012 84deg)",
+          "oklch(72% 0.012 84deg)",
+          "oklch(84% 0.012 84deg)",
+          "oklch(95.2% 0.012 84deg)"
+        ]
+      },
+      "paper-sunk": {
+        "role": "neutral",
+        "displayName": "Paper Sunk",
+        "canonical": "oklch(92.4% 0.016 82deg)",
+        "tonalRamp": [
+          "oklch(15% 0.016 82deg)",
+          "oklch(26% 0.016 82deg)",
+          "oklch(37% 0.016 82deg)",
+          "oklch(48% 0.016 82deg)",
+          "oklch(60% 0.016 82deg)",
+          "oklch(72% 0.016 82deg)",
+          "oklch(83% 0.016 82deg)",
+          "oklch(92.4% 0.016 82deg)"
+        ]
+      },
+      "paper-edge": {
+        "role": "neutral",
+        "displayName": "Paper Edge",
+        "canonical": "oklch(89% 0.018 80deg)",
+        "tonalRamp": [
+          "oklch(15% 0.018 80deg)",
+          "oklch(26% 0.018 80deg)",
+          "oklch(37% 0.018 80deg)",
+          "oklch(48% 0.018 80deg)",
+          "oklch(60% 0.018 80deg)",
+          "oklch(71% 0.018 80deg)",
+          "oklch(80% 0.018 80deg)",
+          "oklch(89% 0.018 80deg)"
+        ]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Woodblock Ink",
+        "canonical": "oklch(23% 0.014 60deg)",
+        "tonalRamp": [
+          "oklch(15% 0.014 60deg)",
+          "oklch(23% 0.014 60deg)",
+          "oklch(34% 0.014 60deg)",
+          "oklch(45% 0.014 60deg)",
+          "oklch(57% 0.014 60deg)",
+          "oklch(69% 0.014 60deg)",
+          "oklch(82% 0.014 60deg)",
+          "oklch(95% 0.014 60deg)"
+        ]
+      },
+      "ink-soft": {
+        "role": "primary",
+        "displayName": "Ink Soft",
+        "canonical": "oklch(50% 0.016 62deg)",
+        "tonalRamp": [
+          "oklch(15% 0.016 62deg)",
+          "oklch(26% 0.016 62deg)",
+          "oklch(38% 0.016 62deg)",
+          "oklch(50% 0.016 62deg)",
+          "oklch(61% 0.016 62deg)",
+          "oklch(73% 0.016 62deg)",
+          "oklch(84% 0.016 62deg)",
+          "oklch(95% 0.016 62deg)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "oklch(84.5% 0.018 80deg)",
+        "tonalRamp": [
+          "oklch(15% 0.018 80deg)",
+          "oklch(26% 0.018 80deg)",
+          "oklch(38% 0.018 80deg)",
+          "oklch(50% 0.018 80deg)",
+          "oklch(61% 0.018 80deg)",
+          "oklch(73% 0.018 80deg)",
+          "oklch(84.5% 0.018 80deg)",
+          "oklch(95% 0.018 80deg)"
+        ]
+      },
+      "son": {
+        "role": "secondary",
+        "displayName": "Cinnabar (Son)",
+        "canonical": "oklch(52% 0.155 34deg)",
+        "tonalRamp": [
+          "oklch(15% 0.155 34deg)",
+          "oklch(26% 0.155 34deg)",
+          "oklch(38% 0.155 34deg)",
+          "oklch(52% 0.155 34deg)",
+          "oklch(63% 0.155 34deg)",
+          "oklch(74% 0.155 34deg)",
+          "oklch(85% 0.09 34deg)",
+          "oklch(95% 0.04 34deg)"
+        ]
+      },
+      "son-deep": {
+        "role": "secondary",
+        "displayName": "Cinnabar Deep",
+        "canonical": "oklch(43% 0.14 33deg)",
+        "tonalRamp": [
+          "oklch(15% 0.14 33deg)",
+          "oklch(25% 0.14 33deg)",
+          "oklch(34% 0.14 33deg)",
+          "oklch(43% 0.14 33deg)",
+          "oklch(56% 0.14 33deg)",
+          "oklch(68% 0.14 33deg)",
+          "oklch(82% 0.09 33deg)",
+          "oklch(94% 0.04 33deg)"
+        ]
+      },
+      "son-wash": {
+        "role": "secondary",
+        "displayName": "Cinnabar Wash",
+        "canonical": "oklch(93% 0.03 40deg)",
+        "tonalRamp": [
+          "oklch(15% 0.03 40deg)",
+          "oklch(26% 0.03 40deg)",
+          "oklch(38% 0.03 40deg)",
+          "oklch(50% 0.03 40deg)",
+          "oklch(62% 0.03 40deg)",
+          "oklch(74% 0.03 40deg)",
+          "oklch(85% 0.03 40deg)",
+          "oklch(93% 0.03 40deg)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headline only, one per page, authored with hard line breaks and set line by line."
+      },
+      "headline": { "displayName": "Headline", "purpose": "Section headings. Never preceded by a kicker." },
+      "title": { "displayName": "Title", "purpose": "Product row titles and award entries; shifts to cinnabar deep on row hover." },
+      "body": { "displayName": "Body", "purpose": "All prose. Capped at 68ch via .measure; leads step up in ink-soft." },
+      "record": { "displayName": "Record", "purpose": "Measured data only — codes, years, counts, hostnames, statuses, footer labels." },
+      "seal": { "displayName": "Seal", "purpose": "Only inside the seal component, on facts an outside party attested." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "settle", "value": "tsr-settle 0.85s cubic-bezier(0.16, 0.84, 0.24, 1) both", "purpose": "Hero load: 8px rise plus fade, staggered 0.1s / 0.18s / 0.26s so the headline lands before the plate." },
+      { "name": "reveal", "value": "0.55s cubic-bezier(0.2, 0.7, 0.2, 1), y 14px → 0, opacity 0 → 1, 70ms per item, once at 25% visibility", "purpose": "Scroll reveal for everything below the fold." },
+      { "name": "hover-color", "value": "color 0.2s", "purpose": "Ink → cinnabar deep on links, headings, and rows." },
+      { "name": "arrow-nudge", "value": "transform 200ms, translateX(4px)", "purpose": "Read-more arrow on product row hover." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "40rem" },
+      { "name": "md", "value": "48rem" },
+      { "name": "lg", "value": "64rem" },
+      { "name": "xl", "value": "80rem" },
+      { "name": "2xl", "value": "86rem" }
+    ],
+    "materials": [
+      {
+        "name": "paper-fibre",
+        "purpose": "Declared once on body::before: fixed, full-viewport fractal-noise SVG at mix-blend-mode multiply, z-index 0, content at z-index 1. Never re-applied to a child.",
+        "css": "body::before { content:''; position:fixed; inset:0; z-index:0; pointer-events:none; mix-blend-mode:multiply; background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62 0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23f)' opacity='0.42'/%3E%3C/svg%3E\"); }"
+      },
+      {
+        "name": "printed-edge",
+        "purpose": "Replaces the 1px UI hairline at every section and row boundary. Turbulence-displaced 1.1px ink rule at 34% opacity on a 320px tile, with the real border forced to zero.",
+        "css": ".edge-print { border-top:0 !important; background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='3' preserveAspectRatio='none'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.35' numOctaves='2'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='2.1'/%3E%3C/filter%3E%3Crect x='0' y='1' width='320' height='1.1' fill='%23241f1a' opacity='0.34' filter='url(%23w)'/%3E%3C/svg%3E\"); background-repeat:repeat-x; background-position:top left; background-size:320px 3px; }"
+      },
+      {
+        "name": "woodblock-bleed",
+        "purpose": "Shared SVG filter mounted once in the root layout <defs>; every plate shape references it by id so the ink edge seeps into the fibre.",
+        "css": "<filter id=\"tsr-bleed\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"0.34 0.52\" numOctaves=\"3\" result=\"noise\"/><feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"3.4\"/><feGaussianBlur stdDeviation=\"0.4\"/></filter>"
+      }
+    ],
+    "themeState": {
+      "shipped": "light",
+      "note": "The root layout hard-codes data-theme=\"light\". A complete dark token set exists in globals.css but is never activated; treat it as unshipped."
+    },
+    "knownGaps": [
+      "Woodblock plates and the seal are authored SVG/CSS, not raster woodcut assets. Recorded as a material-fidelity gap the build carries, not as the system's intent.",
+      "Inherited shadcn button variants still carry shadow-xs and rounded-md; they are template residue outside the printed world and are not part of this system."
+    ]
+  },
+  "components": [
+    {
+      "name": "Ink Action",
+      "kind": "button",
+      "refersTo": "ink-action",
+      "description": "The page's one primary action — the email address itself, set in serif ink and underlined in cinnabar. One per page.",
+      "html": "<a class=\"ds-ink-action\" href=\"mailto:contact@tensoract.com\">contact@tensoract.com</a>",
+      "css": ".ds-ink-action { font-family: var(--font-petrona), Georgia, serif; font-size: clamp(1.35rem, 2.6vw, 1.85rem); color: var(--ink, oklch(23% 0.014 60deg)); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.28em; text-decoration-color: var(--son, oklch(52% 0.155 34deg)); transition: color 0.2s; } .ds-ink-action:hover { color: var(--son-deep, oklch(43% 0.14 33deg)); } .ds-ink-action:focus-visible { outline: 2px solid var(--son, oklch(52% 0.155 34deg)); outline-offset: 3px; }"
+    },
+    {
+      "name": "Quiet Link",
+      "kind": "button",
+      "refersTo": "ink-action",
+      "description": "Secondary action and nav link: ink-soft with a rule-coloured underline that inks in cinnabar on hover.",
+      "html": "<a class=\"ds-link-quiet\" href=\"#\">Xem hồ sơ công ty</a>",
+      "css": ".ds-link-quiet { font-family: var(--font-be-vietnam), ui-sans-serif, system-ui, sans-serif; font-size: 1.0625rem; color: var(--ink-soft, oklch(50% 0.016 62deg)); text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: var(--rule, oklch(84.5% 0.018 80deg)); text-underline-offset: 6px; transition: color 0.2s, text-decoration-color 0.2s; } .ds-link-quiet:hover { color: var(--son-deep, oklch(43% 0.14 33deg)); text-decoration-color: var(--son, oklch(52% 0.155 34deg)); } .ds-link-quiet:focus-visible { outline: 2px solid var(--son, oklch(52% 0.155 34deg)); outline-offset: 3px; }"
+    },
+    {
+      "name": "Seal",
+      "kind": "chip",
+      "refersTo": "seal",
+      "description": "The cinnabar evidence mark. Pressed only against a fact an outside body attested — a competition result, an award, an external ruling.",
+      "html": "<span class=\"ds-seal\">Giải Nhì 2024</span>",
+      "css": ".ds-seal { display: inline-flex; align-items: center; justify-content: center; transform: rotate(-4.5deg); border: 2px solid var(--son, oklch(52% 0.155 34deg)); border-radius: 2px; padding: 0.4rem 0.7rem; color: var(--son-deep, oklch(43% 0.14 33deg)); font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.92; }"
+    },
+    {
+      "name": "Record Data",
+      "kind": "chip",
+      "refersTo": "record",
+      "description": "Measured data set in mono with tabular figures: product codes, years, counts, hostnames, statuses.",
+      "html": "<span class=\"ds-record\">TVTS-10 · 2024 · ĐANG CHẠY</span>",
+      "css": ".ds-record { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.75rem; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; color: var(--ink-soft, oklch(50% 0.016 62deg)); }"
+    },
+    {
+      "name": "Product Row",
+      "kind": "card",
+      "refersTo": "product-row",
+      "description": "A product as an entry in a printed index rather than a card in a grid: printed top edge, plate at left, title and tagline centre, record data right.",
+      "html": "<li class=\"ds-row\"><a class=\"ds-row-link\" href=\"#\"><div class=\"ds-row-plate\"><svg viewBox=\"0 0 160 120\" width=\"100%\"><g fill=\"var(--son, oklch(52% 0.155 34deg))\" opacity=\"0.9\" transform=\"translate(2 -2)\"><circle cx=\"80\" cy=\"26\" r=\"11\"/></g><g fill=\"var(--ink, oklch(23% 0.014 60deg))\"><path d=\"M52 14h56l10 18H42z\"/><rect x=\"78\" y=\"32\" width=\"4\" height=\"6\"/><path d=\"M36 52h88v52H36z\"/></g></svg></div><div class=\"ds-row-body\"><h3 class=\"ds-row-title\">EcomBox</h3><p class=\"ds-row-tagline\">Camera đóng gói, ghi lại từng đơn rời kho.</p></div><div class=\"ds-row-meta\"><span class=\"ds-record\">EB-01 · ĐANG CHẠY</span><span class=\"ds-row-more\">Đọc tiếp<svg class=\"ds-row-arrow\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\"><path d=\"M5 12h13M12 6l6 6-6 6\"/></svg></span></div></a></li>",
+      "css": ".ds-row { list-style: none; border-top: 0; background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='3' preserveAspectRatio='none'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.35' numOctaves='2'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='2.1'/%3E%3C/filter%3E%3Crect x='0' y='1' width='320' height='1.1' fill='%23241f1a' opacity='0.34' filter='url(%23w)'/%3E%3C/svg%3E\"); background-repeat: repeat-x; background-position: top left; background-size: 320px 3px; } .ds-row-link { display: grid; grid-template-columns: 8.5rem 1fr 12rem; align-items: start; gap: 2rem; padding: 2.5rem 0; text-decoration: none; color: var(--ink, oklch(23% 0.014 60deg)); } .ds-row-title { font-family: var(--font-petrona), Georgia, serif; font-weight: 500; letter-spacing: -0.018em; line-height: 1.04; font-size: clamp(1.6rem, 3vw, 2.15rem); transition: color 0.2s; } .ds-row-tagline { max-width: 68ch; margin-top: 0.75rem; line-height: 1.6; color: var(--ink-soft, oklch(50% 0.016 62deg)); font-family: var(--font-be-vietnam), ui-sans-serif, sans-serif; } .ds-row-meta { display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 0.5rem; } .ds-row-more { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; transition: color 0.2s; } .ds-row-arrow { transition: transform 0.2s; } .ds-row-link:hover .ds-row-title, .ds-row-link:hover .ds-row-more { color: var(--son-deep, oklch(43% 0.14 33deg)); } .ds-row-link:hover .ds-row-arrow { transform: translateX(4px); } .ds-row-link:focus-visible { outline: 2px solid var(--son, oklch(52% 0.155 34deg)); outline-offset: 3px; }"
+    },
+    {
+      "name": "Section Header",
+      "kind": "custom",
+      "refersTo": "section-paper",
+      "description": "Heading plus intro across a 6 / 5 split. Nothing sits above the heading — no kicker, eyebrow, or section number.",
+      "html": "<header class=\"ds-section-header\"><h2 class=\"ds-heading\">Cách chúng tôi làm việc</h2><p class=\"ds-intro\">Bảy người, bốn sản phẩm đang chạy thật, và một quy trình viết ra để người ngoài đọc được.</p></header>",
+      "css": ".ds-section-header { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2.5rem; } .ds-heading { grid-column: span 6; font-family: var(--font-petrona), Georgia, serif; font-weight: 500; letter-spacing: -0.018em; line-height: 1.04; text-wrap: balance; font-size: clamp(2rem, 4.6vw, 3.4rem); color: var(--ink, oklch(23% 0.014 60deg)); } .ds-intro { grid-column: 8 / 13; font-family: var(--font-be-vietnam), ui-sans-serif, sans-serif; font-size: 1.125rem; line-height: 1.7; color: var(--ink-soft, oklch(50% 0.016 62deg)); }"
+    },
+    {
+      "name": "Sunk Section",
+      "kind": "card",
+      "refersTo": "section-sunk",
+      "description": "The alternate tone, used for a statement or pull quote. Separation is a tonal step and a printed edge, never a shadow or a card border.",
+      "html": "<section class=\"ds-sunk\"><blockquote class=\"ds-quote\">Chúng tôi không hứa quy mô. Chúng tôi đưa ra thứ đã in.</blockquote><footer class=\"ds-quote-foot\"><span>Nguyễn Thành Phát</span><span class=\"ds-record\">Giám đốc kỹ thuật</span></footer></section>",
+      "css": ".ds-sunk { background: var(--paper-sunk, oklch(92.4% 0.016 82deg)); padding: 6rem 2.5rem; border-top: 0; background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='3' preserveAspectRatio='none'%3E%3Crect x='0' y='1' width='320' height='1.1' fill='%23241f1a' opacity='0.34'/%3E%3C/svg%3E\"); background-repeat: repeat-x; background-position: top left; background-size: 320px 3px; } .ds-quote { max-width: 20ch; font-family: var(--font-petrona), Georgia, serif; font-weight: 500; letter-spacing: -0.018em; line-height: 1.04; font-size: clamp(2rem, 5.4vw, 3.9rem); color: var(--ink, oklch(23% 0.014 60deg)); } .ds-quote-foot { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem; margin-top: 2.5rem; color: var(--ink, oklch(23% 0.014 60deg)); }"
+    },
+    {
+      "name": "Header Bar",
+      "kind": "nav",
+      "refersTo": "header-bar",
+      "description": "Sticky 4.5rem bar on translucent paper with a rule-coloured underline. Links are text; the CTA takes the same treatment — the chrome holds no pill button.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-nav-mark\" href=\"#\">TENSORACT</a><nav class=\"ds-nav-links\"><a class=\"ds-nav-link\" href=\"#\">Sản phẩm</a><a class=\"ds-nav-link\" href=\"#\">Cách làm việc</a><a class=\"ds-nav-link\" href=\"#\">Liên hệ</a></nav></header>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 2rem; height: 4.5rem; padding: 0 2.5rem; background: color-mix(in oklch, var(--paper, oklch(95.2% 0.012 84deg)) 90%, transparent); backdrop-filter: blur(4px); border-bottom: 1px solid var(--rule, oklch(84.5% 0.018 80deg)); } .ds-nav-mark { font-family: var(--font-petrona), Georgia, serif; font-weight: 500; letter-spacing: 0.04em; color: var(--ink, oklch(23% 0.014 60deg)); text-decoration: none; transition: color 0.2s; } .ds-nav-mark:hover { color: var(--son-deep, oklch(43% 0.14 33deg)); } .ds-nav-links { display: flex; align-items: center; gap: 2rem; } .ds-nav-link { font-family: var(--font-be-vietnam), ui-sans-serif, sans-serif; color: var(--ink-soft, oklch(50% 0.016 62deg)); text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: transparent; text-underline-offset: 7px; transition: color 0.2s, text-decoration-color 0.2s; } .ds-nav-link:hover { color: var(--son-deep, oklch(43% 0.14 33deg)); text-decoration-color: var(--son, oklch(52% 0.155 34deg)); } .ds-nav-link:focus-visible { outline: 2px solid var(--son, oklch(52% 0.155 34deg)); outline-offset: 3px; }"
+    },
+    {
+      "name": "Woodblock Plate",
+      "kind": "custom",
+      "refersTo": "product-row",
+      "description": "Two-block print: a cinnabar block laid first and 2-3px out of register, then the ink block over it, both passed through the shared bleed filter.",
+      "html": "<figure class=\"ds-plate\"><svg viewBox=\"0 0 160 120\" width=\"100%\"><defs><filter id=\"ds-bleed\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"0.34 0.52\" numOctaves=\"3\" result=\"n\"/><feDisplacementMap in=\"SourceGraphic\" in2=\"n\" scale=\"3.4\"/><feGaussianBlur stdDeviation=\"0.4\"/></filter></defs><g fill=\"var(--son, oklch(52% 0.155 34deg))\" filter=\"url(#ds-bleed)\" opacity=\"0.9\" transform=\"translate(3 -2)\"><path d=\"M96 34h38v38H96z\"/></g><g fill=\"var(--ink, oklch(23% 0.014 60deg))\" filter=\"url(#ds-bleed)\"><path d=\"M26 22h68v76H26zm10 10v56h48V32H36z\"/><rect x=\"44\" y=\"46\" width=\"30\" height=\"6\"/><rect x=\"44\" y=\"62\" width=\"40\" height=\"6\"/><path d=\"M112 22l14 8-34 56-14-8z\"/></g></svg><figcaption class=\"ds-plate-cap\">Tranh khắc dựng tay — chưa phải ảnh chụp thật</figcaption></figure>",
+      "css": ".ds-plate { margin: 0; max-width: 22rem; } .ds-plate svg { display: block; height: auto; width: 100%; } .ds-plate-cap { margin-top: 1rem; font-family: var(--font-be-vietnam), ui-sans-serif, sans-serif; font-size: 0.875rem; color: var(--ink-soft, oklch(50% 0.016 62deg)); }"
+    },
+    {
+      "name": "Footer Field",
+      "kind": "nav",
+      "refersTo": "footer",
+      "description": "The back cover: the only inverted surface on the site — solid ink with paper type stepped at 85% / 65% / 45%.",
+      "html": "<footer class=\"ds-footer\"><div class=\"ds-footer-brand\"><span class=\"ds-footer-mark\">TENSORACT</span><p class=\"ds-footer-tagline\">Bảy người, bốn sản phẩm đang chạy.</p></div><div><h2 class=\"ds-footer-label\">Liên hệ</h2><ul class=\"ds-footer-list\"><li><a class=\"ds-footer-link\" href=\"#\">contact@tensoract.com</a></li></ul></div></footer>",
+      "css": ".ds-footer { display: grid; grid-template-columns: 5fr 7fr; gap: 2.5rem; background: var(--ink, oklch(23% 0.014 60deg)); color: var(--paper, oklch(95.2% 0.012 84deg)); padding: 5rem 2.5rem; } .ds-footer-mark { font-family: var(--font-petrona), Georgia, serif; font-weight: 500; letter-spacing: 0.04em; } .ds-footer-tagline { margin-top: 1.5rem; max-width: 36ch; line-height: 1.7; color: color-mix(in oklch, var(--paper, oklch(95.2% 0.012 84deg)) 65%, transparent); } .ds-footer-label { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.75rem; letter-spacing: 0.06em; color: color-mix(in oklch, var(--paper, oklch(95.2% 0.012 84deg)) 45%, transparent); } .ds-footer-list { list-style: none; margin: 1rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.625rem; } .ds-footer-link { color: color-mix(in oklch, var(--paper, oklch(95.2% 0.012 84deg)) 85%, transparent); text-decoration: underline; text-underline-offset: 4px; transition: color 0.2s; } .ds-footer-link:hover { color: var(--son, oklch(52% 0.155 34deg)); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Giấy dó & mộc bản — the printed record",
+    "overview": "The site behaves like a sheet of Vietnamese handmade paper that has been through a press. One warm ground runs edge to edge with its fibre still visible, and everything on it is an impression: type cut rather than drawn, illustration in flat blocks of one ink, boundaries that waver the way a pressed line wavers. Nothing is a panel floating over a canvas; there is only the sheet and what was printed on it. The company is seven people, so the surface argues by showing what already exists in public record rather than by asserting scale.\n\nDensity is low and the rhythm is vertical. Sections are long pressings separated by an inked edge, never by a card boundary, and content lengths differ because the things being described differ. The palette is two materials and one seal: paper, ink, and cinnabar. Cinnabar is not an accent colour; it is evidence, pressed only where an outside body attested to something.\n\nThe build ships locked to data-theme=\"light\". A full dark token set exists in the stylesheet but the root layout hard-codes the light attribute, so the paper ground is the only shipped world. Confirmed rejections: the SaaS hero-metric band, the grid of identical product cards, the chromed pill CTA, and the 1px UI hairline.",
+    "keyCharacteristics": [
+      "One warm paper ground with a fixed multiply-blended fibre layer behind the entire site",
+      "Cut-serif display type at press scale, carrying the page without a supporting label",
+      "Cinnabar reserved for attested facts; never decorative",
+      "Printed edges instead of borders wherever a section or row boundary is drawn",
+      "Flat two-block woodblock illustration with a deliberate registration offset",
+      "Near-zero radius (2px); the seal is the only rotated element on the site"
+    ],
+    "rules": [
+      { "name": "The Attestation Rule", "body": "Cinnabar marks a fact somebody outside this company ruled on: a competition result, an award, an external source. It never becomes a highlight, a badge, a tag, or a section accent. If you cannot name the outside body, the mark is ink.", "section": "colors" },
+      { "name": "The Warm Neutral Rule", "body": "No neutral grey and no pure black or white anywhere. Every paper and ink value carries chroma in the 60-84 degree hue range; a value at chroma 0 is out of world.", "section": "colors" },
+      { "name": "The Reverse Field Rule", "body": "The footer is the only surface that inverts — solid ink with paper type, opacities stepped at 85% / 65% / 45% for text hierarchy. Do not invent additional dark bands.", "section": "colors" },
+      { "name": "The No-Kicker Rule", "body": "Nothing sits above a heading. No eyebrow, no kicker, no category label, no all-caps section number. The CMS carries eyebrow fields and the templates deliberately do not render them; keep it that way. A label above a heading is the tell of a page that did not trust its own words.", "section": "typography" },
+      { "name": "The Record-Only Mono Rule", "body": "Mono is data that was measured or recorded — codes, years, counts, hostnames, statuses, labels over lists. It is never used for running prose, for buttons, or as costume to make a paragraph look technical.", "section": "typography" },
+      { "name": "The Serif-Carries-It Rule", "body": "Every heading level on the site, including CMS rich-text h1-h4, is set in Petrona at weight 500 with -0.018em tracking. There is no sans-serif heading anywhere.", "section": "typography" },
+      { "name": "The One Column Rule", "body": "The page is a sheet, not a dashboard. No sidebars, no split-screen sections, no more than two content tracks in any row.", "section": "layout" },
+      { "name": "The No-Shadow Rule", "body": "No box-shadow, no filter: drop-shadow, no glow on any surface. If an element needs to separate from its neighbour, give it a printed edge or a paper-sunk ground.", "section": "elevation" },
+      { "name": "The One Pressing Rule", "body": "The fibre background is declared once on body::before and is never re-applied to a child. Nested texture layers double the noise and break the illusion of a single sheet.", "section": "elevation" },
+      { "name": "The Printed Edge Rule", "body": "A boundary between two pieces of content is a pressed line, never a 1px solid. If you reach for border-top, reach for .edge-print instead.", "section": "shapes" },
+      { "name": "The Two-Block Rule", "body": "A plate has exactly two inks and the second is out of register. Three colours, a gradient, or a perfectly aligned overlay stops reading as a print and starts reading as a vector icon.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do put every heading in Petrona at weight 500 with -0.018em tracking, and let it start the section with nothing above it.",
+      "Do draw section and row boundaries with .edge-print / .edge-print-b; forced border: 0 plus the pressed background is the pattern.",
+      "Do reserve cinnabar for facts an outside party attested, and reach for ink or ink-soft for everything else.",
+      "Do cap prose at 68ch with .measure, and let row heights differ because their contents differ.",
+      "Do set codes, years, counts, hostnames and statuses in .record with tabular figures.",
+      "Do draw new illustration as two flat ink blocks through the shared bleed filter, with the cinnabar block 2-3px out of register.",
+      "Do keep the whole surface in the light paper world; the shipped root is hard-coded to data-theme=\"light\".",
+      "Do localize every copy-bearing field: the site serves VI and EN under /vi and /en, and layouts must survive Vietnamese line lengths and diacritics."
+    ],
+    "donts": [
+      "Don't put a kicker, eyebrow, category label, or section number above a heading. The CMS eyebrow fields exist and are intentionally not rendered.",
+      "Don't add a box-shadow, drop-shadow, or glow to anything.",
+      "Don't use cinnabar as decoration, a highlight, a badge fill, or a section accent.",
+      "Don't set prose or UI labels in mono; it is record data only.",
+      "Don't build a grid of equal-size product cards, or a hero band of large metric numerals.",
+      "Don't introduce a filled pill CTA in the header or anywhere else; the primary action is the underlined address.",
+      "Don't use a neutral grey, pure black, or pure white value.",
+      "Don't re-apply the fibre texture to a child element or add a second rounded corner scale; radius stays at 2px.",
+      "Don't replace a printed edge with 1px solid outside the header chrome and mobile nav."
+    ]
+  }
+}
