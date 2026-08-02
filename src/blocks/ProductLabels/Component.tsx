@@ -39,7 +39,7 @@ export const ProductLabelsBlockComponent: React.FC<Props> = async ({
         {docs.length === 0 ? (
           <p className="mt-14 text-ink-soft">{dict.products.empty}</p>
         ) : (
-          <ul className="mt-16 border-b border-rule">
+          <ul className="mt-16 edge-print-b">
             {docs.map((product) => (
               <ProductRow dict={dict} key={product.id} locale={locale} product={product} />
             ))}

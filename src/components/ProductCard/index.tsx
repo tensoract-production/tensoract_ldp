@@ -33,7 +33,7 @@ export const ProductRow: React.FC<{
   const host = hostOf(product.externalUrl)
 
   return (
-    <li className={cn('border-t border-rule', className)}>
+    <li className={cn('edge-print', className)}>
       <Link
         className="group grid items-start gap-6 py-10 md:grid-cols-12 md:gap-8 md:py-12"
         href={`/${locale}/products/${product.slug}`}

@@ -19,6 +19,8 @@ export const dictionaries = {
     products: {
       all: 'Tất cả sản phẩm',
       others: 'Sản phẩm khác',
+      flagshipGroup: 'Ecombox và giải pháp đi kèm',
+      sideGroup: 'Phần mềm khác chúng tôi duy trì',
       visit: 'Mở trang sản phẩm',
       readMore: 'Xem chi tiết',
       status: {
@@ -48,6 +50,7 @@ export const dictionaries = {
     awards: {
       source: 'Nguồn',
     },
+    unverifiedEmail: 'địa chỉ tạm, chưa xác minh',
     footer: {
       company: 'Công ty',
       products: 'Sản phẩm',
@@ -76,6 +79,8 @@ export const dictionaries = {
     products: {
       all: 'All products',
       others: 'Other products',
+      flagshipGroup: 'Ecombox and its companions',
+      sideGroup: 'Other software we maintain',
       visit: 'Open product site',
       readMore: 'View details',
       status: {
@@ -105,6 +110,7 @@ export const dictionaries = {
     awards: {
       source: 'Source',
     },
+    unverifiedEmail: 'placeholder address, unverified',
     footer: {
       company: 'Company',
       products: 'Products',

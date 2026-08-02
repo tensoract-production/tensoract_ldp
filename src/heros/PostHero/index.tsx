@@ -23,7 +23,7 @@ export const PostHero: React.FC<{
     .filter(Boolean)
 
   return (
-    <header className="border-b border-rule pt-16 pb-14 md:pt-24">
+    <header className="edge-print-b pt-16 pb-14 md:pt-24">
       <div className="container">
         <div className="mx-auto max-w-[46rem]">
           {categoryNames.length > 0 && (
@@ -32,7 +32,7 @@ export const PostHero: React.FC<{
 
           <h1 className="serif mt-5 text-[clamp(2.1rem,5.2vw,3.6rem)]">{title}</h1>
 
-          <dl className="mt-10 flex flex-wrap gap-x-12 gap-y-4 border-t border-rule pt-5">
+          <dl className="mt-10 flex flex-wrap gap-x-12 gap-y-4 edge-print pt-5">
             {hasAuthors && (
               <div>
                 <dt className="record text-ink-soft">

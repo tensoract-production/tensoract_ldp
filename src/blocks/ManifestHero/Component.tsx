@@ -46,13 +46,25 @@ export const ManifestHeroBlockComponent: React.FC<Props> = ({
               </p>
             )}
 
+            {/* One action. The first link is the address itself, set in ink;
+                anything after it is a quiet secondary. */}
             {links && links.length > 0 && (
               <div
-                className="anim-settle mt-10 flex flex-wrap items-center gap-x-8 gap-y-4"
+                className="anim-settle mt-11 flex flex-wrap items-baseline gap-x-9 gap-y-4"
                 style={{ animationDelay: '0.18s' }}
               >
                 {links.map(({ link }, i) => (
-                  <CMSLink key={i} locale={locale} size={i === 0 ? 'lg' : undefined} {...link} />
+                  <CMSLink
+                    className={
+                      i === 0
+                        ? 'ink-action'
+                        : 'text-ink-soft underline decoration-rule underline-offset-[6px] transition-colors hover:text-son-deep hover:decoration-son'
+                    }
+                    key={i}
+                    locale={locale}
+                    {...link}
+                    appearance="inline"
+                  />
                 ))}
               </div>
             )}
@@ -63,7 +75,7 @@ export const ManifestHeroBlockComponent: React.FC<Props> = ({
             style={{ animationDelay: '0.26s' }}
           >
             <PlateWorkroom label="Xưởng làm việc của Tensoract, dựng theo lối tranh khắc gỗ" />
-            <figcaption className="record mt-4 text-ink-soft">
+            <figcaption className="mt-4 text-sm text-ink-soft">
               Tranh khắc dựng tay — chưa phải ảnh chụp thật
             </figcaption>
           </figure>
@@ -71,11 +83,11 @@ export const ManifestHeroBlockComponent: React.FC<Props> = ({
 
         {/* The registration line: the facts a public record already holds. */}
         {labelRows && labelRows.length > 0 && (
-          <dl className="mt-20 flex flex-wrap items-center gap-x-10 gap-y-5 border-t border-rule pt-6 md:mt-24">
-            {labelCode && <dt className="record sr-only">{labelCode}</dt>}
+          <dl className="edge-print mt-20 flex flex-wrap items-center gap-x-10 gap-y-5 pt-7 md:mt-24">
+            {labelCode && <dt className="sr-only">{labelCode}</dt>}
             {labelRows.map((row) => (
               <div className="flex items-baseline gap-3" key={row.id}>
-                <dt className="record text-ink-soft">{row.label}</dt>
+                <dt className="text-sm text-ink-soft">{row.label}</dt>
                 <dd className="text-ink">{row.value}</dd>
               </div>
             ))}

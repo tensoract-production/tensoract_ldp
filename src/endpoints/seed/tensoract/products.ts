@@ -15,6 +15,7 @@ type Localized = {
 export type ProductSeed = {
   slug: string
   code: string
+  tier: NonNullable<Product['tier']>
   status: Product['status']
   category: NonNullable<Product['category']>
   externalUrl?: string
@@ -33,15 +34,16 @@ export const products: ProductSeed[] = [
   {
     slug: 'ecombox',
     code: 'TSR-01',
+    tier: 'flagship',
     status: 'live',
     category: 'ecommerce',
     featured: true,
     order: 10,
     vi: {
       title: 'Ecombox',
-      tagline: 'Video AI cho khâu đóng gói, để bớt tranh chấp hoàn hàng.',
+      tagline: 'Nền tảng ghi nhận khâu đóng gói bằng AI, triển khai cho doanh nghiệp.',
       summary:
-        'Ecombox ghi lại quá trình đóng gói và gắn đoạn video vào đúng mã đơn. Khi khách báo thiếu hàng hoặc sai hàng, người bán có thứ để đối soát thay vì chịu thiệt.',
+        'Ecombox ghi lại quá trình đóng gói và gắn đoạn video vào đúng mã đơn, để mọi tranh chấp hoàn hàng đều có bản ghi tra được. Đây là sản phẩm chủ lực của Tensoract, triển khai theo quy mô kho và tích hợp vào hệ thống sẵn có của doanh nghiệp.',
       highlights: [
         {
           title: 'Video gắn theo mã đơn',
@@ -76,9 +78,9 @@ export const products: ProductSeed[] = [
     },
     en: {
       title: 'Ecombox',
-      tagline: 'AI video for the packing bench, so fewer returns turn into disputes.',
+      tagline: 'AI packing-record platform, deployed inside the enterprise.',
       summary:
-        'Ecombox records the packing process and attaches the clip to the right order code. When a buyer reports a missing or wrong item, the seller has something to check against instead of absorbing the loss.',
+        'Ecombox records the packing process and attaches each clip to its order code, so every return dispute has a record that can be looked up. It is the Tensoract flagship, deployed to the scale of the warehouse and integrated with the systems already in place.',
       highlights: [
         {
           title: 'Clips tied to order codes',
@@ -112,88 +114,65 @@ export const products: ProductSeed[] = [
     },
   },
   {
-    slug: 'goi-hang-chuan',
+    slug: 'ecombox-ormi',
     code: 'TSR-02',
-    status: 'live',
+    tier: 'companion',
+    status: 'building',
     category: 'ecommerce',
-    externalUrl: 'https://goihangchuan.vn',
     featured: true,
     order: 20,
     vi: {
-      title: 'Gói Hàng Chuẩn',
-      tagline: 'Quản lý vận đơn cho người bán online, gọn trong một chỗ.',
+      title: 'Ecombox ORMI',
+      tagline: 'Giải pháp đi kèm Ecombox cho triển khai doanh nghiệp.',
       summary:
-        'Một nơi để theo dõi vận đơn, in tem và biết đơn nào đang kẹt — thay vì mở lần lượt trang của từng hãng vận chuyển mỗi sáng.',
+        '[Chờ nội dung] Đây là khung sẵn cho ORMI. Hãy mô tả ORMI giải quyết việc gì trong Payload admin → Products → Ecombox ORMI trước khi trang này lên thật.',
       highlights: [
         {
-          title: 'Gom vận đơn về một bảng',
-          description: 'Không phải nhớ đơn nào đi hãng nào để mở đúng trang tra cứu.',
-        },
-        {
-          title: 'In tem hàng loạt',
-          description: 'Chuẩn bị tem cho cả lô hàng trong một lượt, thay vì in từng cái.',
-        },
-        {
-          title: 'Thấy đơn đang kẹt',
-          description: 'Đơn đứng yên quá lâu được đẩy lên đầu bảng để xử lý trước.',
+          title: '[Chờ nội dung] Năng lực thứ nhất',
+          description: 'Thay bằng mô tả thật trong admin.',
         },
       ],
       content: doc(
-        h('h2', 'Vì sao có sản phẩm này'),
+        h('h2', 'Mục này đang chờ nội dung'),
         p(
-          'Người bán vừa đủ lớn để chạy nhiều hãng vận chuyển thì cũng vừa đủ bận để không kịp mở từng trang tra cứu. Việc theo dõi vận đơn rơi vào file Excel, rồi rơi khỏi file Excel.',
-        ),
-        p(
-          'Gói Hàng Chuẩn gom phần đó lại thành một bảng làm việc duy nhất, đủ để biết sáng nay cần xử lý đơn nào.',
+          'Cấu trúc, đường dẫn và vị trí trong danh mục đã sẵn sàng. Phần mô tả ORMI cần do đội Tensoract viết, vì đây là thông tin sản phẩm chưa được công bố ở đâu.',
         ),
       ),
       meta: {
-        title: 'Gói Hàng Chuẩn — quản lý vận đơn cho người bán online',
-        description:
-          'Theo dõi vận đơn nhiều hãng, in tem hàng loạt và phát hiện đơn kẹt, trong một bảng làm việc duy nhất.',
+        title: 'Ecombox ORMI',
+        description: 'Giải pháp đi kèm Ecombox cho triển khai doanh nghiệp.',
       },
     },
     en: {
-      title: 'Gói Hàng Chuẩn',
-      tagline: 'Parcel management for online sellers, in one place.',
+      title: 'Ecombox ORMI',
+      tagline: 'The companion to Ecombox for enterprise deployment.',
       summary:
-        'One place to track shipments, print labels, and see which parcels are stuck — instead of opening a different carrier site every morning.',
+        '[Content pending] This is a prepared shell for ORMI. Describe what ORMI does in Payload admin → Products → Ecombox ORMI before this page goes live.',
       highlights: [
         {
-          title: 'Every carrier in one table',
-          description: 'No need to remember which carrier an order went out with to look it up.',
-        },
-        {
-          title: 'Print labels in batches',
-          description: 'Prepare labels for a whole run at once rather than one at a time.',
-        },
-        {
-          title: 'Surface stuck parcels',
-          description: 'Anything that has not moved for too long is pushed to the top of the list.',
+          title: '[Content pending] First capability',
+          description: 'Replace with the real description in the admin.',
         },
       ],
       content: doc(
-        h('h2', 'Why this exists'),
+        h('h2', 'This entry is awaiting content'),
         p(
-          'A seller large enough to use several carriers is also busy enough to stop checking each carrier site. Shipment tracking falls into a spreadsheet, and then out of it.',
-        ),
-        p(
-          'Gói Hàng Chuẩn collapses that into a single working table — enough to know which parcels need attention this morning.',
+          'The structure, the route and the place in the index are ready. The description of ORMI has to come from the Tensoract team, because it is product information that has not been published anywhere.',
         ),
       ),
       meta: {
-        title: 'Gói Hàng Chuẩn — parcel management for online sellers',
-        description:
-          'Track multi-carrier shipments, print labels in batches, and catch stuck parcels from one table.',
+        title: 'Ecombox ORMI',
+        description: 'The companion to Ecombox for enterprise deployment.',
       },
     },
   },
   {
     slug: 'deligent',
     code: 'TSR-03',
+    tier: 'side',
     status: 'live',
     category: 'ai',
-    featured: true,
+    featured: false,
     order: 30,
     vi: {
       title: 'Deligent',
@@ -265,9 +244,10 @@ export const products: ProductSeed[] = [
   {
     slug: 'tvts-10',
     code: 'TSR-04',
+    tier: 'side',
     status: 'live',
     category: 'education',
-    featured: true,
+    featured: false,
     order: 40,
     vi: {
       title: 'TVTS 10',

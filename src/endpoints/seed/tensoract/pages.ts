@@ -46,8 +46,8 @@ export const homePage = (locale: Locale) => ({
       ),
       lead: pick(
         locale,
-        'Tensoract là công ty phần mềm tại Thủ Đức, TP.HCM. Bốn sản phẩm của chúng tôi đang chạy thật trong khâu đóng gói, vận đơn, thiết kế và tuyển sinh — do một đội bảy người xây và tự vận hành.',
-        'Tensoract is a software company in Thu Duc, Ho Chi Minh City. Four products are running today across packing, shipping, design and school admissions — built and operated by a team of seven.',
+        'Tensoract là công ty phần mềm tại Thủ Đức, TP.HCM. Sản phẩm chủ lực Ecombox ghi nhận khâu đóng gói bằng AI và được triển khai theo quy mô kho của doanh nghiệp. Một đội bảy người xây và tự vận hành.',
+        'Tensoract is a software company in Thu Duc, Ho Chi Minh City. Its flagship, Ecombox, records the packing process with AI and is deployed at the scale of the warehouse. Built and operated by a team of seven.',
       ),
       links: [
         {
@@ -77,31 +77,26 @@ export const homePage = (locale: Locale) => ({
         },
         { label: pick(locale, 'Đội ngũ', 'Team'), value: pick(locale, '7 người', '7 people') },
         {
-          label: pick(locale, 'Sản phẩm', 'Products'),
-          value: pick(locale, '4 đang vận hành', '4 in operation'),
+          label: pick(locale, 'Chủ lực', 'Flagship'),
+          value: 'Ecombox',
         },
-      ],
-    },
-    {
-      blockType: 'manifestStrip' as const,
-      items: [
-        { value: '2022', label: pick(locale, 'thành lập', 'founded') },
-        { value: '7', label: pick(locale, 'người trong đội', 'people on the team') },
-        { value: '4', label: pick(locale, 'sản phẩm đang chạy', 'products running') },
-        { value: '100+', label: pick(locale, 'buổi seminar đã tổ chức', 'seminars run') },
+        {
+          label: pick(locale, 'Sản phẩm', 'Products'),
+          value: pick(locale, '4 · 3 đang vận hành', '4 · 3 live'),
+        },
       ],
     },
     {
       blockType: 'productLabels' as const,
       heading: pick(
         locale,
-        'Bốn sản phẩm, mỗi cái giải một việc cụ thể.',
-        'Four products, each solving one specific job.',
+        'Ecombox, và những gì đi cùng nó.',
+        'Ecombox, and what ships with it.',
       ),
       intro: pick(
         locale,
-        'Không có nền tảng tất-cả-trong-một. Mỗi sản phẩm bắt đầu từ một khâu vận hành mà phần mềm lớn bỏ qua, và được vận hành như một dịch vụ riêng.',
-        'No all-in-one platform. Each product started from an operational step the large systems skip, and each runs as its own service.',
+        'Ecombox là sản phẩm chủ lực, triển khai cho doanh nghiệp theo quy mô kho thật. Vài phần mềm nhỏ hơn chúng tôi vẫn duy trì, nhưng không dẫn câu chuyện bằng chúng.',
+        'Ecombox is the flagship, deployed to the real scale of a warehouse. We maintain a few smaller products, but we do not lead with them.',
       ),
       source: 'featured' as const,
       limit: 6,
@@ -117,57 +112,14 @@ export const homePage = (locale: Locale) => ({
       ],
     },
     {
-      blockType: 'approach' as const,
-      heading: pick(locale, 'Cách chúng tôi làm việc', 'How we work'),
+      blockType: 'releases' as const,
+      heading: pick(locale, 'Bản phát hành gần đây', 'Recent releases'),
       intro: pick(
         locale,
-        'Bảy người không thể làm mọi thứ, nên phần lớn công việc là chọn đúng thứ để làm.',
-        'Seven people cannot do everything, so most of the work is choosing the right thing to do.',
+        'Sản phẩm đi tới đâu, ghi lại ở đây — không lẫn vào bài viết.',
+        'Where the products actually got to, kept out of the essays.',
       ),
-      items: [
-        {
-          title: pick(locale, 'Mỗi sản phẩm giải đúng một việc', 'One product, one job'),
-          description: pick(
-            locale,
-            'Chúng tôi không gộp bốn sản phẩm thành một nền tảng. Mỗi cái có khách riêng, vòng đời riêng, và có thể bị dừng riêng nếu không còn ai cần.',
-            'We do not merge four products into a platform. Each has its own customers, its own lifecycle, and can be retired on its own if nobody needs it.',
-          ),
-        },
-        {
-          title: pick(locale, 'AI đặt ở khâu tốn công nhất', 'AI where the work actually is'),
-          description: pick(
-            locale,
-            'Đọc video đóng gói, dựng bản thiết kế nháp, gợi ý tổ hợp môn. Đó là những chỗ mô hình thay được sức người; phần còn lại vẫn là phần mềm bình thường và nên như vậy.',
-            'Reading packing footage, drafting artwork, suggesting subject combinations. Those are the places a model replaces real labour; the rest is ordinary software and should stay that way.',
-          ),
-        },
-        {
-          title: pick(locale, 'Ra bản dùng được sớm', 'Ship something usable early'),
-          description: pick(
-            locale,
-            'Một đội nhỏ không giấu được sản phẩm suốt nửa năm. Chúng tôi đưa bản chạy được ra tay người dùng thật rồi sửa theo cái họ thực sự làm.',
-            'A small team cannot hide a product for six months. We put a working version in real hands and fix it against what people actually do.',
-          ),
-        },
-        {
-          title: pick(locale, 'Hạ tầng thuê, logic tự viết', 'Rent the rack, own the logic'),
-          description: pick(
-            locale,
-            'Máy chủ, CDN và phần mô hình thuê của Google Cloud, AWS, Microsoft và Cloudflare. Toàn bộ logic sản phẩm do đội tự viết, vì đó là phần không thể thuê ngoài.',
-            'Servers, CDN and model capacity are rented from Google Cloud, AWS, Microsoft and Cloudflare. The product logic is written in-house, because that is the part nobody can rent out.',
-          ),
-        },
-      ],
-    },
-    {
-      blockType: 'statement' as const,
-      text: pick(
-        locale,
-        'Làm ra những phần mềm đơn giản và mạnh, cho đúng những khâu vận hành mà hệ thống lớn bỏ qua.',
-        'Make software that stays simple and stays strong, for the operational steps large systems leave alone.',
-      ),
-      attribution: 'Võ Quốc Thịnh',
-      attributionRole: pick(locale, 'Nhà sáng lập', 'Founder'),
+      limit: 4,
     },
     {
       blockType: 'awards' as const,
@@ -227,6 +179,94 @@ export const homePage = (locale: Locale) => ({
           ],
         },
       ],
+    },
+    {
+      blockType: 'approach' as const,
+      heading: pick(locale, 'Chúng tôi cung cấp gì', 'What we provide'),
+      intro: pick(
+        locale,
+        'Ba việc, và chúng tôi nói không với phần còn lại.',
+        'Three things, and we say no to the rest.',
+      ),
+      items: [
+        {
+          title: pick(locale, 'Triển khai Ecombox cho doanh nghiệp', 'Ecombox, deployed'),
+          description: pick(
+            locale,
+            'Lắp đặt và vận hành Ecombox theo quy mô kho thật: số điểm đóng gói, sản lượng đơn mỗi ngày, và cách đội kho đang làm việc.',
+            'Installing and running Ecombox at the scale of a real warehouse: how many packing stations, how many orders a day, and how the floor team already works.',
+          ),
+        },
+        {
+          title: pick(locale, 'Ghép nối vào hệ thống sẵn có', 'Fitting it to what you run'),
+          description: pick(
+            locale,
+            'Doanh nghiệp đã có hệ quản lý kho và vận đơn riêng. Chúng tôi ghép Ecombox vào đó thay vì bắt đổi quy trình cho vừa phần mềm.',
+            'Enterprises already run their own warehouse and shipping systems. We fit Ecombox to those rather than asking the process to bend around the software.',
+          ),
+        },
+        {
+          title: pick(locale, 'Đào tạo và chuyển giao', 'Training and handover'),
+          description: pick(
+            locale,
+            'Hơn một trăm buổi seminar và ba khoá học về kỹ thuật, vận hành thương mại điện tử — cùng phần chuyển giao cho đội vận hành tại chỗ.',
+            'Over a hundred seminars and three courses on e-commerce engineering and operations, plus handover to the team that will run it.',
+          ),
+        },
+      ],
+    },
+    {
+      blockType: 'approach' as const,
+      heading: pick(locale, 'Tư duy định hướng', 'How we think'),
+      intro: pick(
+        locale,
+        'Bảy người không thể làm mọi thứ, nên phần lớn công việc là chọn đúng thứ để làm.',
+        'Seven people cannot do everything, so most of the work is choosing the right thing to do.',
+      ),
+      items: [
+        {
+          title: pick(locale, 'Mỗi sản phẩm giải đúng một việc', 'One product, one job'),
+          description: pick(
+            locale,
+            'Chúng tôi không gộp bốn sản phẩm thành một nền tảng. Mỗi cái có khách riêng, vòng đời riêng, và có thể bị dừng riêng nếu không còn ai cần.',
+            'We do not merge four products into a platform. Each has its own customers, its own lifecycle, and can be retired on its own if nobody needs it.',
+          ),
+        },
+        {
+          title: pick(locale, 'AI đặt ở khâu tốn công nhất', 'AI where the work actually is'),
+          description: pick(
+            locale,
+            'Đọc video đóng gói, dựng bản thiết kế nháp, gợi ý tổ hợp môn. Đó là những chỗ mô hình thay được sức người; phần còn lại vẫn là phần mềm bình thường và nên như vậy.',
+            'Reading packing footage, drafting artwork, suggesting subject combinations. Those are the places a model replaces real labour; the rest is ordinary software and should stay that way.',
+          ),
+        },
+        {
+          title: pick(locale, 'Ra bản dùng được sớm', 'Ship something usable early'),
+          description: pick(
+            locale,
+            'Một đội nhỏ không giấu được sản phẩm suốt nửa năm. Chúng tôi đưa bản chạy được ra tay người dùng thật rồi sửa theo cái họ thực sự làm.',
+            'A small team cannot hide a product for six months. We put a working version in real hands and fix it against what people actually do.',
+          ),
+        },
+        {
+          title: pick(locale, 'Hạ tầng thuê, logic tự viết', 'Rent the rack, own the logic'),
+          description: pick(
+            locale,
+            'Máy chủ, CDN và phần mô hình thuê của Google Cloud, AWS, Microsoft và Cloudflare. Toàn bộ logic sản phẩm do đội tự viết, vì đó là phần không thể thuê ngoài.',
+            'Servers, CDN and model capacity are rented from Google Cloud, AWS, Microsoft and Cloudflare. The product logic is written in-house, because that is the part nobody can rent out.',
+          ),
+        },
+      ],
+    },
+    {
+      blockType: 'statement' as const,
+      text: pick(
+        locale,
+        'Làm ra những phần mềm đơn giản và mạnh, cho đúng những khâu vận hành mà hệ thống lớn bỏ qua.',
+        'Make software that stays simple and stays strong, for the operational steps large systems leave alone.',
+      ),
+      attribution: 'Võ Quốc Thịnh',
+      attributionRole: pick(locale, 'Nhà sáng lập', 'Founder'),
     },
     {
       blockType: 'cta' as const,
@@ -516,8 +556,8 @@ export const footerGlobal = (locale: Locale) => ({
         {
           link: {
             type: 'custom' as const,
-            label: 'Gói Hàng Chuẩn',
-            url: '/products/goi-hang-chuan',
+            label: 'Ecombox ORMI',
+            url: '/products/ecombox-ormi',
           },
         },
         { link: { type: 'custom' as const, label: 'Deligent', url: '/products/deligent' } },

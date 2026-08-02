@@ -66,6 +66,9 @@ export async function Footer({ locale = defaultLocale }: { locale?: Locale }) {
                       {contact.email}
                     </a>
                   )}
+                  {contact.email && (
+                    <span className="record text-paper/40">{dict.unverifiedEmail}</span>
+                  )}
                 </address>
               </div>
             )}

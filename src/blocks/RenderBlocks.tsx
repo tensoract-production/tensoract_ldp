@@ -14,6 +14,7 @@ import { ManifestStripBlockComponent } from '@/blocks/ManifestStrip/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { PartnersBlockComponent } from '@/blocks/Partners/Component'
 import { ProductLabelsBlockComponent } from '@/blocks/ProductLabels/Component'
+import { ReleasesBlockComponent } from '@/blocks/Releases/Component'
 import { StatementBlockComponent } from '@/blocks/Statement/Component'
 
 const blockComponents = {
@@ -28,6 +29,7 @@ const blockComponents = {
   mediaBlock: MediaBlock,
   partners: PartnersBlockComponent,
   productLabels: ProductLabelsBlockComponent,
+  releases: ReleasesBlockComponent,
   statement: StatementBlockComponent,
 }
 
@@ -43,6 +45,7 @@ const selfSpaced = new Set([
   'manifestStrip',
   'partners',
   'productLabels',
+  'releases',
   'statement',
 ])
 

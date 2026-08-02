@@ -195,6 +195,22 @@ export const Products: CollectionConfig<'products'> = {
       ],
     },
     {
+      name: 'tier',
+      type: 'select',
+      required: true,
+      defaultValue: 'side',
+      admin: {
+        position: 'sidebar',
+        description:
+          'Flagship leads the company story; companions ship alongside it; side products are maintained but not led with.',
+      },
+      options: [
+        { label: 'Flagship', value: 'flagship' },
+        { label: 'Companion to the flagship', value: 'companion' },
+        { label: 'Side product', value: 'side' },
+      ],
+    },
+    {
       name: 'category',
       type: 'select',
       defaultValue: 'ecommerce',

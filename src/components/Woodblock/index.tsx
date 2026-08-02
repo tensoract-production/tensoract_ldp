@@ -194,7 +194,7 @@ export const PlateGate: React.FC<PlateProps> = ({ className, label }) => (
 
 export const productPlates = {
   ecombox: PlateParcelCamera,
-  'goi-hang-chuan': PlateRoutes,
+  'ecombox-ormi': PlateRoutes,
   deligent: PlateBrush,
   'tvts-10': PlateGate,
 } as const

@@ -70,6 +70,7 @@ export interface Config {
     pages: Page;
     posts: Post;
     products: Product;
+    releases: Release;
     media: Media;
     categories: Category;
     users: User;
@@ -93,6 +94,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    releases: ReleasesSelect<false> | ReleasesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -211,6 +213,7 @@ export interface Page {
     | ManifestHeroBlock
     | ManifestStripBlock
     | ProductLabelsBlock
+    | ReleasesBlock
     | ApproachBlock
     | StatementBlock
     | AwardsBlock
@@ -520,6 +523,10 @@ export interface Product {
    */
   code: string;
   status: 'live' | 'beta' | 'building' | 'archived';
+  /**
+   * Flagship leads the company story; companions ship alongside it; side products are maintained but not led with.
+   */
+  tier: 'flagship' | 'companion' | 'side';
   category?: ('ecommerce' | 'ai' | 'education') | null;
   /**
    * Full URL, e.g. https://goihangchuan.vn
@@ -666,6 +673,45 @@ export interface ProductLabelsBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'productLabels';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ReleasesBlock".
+ */
+export interface ReleasesBlock {
+  heading: string;
+  intro?: string | null;
+  /**
+   * How many of the most recent releases to list.
+   */
+  limit?: number | null;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null)
+            | ({
+                relationTo: 'products';
+                value: string | Product;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'releases';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1113,6 +1159,41 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "releases".
+ */
+export interface Release {
+  id: string;
+  /**
+   * e.g. 2.4 or 2026.01
+   */
+  version: string;
+  /**
+   * One line: what this release changed.
+   */
+  title: string;
+  releasedAt: string;
+  product?: (string | null) | Product;
+  notes?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1314,6 +1395,10 @@ export interface PayloadLockedDocument {
         value: string | Product;
       } | null)
     | ({
+        relationTo: 'releases';
+        value: string | Release;
+      } | null)
+    | ({
         relationTo: 'media';
         value: string | Media;
       } | null)
@@ -1421,6 +1506,7 @@ export interface PagesSelect<T extends boolean = true> {
         manifestHero?: T | ManifestHeroBlockSelect<T>;
         manifestStrip?: T | ManifestStripBlockSelect<T>;
         productLabels?: T | ProductLabelsBlockSelect<T>;
+        releases?: T | ReleasesBlockSelect<T>;
         approach?: T | ApproachBlockSelect<T>;
         statement?: T | StatementBlockSelect<T>;
         awards?: T | AwardsBlockSelect<T>;
@@ -1519,6 +1605,31 @@ export interface ProductLabelsBlockSelect<T extends boolean = true> {
               url?: T;
               label?: T;
               appearance?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ReleasesBlock_select".
+ */
+export interface ReleasesBlockSelect<T extends boolean = true> {
+  heading?: T;
+  intro?: T;
+  limit?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
             };
         id?: T;
       };
@@ -1752,6 +1863,7 @@ export interface ProductsSelect<T extends boolean = true> {
       };
   code?: T;
   status?: T;
+  tier?: T;
   category?: T;
   externalUrl?: T;
   launchedAt?: T;
@@ -1759,6 +1871,20 @@ export interface ProductsSelect<T extends boolean = true> {
   order?: T;
   generateSlug?: T;
   slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "releases_select".
+ */
+export interface ReleasesSelect<T extends boolean = true> {
+  version?: T;
+  title?: T;
+  releasedAt?: T;
+  product?: T;
+  notes?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

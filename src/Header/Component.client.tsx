@@ -54,15 +54,9 @@ export const HeaderClient: React.FC<{ data: Header; locale: Locale }> = ({ data,
             <span className="sr-only">{dict.nav.search}</span>
             <Search />
           </Link>
-          {cta && (
-            <CMSLink
-              appearance="default"
-              className="h-10 px-5"
-              locale={locale}
-              size="lg"
-              {...cta}
-            />
-          )}
+          {/* Quiet: the page has one primary action and it is the address in
+              the first viewport, not a pill in the chrome. */}
+          {cta && <CMSLink className={navLink} locale={locale} {...cta} />}
         </div>
 
         <button

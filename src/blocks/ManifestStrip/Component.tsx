@@ -12,7 +12,7 @@ export const ManifestStripBlockComponent: React.FC<Props> = ({ items }) => {
   if (!items || items.length === 0) return null
 
   return (
-    <section className="border-t border-rule py-16 md:py-20">
+    <section className="edge-print py-16 md:py-20">
       <div className="container">
         <p className="serif flex flex-wrap items-baseline gap-x-3 gap-y-2 text-[clamp(1.25rem,2.4vw,1.85rem)] leading-snug">
           {items.map((item, i) => (

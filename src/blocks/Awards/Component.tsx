@@ -20,10 +20,10 @@ export const AwardsBlockComponent: React.FC<Props> = ({ heading, intro, items, l
       <SectionHeader heading={heading} intro={intro} />
 
       {items && items.length > 0 && (
-        <ol className="mt-16 border-t border-rule">
+        <ol className="mt-16 edge-print">
           {items.map((item, i) => (
             <li
-              className="grid gap-6 border-b border-rule py-10 md:grid-cols-12 md:gap-10"
+              className="grid gap-6 edge-print-b py-10 md:grid-cols-12 md:gap-10"
               key={item.id ?? i}
             >
               <p className="record tnum text-ink-soft md:col-span-2">{item.year}</p>

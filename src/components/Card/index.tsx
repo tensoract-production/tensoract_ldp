@@ -49,7 +49,7 @@ export const Card: React.FC<{
 
   return (
     <article
-      className={cn('group cursor-pointer border-t border-rule', className)}
+      className={cn('group cursor-pointer edge-print', className)}
       ref={card.ref}
     >
       <div className="grid items-start gap-6 py-10 md:grid-cols-12 md:gap-8 md:py-12">

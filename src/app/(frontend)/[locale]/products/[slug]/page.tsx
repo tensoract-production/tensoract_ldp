@@ -56,7 +56,7 @@ export default async function ProductPage({ params: paramsPromise }: Args) {
     <article>
       {draft && <LivePreviewListener />}
 
-      <header className="border-b border-rule pt-14 pb-14 md:pt-20 md:pb-20">
+      <header className="edge-print-b pt-14 pb-14 md:pt-20 md:pb-20">
         <div className="container grid items-end gap-12 md:grid-cols-12">
           <div className="md:col-span-7">
             <p className="record text-ink-soft">
@@ -82,21 +82,21 @@ export default async function ProductPage({ params: paramsPromise }: Args) {
             <div className="max-w-[15rem]">
               <Plate />
             </div>
-            <dl className="mt-8 border-t border-rule">
+            <dl className="mt-8 edge-print">
               {host && (
-                <div className="flex items-baseline justify-between gap-4 border-b border-rule py-3">
+                <div className="flex items-baseline justify-between gap-4 edge-print-b py-3">
                   <dt className="record text-ink-soft">Website</dt>
                   <dd>{host}</dd>
                 </div>
               )}
-              <div className="flex items-baseline justify-between gap-4 border-b border-rule py-3">
+              <div className="flex items-baseline justify-between gap-4 edge-print-b py-3">
                 <dt className="record text-ink-soft">
                   {locale === 'vi' ? 'Nhóm' : 'Category'}
                 </dt>
                 <dd>{dict.products.category[product.category ?? 'ecommerce']}</dd>
               </div>
               {product.launchedAt && (
-                <div className="flex items-baseline justify-between gap-4 border-b border-rule py-3">
+                <div className="flex items-baseline justify-between gap-4 edge-print-b py-3">
                   <dt className="record text-ink-soft">{dict.products.launched}</dt>
                   <dd className="tnum">
                     {new Date(product.launchedAt).toLocaleDateString(
@@ -112,7 +112,7 @@ export default async function ProductPage({ params: paramsPromise }: Args) {
       </header>
 
       {product.cover && typeof product.cover === 'object' && (
-        <div className="border-b border-rule bg-paper-sunk">
+        <div className="edge-print-b bg-paper-sunk">
           <div className="container py-12">
             <Media
               className="border border-rule bg-paper"
@@ -135,10 +135,10 @@ export default async function ProductPage({ params: paramsPromise }: Args) {
 
           <div className="md:col-span-4 md:col-start-9">
             {product.metrics && product.metrics.length > 0 && (
-              <dl className="mb-12 border-t border-rule">
+              <dl className="mb-12 edge-print">
                 {product.metrics.map((metric, i) => (
                   <div
-                    className="flex items-baseline justify-between gap-4 border-b border-rule py-4"
+                    className="flex items-baseline justify-between gap-4 edge-print-b py-4"
                     key={metric.id ?? i}
                   >
                     <dt className="serif tnum text-[1.6rem]">{metric.value}</dt>
@@ -151,9 +151,9 @@ export default async function ProductPage({ params: paramsPromise }: Args) {
             {product.highlights && product.highlights.length > 0 && (
               <div>
                 <h2 className="serif text-[1.35rem]">{dict.products.whatItDoes}</h2>
-                <ul className="mt-5 border-t border-rule">
+                <ul className="mt-5 edge-print">
                   {product.highlights.map((item, i) => (
-                    <li className="border-b border-rule py-5" key={item.id ?? i}>
+                    <li className="edge-print-b py-5" key={item.id ?? i}>
                       <h3 className="text-ink">{item.title}</h3>
                       {item.description && (
                         <p className="mt-2 leading-relaxed text-ink-soft">{item.description}</p>
@@ -171,7 +171,7 @@ export default async function ProductPage({ params: paramsPromise }: Args) {
         <Section tone="sunk">
           <div className="container">
             <SectionHeader align="stacked" heading={dict.products.others} />
-            <ul className="mt-10 border-b border-rule">
+            <ul className="mt-10 edge-print-b">
               {others.map((other) => (
                 <ProductRow dict={dict} key={other.id} locale={locale} product={other} />
               ))}

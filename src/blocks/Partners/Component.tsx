@@ -16,13 +16,13 @@ export const PartnersBlockComponent: React.FC<Props> = ({ groups, heading, intro
       <SectionHeader heading={heading} intro={intro} />
 
       {groups && groups.length > 0 && (
-        <div className="mt-16 border-t border-rule">
+        <div className="mt-16 edge-print">
           {groups.map((group, gi) => (
             <div
-              className="grid gap-5 border-b border-rule py-9 md:grid-cols-12 md:gap-10"
+              className="grid gap-5 edge-print-b py-9 md:grid-cols-12 md:gap-10"
               key={group.id ?? gi}
             >
-              <p className="record text-ink-soft md:col-span-3 md:pt-2">{group.label}</p>
+              <p className="text-sm text-ink-soft md:col-span-3 md:pt-2">{group.label}</p>
 
               <ul className="flex flex-wrap items-center gap-x-10 gap-y-4 md:col-span-9">
                 {(group.items ?? []).map((partner, pi) => {

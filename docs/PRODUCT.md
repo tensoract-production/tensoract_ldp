@@ -62,14 +62,20 @@ Two hard consequences:
 
 ## Capabilities and Constraints
 
-**Products documented so far (4):**
+**Product model — Ecombox at the centre.** Confirmed by the user after the first
+build: the company story leads on Ecombox and the solutions that deploy
+alongside it. Everything else is maintained but not led with.
 
-| Product | What it does |
-|---|---|
-| Ecombox | AI video of the packing process, tied to order codes, to settle return disputes |
-| Gói Hàng Chuẩn (goihangchuan.vn) | Multi-carrier parcel and shipment management for online sellers |
-| Deligent | AI design platform for businesses |
-| TVTS 10 | AI subject-combination guidance for Grade 10 plus school admissions processing |
+| Product | Tier | What it does |
+|---|---|---|
+| Ecombox | flagship | AI record of the packing process tied to order codes; sold as an enterprise deployment |
+| Ecombox ORMI | companion | Ships alongside Ecombox for enterprise deployment. **What ORMI actually does is not known** — the site carries a marked shell until the team writes it |
+| Deligent | side | AI design platform for businesses |
+| TVTS 10 | side | AI subject-combination guidance plus school admissions processing |
+
+**Gói Hàng Chuẩn is retired as a product name.** The user confirmed it was the
+former name and predecessor of this work; it is folded into Ecombox and must not
+reappear as a separate product. `goihangchuan.vn` may still resolve as a domain.
 
 **Technical constraints:** Next.js 16 + Payload CMS 3.87 on MongoDB. Bilingual
 VI/EN through Payload localization, served under `/vi` and `/en`. Products are a
@@ -81,15 +87,18 @@ CMS collection; marketing sections are CMS blocks.
 - Contact email. `hello@tensoract.vn` currently appears in the seed data, footer,
   and contact page. **It was invented during development and is not verified.**
   Replace it before the site goes public.
-- The company's own site states five products; only the four above are
-  identified. The fifth is unknown.
+- What Ecombox ORMI does. The site ships a shell marked "[Chờ nội dung]".
+- The company's own site states five products; four are identified above.
+- Release history. The Releases collection exists and the home page section is
+  wired, but it holds one placeholder row — real versions and dates must come
+  from the team.
 - Ecombox has no verified public URL.
 
-**Known conflict in the current implementation:** the shipped homepage, its hero
-stamp, the "what bootstrapped means" section, and one blog post all lead on the
-bootstrapped framing, and the hero speaks to online sellers rather than partners.
-Both contradict the record above. A full B2B repositioning pass is agreed and
-pending.
+**What the site provides**, as stated on the home page: Ecombox deployed at
+warehouse scale, fitting it to systems the enterprise already runs, and training
+and handover. The training figure (100+ seminars, 3 courses) is the company's own
+published claim; the other two are descriptions of the deployment work, not
+capability claims about integrations with named systems.
 
 ## Brand Commitments
 

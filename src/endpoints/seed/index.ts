@@ -13,6 +13,7 @@ const collections: CollectionSlug[] = [
   'pages',
   'posts',
   'products',
+  'releases',
   'forms',
   'form-submissions',
   'search',
@@ -135,6 +136,7 @@ export const seed = async ({
         slug: product.slug,
         _status: 'published',
         code: product.code,
+        tier: product.tier,
         status: product.status,
         category: product.category,
         externalUrl: product.externalUrl,
@@ -153,6 +155,39 @@ export const seed = async ({
       data: withIdsFrom(created, product.en),
     })
   }
+
+  payload.logger.info('— Seeding a placeholder release...')
+
+  // One obviously-marked row so the section is visibly wired. Real release
+  // history is not something this seed can invent for a shipping product.
+  const flagship = await payload.find({
+    collection: 'products',
+    limit: 1,
+    where: { slug: { equals: 'ecombox' } },
+  })
+
+  const releaseVi = await payload.create({
+    collection: 'releases',
+    depth: 0,
+    locale: 'vi',
+    context: { disableRevalidate: true },
+    data: {
+      version: '—',
+      title: '[Chờ nội dung] Thêm bản phát hành thật trong admin',
+      releasedAt: new Date().toISOString(),
+      product: flagship.docs[0]?.id,
+      _status: 'published',
+    },
+  })
+
+  await payload.update({
+    collection: 'releases',
+    id: releaseVi.id,
+    locale: 'en',
+    depth: 0,
+    context: { disableRevalidate: true },
+    data: { title: '[Content pending] Add real releases in the admin' },
+  })
 
   payload.logger.info('— Seeding posts...')
 

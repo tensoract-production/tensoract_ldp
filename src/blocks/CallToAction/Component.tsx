@@ -20,7 +20,13 @@ export const CallToActionBlock: React.FC<Props> = ({ links, locale, richText }) 
           </div>
           <div className="flex flex-col items-start gap-4 md:col-span-4 md:col-start-9">
             {(links || []).map(({ link }, i) => (
-              <CMSLink key={i} locale={locale} size="lg" {...link} />
+              <CMSLink
+                className={i === 0 ? 'ink-action' : undefined}
+                key={i}
+                locale={locale}
+                {...link}
+                appearance="inline"
+              />
             ))}
           </div>
         </div>

@@ -241,19 +241,28 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.5;
+    opacity: 1;
     mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23f)' opacity='0.14'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62 0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23f)' opacity='0.42'/%3E%3C/svg%3E");
   }
 
   [data-theme='dark'] body::before {
     mix-blend-mode: screen;
-    opacity: 0.22;
+    opacity: 0.3;
   }
 
   body > * {
     position: relative;
     z-index: 1;
+  }
+
+  /* Rich-text headings are set in the display face like every other heading;
+     without this the CMS-authored sections drift to the body face. */
+  .prose :is(h1, h2, h3, h4) {
+    font-family: var(--font-serif), Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.018em;
+    line-height: 1.14;
   }
 
   ::selection {
@@ -294,9 +303,44 @@
     max-width: 68ch;
   }
 
-  /* A printed edge, thicker and warmer than a UI hairline. */
-  .edge-top {
-    border-top: 1px solid var(--rule);
+  /* A printed edge: an inked rule that wavers the way a pressed line does.
+     Replaces the 1px UI hairline everywhere a section boundary is drawn. */
+  .edge-print {
+    border-top: 0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='3' preserveAspectRatio='none'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.35' numOctaves='2'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='2.1'/%3E%3C/filter%3E%3Crect x='0' y='1' width='320' height='1.1' fill='%23241f1a' opacity='0.34' filter='url(%23w)'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-position: top left;
+    background-size: 320px 3px;
+  }
+
+  .edge-print-b {
+    border-bottom: 0 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='3' preserveAspectRatio='none'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.35' numOctaves='2'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='2.1'/%3E%3C/filter%3E%3Crect x='0' y='1' width='320' height='1.1' fill='%23241f1a' opacity='0.34' filter='url(%23w)'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-position: bottom left;
+    background-size: 320px 3px;
+  }
+
+  [data-theme='dark'] .edge-print-b,
+  [data-theme='dark'] .edge-print {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='3' preserveAspectRatio='none'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.35' numOctaves='2'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='2.1'/%3E%3C/filter%3E%3Crect x='0' y='1' width='320' height='1.1' fill='%23efe9dd' opacity='0.3' filter='url(%23w)'/%3E%3C/svg%3E");
+  }
+
+  /* The email address as the page's one action: ink, at text scale, underlined
+     the way a printed reference is — not a chromed pill. */
+  .ink-action {
+    font-family: var(--font-serif), Georgia, serif;
+    font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.28em;
+    text-decoration-color: var(--son);
+    transition: color 0.2s;
+  }
+
+  .ink-action:hover {
+    color: var(--son-deep);
   }
 
   /* The seal: pressed by hand, so never quite square, and the ink sits

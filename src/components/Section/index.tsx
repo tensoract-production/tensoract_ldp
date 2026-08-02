@@ -15,7 +15,7 @@ export const Section: React.FC<{
 }> = ({ children, className, id, tone = 'paper' }) => (
   <section
     className={cn(
-      'border-t border-rule py-24 md:py-32',
+      'edge-print py-24 md:py-32',
       tone === 'sunk' && 'bg-paper-sunk',
       className,
     )}

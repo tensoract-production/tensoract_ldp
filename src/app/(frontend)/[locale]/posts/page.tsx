@@ -1,6 +1,6 @@
 import type { Metadata } from 'next/types'
 
-import { CollectionArchive } from '@/components/CollectionArchive'
+import { EditorialArchive } from '@/components/EditorialArchive'
 import { Pagination } from '@/components/Pagination'
 import { PageIntro } from '@/components/PageIntro'
 import configPromise from '@payload-config'
@@ -43,11 +43,11 @@ export default async function Page({ params }: Args) {
         intro={dict.blog.lead}
       />
 
-      <div className="py-14 md:py-16">
+      <div className="pb-16">
         {posts.docs.length === 0 ? (
           <div className="container text-ink-soft">{dict.blog.empty}</div>
         ) : (
-          <CollectionArchive locale={locale} posts={posts.docs} />
+          <EditorialArchive locale={locale} posts={posts.docs} />
         )}
 
         {posts.totalPages > 1 && posts.page && (
