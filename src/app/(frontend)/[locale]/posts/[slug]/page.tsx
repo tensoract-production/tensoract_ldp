@@ -62,8 +62,8 @@ export default async function Post({ params: paramsPromise }: Args) {
         <RichText className="mx-auto max-w-[48rem]" data={post.content} enableGutter={false} />
 
         {post.relatedPosts && post.relatedPosts.length > 0 && (
-          <div className="mx-auto mt-20 max-w-[52rem] border-t border-rule pt-10">
-            <h2 className="manifest text-ink-soft">{dict.blog.relatedTitle}</h2>
+          <div className="mx-auto mt-20 max-w-[52rem] edge-print pt-10">
+            <h2 className="record text-ink-soft">{dict.blog.relatedTitle}</h2>
             <RelatedPosts
               className="mt-6"
               docs={post.relatedPosts.filter((related) => typeof related === 'object')}

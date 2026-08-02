@@ -78,7 +78,7 @@ asserts. Refuses the SaaS hero-metric band and the grid of identical product car
 OWN-WORLD: Giấy dó paper ground with visible fibre, warm woodblock ink, cinnabar reserved
 for facts an outsider attested. Petrona cut-serif display, Be Vietnam Pro text, mono only
 on record data. Hand-cut SVG plates; printed edges, never UI hairlines.
-STORY: An investor or enterprise buyer sees four products actually running, reads how the
+STORY: An investor or enterprise buyer sees the flagship actually running, reads how the
 team works, finds the attested competition entry, and emails.
 FIRST VIEWPORT: One wide column on paper. Serif headline left at display scale, a printed
 registration line beneath it, a woodblock plate of the workroom right. The email address
@@ -92,7 +92,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           <AdminBar adminBarProps={{ preview: isEnabled }} />
 
           <a
-            className="manifest sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-ink focus:px-4 focus:py-2.5 focus:text-paper"
+            className="record sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-ink focus:px-4 focus:py-2.5 focus:text-paper"
             href="#main"
           >
             {dict.skipToContent}
@@ -108,7 +108,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           </main>
           <Footer locale={locale} />
         </Providers>
-      </body>
+</body>
     </html>
   )
 }
