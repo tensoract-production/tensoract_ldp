@@ -34,7 +34,7 @@ export const PartnersBlockComponent: React.FC<Props> = ({ groups, heading, intro
                         resource={partner.logo}
                       />
                     ) : (
-                      <span className="serif text-[1.35rem]">{partner.name}</span>
+                      <span className="subhead">{partner.name}</span>
                     )
 
                   return (

@@ -30,6 +30,30 @@ typography:
     fontWeight: 500
     lineHeight: 1.04
     letterSpacing: "-0.018em"
+  subhead:
+    fontFamily: "Petrona, Georgia, serif"
+    fontSize: "1.4rem"
+    fontWeight: 500
+    lineHeight: 1.2
+    letterSpacing: "-0.014em"
+  action:
+    fontFamily: "Petrona, Georgia, serif"
+    fontSize: "clamp(1.35rem, 2.6vw, 1.85rem)"
+    fontWeight: 500
+    lineHeight: 1.2
+    letterSpacing: "-0.018em"
+  wordmark:
+    fontFamily: "Petrona, Georgia, serif"
+    fontSize: "1.2rem"
+    fontWeight: 600
+    lineHeight: 1
+    letterSpacing: "-0.015em"
+  control:
+    fontFamily: "Be Vietnam Pro, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "0.95rem"
+    fontWeight: 500
+    lineHeight: 1
+    letterSpacing: "normal"
   body:
     fontFamily: "Be Vietnam Pro, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1.0625rem"
@@ -60,7 +84,7 @@ spacing:
 components:
   ink-action:
     textColor: "{colors.ink}"
-    typography: "{typography.display}"
+    typography: "{typography.action}"
     rounded: "0"
   ink-action-hover:
     textColor: "{colors.son-deep}"

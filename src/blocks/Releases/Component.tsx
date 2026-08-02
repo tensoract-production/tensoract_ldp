@@ -68,7 +68,7 @@ export const ReleasesBlockComponent: React.FC<Props> = async ({
                 </p>
 
                 <div className="md:col-span-7">
-                  <h3 className="serif text-[1.3rem]">{release.title}</h3>
+                  <h3 className="subhead">{release.title}</h3>
                   {release.notes && (
                     <RichText
                       className="mt-2 max-w-none text-ink-soft"

@@ -150,7 +150,7 @@ export default async function ProductPage({ params: paramsPromise }: Args) {
 
             {product.highlights && product.highlights.length > 0 && (
               <div>
-                <h2 className="serif text-[1.35rem]">{dict.products.whatItDoes}</h2>
+                <h2 className="subhead">{dict.products.whatItDoes}</h2>
                 <ul className="mt-5 edge-print">
                   {product.highlights.map((item, i) => (
                     <li className="edge-print-b py-5" key={item.id ?? i}>

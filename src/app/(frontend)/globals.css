@@ -286,6 +286,17 @@
     text-wrap: balance;
   }
 
+  /* The one step below `title`: item headings inside a section — approach
+     entries, partner names, release lines, the "what it does" list. They were
+     drifting across four different literal sizes doing the same job. */
+  .subhead {
+    font-family: var(--font-serif), Georgia, serif;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    letter-spacing: -0.014em;
+  }
+
   /* Only for measured record data — codes, years, counts. Never as costume. */
   .record {
     font-family: var(--font-mono), ui-monospace, monospace;

@@ -97,7 +97,7 @@ export const EditorialArchive: React.FC<{
                 {categoryLine(post) && (
                   <p className="record text-ink-soft">{categoryLine(post)}</p>
                 )}
-                <h3 className="serif mt-3 text-[1.5rem] transition-colors group-hover:text-son-deep">
+                <h3 className="subhead mt-3 transition-colors group-hover:text-son-deep">
                   {post.title}
                 </h3>
                 {post.meta?.description && (
