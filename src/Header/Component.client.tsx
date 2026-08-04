@@ -11,6 +11,7 @@ import { CMSLink } from '@/components/Link'
 import { Search } from '@/components/Icon'
 import { LocaleSwitcher } from '@/components/LocaleSwitcher'
 import { Logo } from '@/components/Logo/Logo'
+import { ThemeToggle } from '@/components/ThemeToggle'
 import { getDictionary } from '@/i18n/dictionaries'
 import { cn } from '@/utilities/ui'
 
@@ -48,12 +49,13 @@ export const HeaderClient: React.FC<{ data: Header; locale: Locale }> = ({ data,
         <div className="hidden items-center gap-6 md:flex">
           <LocaleSwitcher locale={locale} />
           <Link
-            className="text-ink-soft transition-colors hover:text-son-deep"
+            className="-m-2 inline-flex items-center p-2 text-ink-soft transition-colors hover:text-son-deep"
             href={`/${locale}/search`}
           >
             <span className="sr-only">{dict.nav.search}</span>
             <Search />
           </Link>
+          <ThemeToggle locale={locale} />
           {/* Quiet: the page has one primary action and it is the address in
               the first viewport, not a pill in the chrome. */}
           {cta && <CMSLink className={navLink} locale={locale} {...cta} />}
@@ -87,7 +89,10 @@ export const HeaderClient: React.FC<{ data: Header; locale: Locale }> = ({ data,
             {dict.nav.search}
           </Link>
           <div className="flex items-center justify-between gap-4 py-5">
-            <LocaleSwitcher locale={locale} />
+            <div className="flex items-center gap-6">
+              <LocaleSwitcher locale={locale} />
+              <ThemeToggle locale={locale} />
+            </div>
             {cta && <CMSLink appearance="default" locale={locale} size="lg" {...cta} />}
           </div>
         </nav>

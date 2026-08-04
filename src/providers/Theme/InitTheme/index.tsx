@@ -1,8 +1,13 @@
 import Script from 'next/script'
 import React from 'react'
 
-import { defaultTheme, themeLocalStorageKey } from '../ThemeSelector/types'
+import { defaultTheme, themeLocalStorageKey } from '../shared'
 
+/**
+ * Runs before first paint so a reader who chose dark never sees a sheet of
+ * white on the way to it. Mirrors `resolveTheme` by hand: this has to ship as
+ * a string of source, so it cannot import the function it duplicates.
+ */
 export const InitTheme: React.FC = () => {
   return (
     // eslint-disable-next-line @next/next/no-before-interactive-script-outside-document
@@ -10,36 +15,14 @@ export const InitTheme: React.FC = () => {
       dangerouslySetInnerHTML={{
         __html: `
   (function () {
-    function getImplicitPreference() {
-      var mediaQuery = '(prefers-color-scheme: dark)'
-      var mql = window.matchMedia(mediaQuery)
-      var hasImplicitPreference = typeof mql.matches === 'boolean'
-
-      if (hasImplicitPreference) {
-        return mql.matches ? 'dark' : 'light'
-      }
-
-      return null
+    var stored = null
+    try {
+      stored = window.localStorage.getItem('${themeLocalStorageKey}')
+    } catch (e) {
+      /* storage blocked (private mode); fall through to the default */
     }
-
-    function themeIsValid(theme) {
-      return theme === 'light' || theme === 'dark'
-    }
-
-    var themeToSet = '${defaultTheme}'
-    var preference = window.localStorage.getItem('${themeLocalStorageKey}')
-
-    if (themeIsValid(preference)) {
-      themeToSet = preference
-    } else {
-      var implicitPreference = getImplicitPreference()
-
-      if (implicitPreference) {
-        themeToSet = implicitPreference
-      }
-    }
-
-    document.documentElement.setAttribute('data-theme', themeToSet)
+    var theme = stored === 'dark' || stored === 'light' ? stored : '${defaultTheme}'
+    document.documentElement.setAttribute('data-theme', theme)
   })();
   `,
       }}

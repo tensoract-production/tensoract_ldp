@@ -5,8 +5,7 @@ import React, { createContext, useCallback, use, useEffect, useState } from 'rea
 import type { Theme, ThemeContextType } from './types'
 
 import canUseDOM from '@/utilities/canUseDOM'
-import { defaultTheme, getImplicitPreference, themeLocalStorageKey } from './shared'
-import { themeIsValid } from './types'
+import { resolveTheme, themeLocalStorageKey } from './shared'
 
 const initialContext: ThemeContextType = {
   setTheme: () => null,
@@ -16,39 +15,42 @@ const initialContext: ThemeContextType = {
 const ThemeContext = createContext(initialContext)
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  // InitTheme has already written the attribute before this ever runs, so read
+  // it rather than re-deciding and risking a second, different answer.
   const [theme, setThemeState] = useState<Theme | undefined>(
     canUseDOM ? (document.documentElement.getAttribute('data-theme') as Theme) : undefined,
   )
 
   const setTheme = useCallback((themeToSet: Theme | null) => {
-    if (themeToSet === null) {
-      window.localStorage.removeItem(themeLocalStorageKey)
-      const implicitPreference = getImplicitPreference()
-      document.documentElement.setAttribute('data-theme', implicitPreference || '')
-      if (implicitPreference) setThemeState(implicitPreference)
-    } else {
-      setThemeState(themeToSet)
-      window.localStorage.setItem(themeLocalStorageKey, themeToSet)
-      document.documentElement.setAttribute('data-theme', themeToSet)
+    const next = resolveTheme(themeToSet)
+
+    try {
+      if (themeToSet === null) {
+        window.localStorage.removeItem(themeLocalStorageKey)
+      } else {
+        window.localStorage.setItem(themeLocalStorageKey, next)
+      }
+    } catch (e) {
+      // Storage blocked. The choice still applies to this page; it just will
+      // not survive a reload, which beats refusing to switch at all.
     }
+
+    document.documentElement.setAttribute('data-theme', next)
+    setThemeState(next)
   }, [])
 
   useEffect(() => {
-    let themeToSet: Theme = defaultTheme
-    const preference = window.localStorage.getItem(themeLocalStorageKey)
+    let stored: null | string = null
 
-    if (themeIsValid(preference)) {
-      themeToSet = preference
-    } else {
-      const implicitPreference = getImplicitPreference()
-
-      if (implicitPreference) {
-        themeToSet = implicitPreference
-      }
+    try {
+      stored = window.localStorage.getItem(themeLocalStorageKey)
+    } catch (e) {
+      /* storage blocked; the default stands */
     }
 
-    document.documentElement.setAttribute('data-theme', themeToSet)
-    setThemeState(themeToSet)
+    const next = resolveTheme(stored)
+    document.documentElement.setAttribute('data-theme', next)
+    setThemeState(next)
   }, [])
 
   return <ThemeContext value={{ setTheme, theme }}>{children}</ThemeContext>
