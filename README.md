@@ -104,4 +104,4 @@ trong `src/blocks/RenderBlocks.tsx`, rồi chạy `generate:types`.
 
 - `docs/PRODUCT.md` — sự thật về sản phẩm và công ty: đối tượng, định vị, dữ kiện đã
   xác minh và dữ kiện cố tình để trống.
-- `.impeccable/surfaces/` — chiến lược riêng của từng trang.
+- `docs/DESIGN.md` — hệ thống thiết kế: bảng màu, thang chữ, nhịp khoảng cách.
