@@ -9,9 +9,33 @@ import { redirects } from './redirects'
 
 const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : process.env.__NEXT_PRIVATE_ORIGIN || 'http://localhost:3000'
+  : process.env.NEXT_PUBLIC_SERVER_URL ||
+    process.env.__NEXT_PRIVATE_ORIGIN ||
+    'http://localhost:3000'
+
+const securityHeaders = [
+  { key: 'Permissions-Policy', value: 'camera=(), geolocation=(), microphone=()' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+]
+
+if (NEXT_PUBLIC_SERVER_URL.startsWith('https://')) {
+  securityHeaders.push({
+    key: 'Strict-Transport-Security',
+    value: 'max-age=31536000',
+  })
+}
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
+  poweredByHeader: false,
+  headers: async () => [
+    {
+      source: '/:path*',
+      headers: securityHeaders,
+    },
+  ],
   // Temporarily required on Windows until Next.js fixes Turbopack Sass resolution.
   // See: https://github.com/vercel/next.js/issues/86431
   sassOptions: {

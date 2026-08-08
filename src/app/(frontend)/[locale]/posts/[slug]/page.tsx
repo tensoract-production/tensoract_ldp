@@ -1,34 +1,19 @@
 import type { Metadata } from 'next'
 
 import { RelatedPosts } from '@/blocks/RelatedPosts/Component'
-import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
+import { notFound } from 'next/navigation'
 import React, { cache } from 'react'
 import RichText from '@/components/RichText'
 
 import { PostHero } from '@/heros/PostHero'
-import { generateMeta } from '@/utilities/generateMeta'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-import { type Locale, locales, toLocale } from '@/i18n/config'
+import { type Locale, toLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 
-export async function generateStaticParams() {
-  const payload = await getPayload({ config: configPromise })
-  const posts = await payload.find({
-    collection: 'posts',
-    draft: false,
-    limit: 1000,
-    overrideAccess: false,
-    pagination: false,
-    select: {
-      slug: true,
-    },
-  })
-
-  return locales.flatMap((locale) => posts.docs.map(({ slug }) => ({ locale, slug })))
-}
+export const dynamic = 'force-dynamic'
 
 type Args = {
   params: Promise<{
@@ -44,16 +29,12 @@ export default async function Post({ params: paramsPromise }: Args) {
   const dict = getDictionary(locale)
   // Decode to support slugs with special characters
   const decodedSlug = decodeURIComponent(slug)
-  const url = `/${locale}/posts/${decodedSlug}`
   const post = await queryPostBySlug({ locale, slug: decodedSlug })
 
-  if (!post) return <PayloadRedirects url={url} />
+  if (!post) notFound()
 
   return (
     <article className="pb-20">
-      {/* Allows redirects for valid pages too */}
-      <PayloadRedirects disableNotFound url={url} />
-
       {draft && <LivePreviewListener />}
 
       <PostHero locale={locale} post={post} />
@@ -62,8 +43,8 @@ export default async function Post({ params: paramsPromise }: Args) {
         <RichText className="mx-auto max-w-[48rem]" data={post.content} enableGutter={false} />
 
         {post.relatedPosts && post.relatedPosts.length > 0 && (
-          <div className="mx-auto mt-20 max-w-[52rem] edge-print pt-10">
-            <h2 className="record text-ink-soft">{dict.blog.relatedTitle}</h2>
+          <div className="mx-auto mt-20 max-w-[52rem] border-t border-border pt-10">
+            <h2 className="wire-label">{dict.blog.relatedTitle}</h2>
             <RelatedPosts
               className="mt-6"
               docs={post.relatedPosts.filter((related) => typeof related === 'object')}
@@ -83,7 +64,10 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   const decodedSlug = decodeURIComponent(slug)
   const post = await queryPostBySlug({ locale, slug: decodedSlug })
 
-  return generateMeta({ doc: post })
+  return {
+    title: post?.meta?.title || post?.title || 'Tensoract Insights',
+    description: post?.meta?.description || undefined,
+  }
 }
 
 const queryPostBySlug = cache(async ({ locale, slug }: { locale: Locale; slug: string }) => {

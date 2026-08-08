@@ -15,16 +15,8 @@ import { Banner } from '../../blocks/Banner/config'
 import { Code } from '../../blocks/Code/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
-import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
 
-import {
-  MetaDescriptionField,
-  MetaImageField,
-  MetaTitleField,
-  OverviewField,
-  PreviewField,
-} from '@payloadcms/plugin-seo/fields'
 import { slugField } from 'payload'
 
 export const Posts: CollectionConfig<'posts'> = {
@@ -138,27 +130,23 @@ export const Posts: CollectionConfig<'posts'> = {
           name: 'meta',
           label: 'SEO',
           fields: [
-            OverviewField({
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-              imagePath: 'meta.image',
-            }),
-            MetaTitleField({
-              hasGenerateFn: true,
-            }),
-            MetaImageField({
+            {
+              name: 'title',
+              type: 'text',
+              localized: true,
+              admin: { description: 'Optional title for search and social previews.' },
+            },
+            {
+              name: 'image',
+              type: 'upload',
               relationTo: 'media',
-            }),
-
-            MetaDescriptionField({}),
-            PreviewField({
-              // if the `generateUrl` function is configured
-              hasGenerateFn: true,
-
-              // field paths to match the target field for data
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-            }),
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              localized: true,
+              maxLength: 180,
+            },
           ],
         },
       ],
@@ -190,37 +178,12 @@ export const Posts: CollectionConfig<'posts'> = {
         position: 'sidebar',
       },
       hasMany: true,
-      relationTo: 'users',
-    },
-    // This field is only used to populate the user data via the `populateAuthors` hook
-    // This is because the `user` collection has access control locked to protect user privacy
-    // GraphQL will also not return mutated user data that differs from the underlying schema
-    {
-      name: 'populatedAuthors',
-      type: 'array',
-      access: {
-        update: () => false,
-      },
-      admin: {
-        disabled: true,
-        readOnly: true,
-      },
-      fields: [
-        {
-          name: 'id',
-          type: 'text',
-        },
-        {
-          name: 'name',
-          type: 'text',
-        },
-      ],
+      relationTo: 'authors',
     },
     slugField(),
   ],
   hooks: {
     afterChange: [revalidatePost],
-    afterRead: [populateAuthors],
     afterDelete: [revalidateDelete],
   },
   versions: {

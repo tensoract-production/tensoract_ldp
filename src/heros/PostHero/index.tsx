@@ -6,44 +6,43 @@ import type { Locale } from '@/i18n/config'
 
 import { Media } from '@/components/Media'
 import { defaultLocale } from '@/i18n/config'
-import { formatAuthors } from '@/utilities/formatAuthors'
 
-/** A post opens the way the rest of the sheet does: title, then the record line. */
 export const PostHero: React.FC<{
   post: Post
   locale?: Locale
 }> = ({ locale = defaultLocale, post }) => {
-  const { categories, heroImage, populatedAuthors, publishedAt, title } = post
+  const { authors, categories, heroImage, publishedAt, title } = post
 
-  const hasAuthors =
-    populatedAuthors && populatedAuthors.length > 0 && formatAuthors(populatedAuthors) !== ''
+  const authorNames = (authors ?? [])
+    .map((author) => (typeof author === 'object' && author !== null ? author.name : null))
+    .filter(Boolean)
 
   const categoryNames = (categories ?? [])
     .map((category) => (typeof category === 'object' && category !== null ? category.title : null))
     .filter(Boolean)
 
   return (
-    <header className="edge-print-b pt-16 pb-14 md:pt-24">
+    <header className="border-b border-border pt-16 pb-14 md:pt-24">
       <div className="container">
         <div className="mx-auto max-w-[46rem]">
           {categoryNames.length > 0 && (
-            <p className="record text-ink-soft">{categoryNames.join(', ')}</p>
+            <p className="wire-label">{categoryNames.join(', ')}</p>
           )}
 
-          <h1 className="serif mt-5 text-[clamp(2.1rem,5.2vw,3.6rem)]">{title}</h1>
+          <h1 className="wire-title mt-5 text-[clamp(2.1rem,5.2vw,3.6rem)]">{title}</h1>
 
-          <dl className="mt-10 flex flex-wrap gap-x-12 gap-y-4 edge-print pt-5">
-            {hasAuthors && (
+          <dl className="mt-10 flex flex-wrap gap-x-12 gap-y-4 border-t border-border pt-5">
+            {authorNames.length > 0 && (
               <div>
-                <dt className="record text-ink-soft">
+                <dt className="wire-label">
                   {locale === 'vi' ? 'Tác giả' : 'Author'}
                 </dt>
-                <dd className="mt-1">{formatAuthors(populatedAuthors)}</dd>
+                <dd className="mt-1">{authorNames.join(', ')}</dd>
               </div>
             )}
             {publishedAt && (
               <div>
-                <dt className="record text-ink-soft">
+                <dt className="wire-label">
                   {locale === 'vi' ? 'Đăng ngày' : 'Published'}
                 </dt>
                 <dd className="mt-1">
@@ -55,7 +54,7 @@ export const PostHero: React.FC<{
         </div>
 
         {heroImage && typeof heroImage !== 'string' && (
-          <div className="mx-auto mt-14 max-w-[54rem] border border-rule">
+          <div className="mx-auto mt-14 max-w-[54rem] border border-border">
             <Media
               imgClassName="w-full object-cover"
               priority

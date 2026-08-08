@@ -15,6 +15,7 @@ export const dictionaries = {
       search: 'Tìm kiếm',
       menu: 'Menu',
       close: 'Đóng',
+      theme: 'Đổi nền sáng tối',
     },
     products: {
       all: 'Tất cả sản phẩm',
@@ -75,6 +76,7 @@ export const dictionaries = {
       search: 'Search',
       menu: 'Menu',
       close: 'Close',
+      theme: 'Switch light and dark',
     },
     products: {
       all: 'All products',

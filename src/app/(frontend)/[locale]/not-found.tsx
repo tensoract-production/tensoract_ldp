@@ -11,11 +11,11 @@ export default function NotFound() {
 
   return (
     <div className="container py-32 md:py-40">
-      <p className="record text-ink-soft">404</p>
-      <h1 className="serif mt-5 max-w-[14ch] text-[clamp(2.4rem,6vw,4rem)]">
+      <p className="wire-label">404</p>
+      <h1 className="wire-title mt-5 max-w-[14ch] text-[clamp(2.4rem,6vw,4rem)]">
         {dict.notFound.title}
       </h1>
-      <p className="measure mt-6 text-lg text-ink-soft">{dict.notFound.body}</p>
+      <p className="measure mt-6 text-lg text-muted-foreground">{dict.notFound.body}</p>
       <Button asChild className="mt-10" size="lg" variant="default">
         <Link href={`/${defaultLocale}`}>{dict.backHome}</Link>
       </Button>

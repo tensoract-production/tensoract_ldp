@@ -6,31 +6,28 @@ web
 
 ## Users
 
-**Primary: B2B partners and prospective business counterparties**, confirmed as
-two groups:
+The website serves four audience groups:
 
-- **Investors.** Assessing whether this team executes. They need evidence of
-  shipping and momentum — never a statement about funding posture.
-- **Enterprises buying for internal use.** Assessing whether the software can
-  run inside their own operation. They need scale, reliability, and
-  operational-commitment signals.
+- **Customers and partners** evaluating products, technical capability and fit.
+- **Investors** looking for evidence of shipped products, traction, direction and
+  the team's ability to execute. The company is raising capital, but the website
+  must not read like a pitch deck.
+- **Candidates** evaluating the company and opportunities to work with the team.
+- **People learning about Tensoract** who need a clear company and product overview.
 
-Their job on this site is to decide whether the company is real, capable, and
-worth engaging. **The action they should take is to email the company directly**
-— no booking flow, no gated download.
-
-This site is a company profile, not a product funnel. Individual products are
-sold on their own properties (e.g. goihangchuan.vn); end users of those products
-— Vietnamese online sellers — are not the audience this site is written for.
+The site remains a company profile rather than an end-user product funnel. Its
+primary journeys are to explore products, understand Tensoract, read insights,
+consider careers, or start a conversation.
 
 ## Product Purpose
 
-Tensoract Co., Ltd builds SaaS software for the e-commerce sector. This site
-exists to **define the company** for a B2B audience: what Tensoract is, what it
-has built, and why an outside organisation should take it seriously.
+Tensoract Co., Ltd builds technology and SaaS products, with practical
+e-commerce problems as an important area of expertise. The site exists to define
+the company, connect its products into one ecosystem, demonstrate capability and
+traction, and show where the company is heading.
 
-Success is a partner finishing the site able to describe what the company does
-and willing to start a conversation.
+Success is a visitor finishing the homepage able to explain what Tensoract does,
+recognize Ecombox as a featured product, and choose a relevant next step.
 
 ## Positioning
 
@@ -75,9 +72,10 @@ alongside it. Everything else is maintained but not led with.
 former name and predecessor of this work; it is folded into Ecombox and must not
 reappear as a separate product. `goihangchuan.vn` may still resolve as a domain.
 
-**Technical constraints:** Next.js 16 + Payload CMS 3.87 on MongoDB. Bilingual
-VI/EN through Payload localization, served under `/vi` and `/en`. Products are a
-CMS collection; marketing sections are CMS blocks.
+**Technical constraints:** Next.js 16 + Payload CMS 3.87 on MongoDB. The public
+site remains bilingual under `/vi` and `/en`. For V2, Payload is limited to blog
+content: Posts, Categories, Authors and Media. Homepage marketing sections and
+product data are code-owned during the wireframe stage.
 
 **Undecided or unverified product facts:**
 

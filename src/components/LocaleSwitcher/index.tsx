@@ -2,16 +2,13 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { Fragment } from 'react'
+import React from 'react'
 
 import { type Locale, localeLabels, localeShortLabels, locales } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 import { cn } from '@/utilities/ui'
 
-/**
- * Swaps the language segment of the current path so the reader stays on the
- * page they were reading.
- */
+/** Keep the current route while swapping only its locale segment. */
 export const LocaleSwitcher: React.FC<{ locale: Locale; className?: string }> = ({
   className,
   locale,
@@ -20,31 +17,26 @@ export const LocaleSwitcher: React.FC<{ locale: Locale; className?: string }> = 
   const rest = pathname.replace(new RegExp(`^/(${locales.join('|')})(?=/|$)`), '')
 
   return (
-    <nav
-      aria-label={getDictionary(locale).langSwitch}
-      className={cn('record flex items-center', className)}
-    >
-      {locales.map((code, i) => (
-        <Fragment key={code}>
-          {i > 0 && (
-            <span aria-hidden="true" className="px-1.5 text-rule">
-              /
-            </span>
-          )}
+    <details className={cn('locale-dropdown', className)}>
+      <summary aria-label={getDictionary(locale).langSwitch}>
+        <span>{localeShortLabels[locale]}</span>
+        <span aria-hidden="true" className="locale-dropdown__chevron" />
+      </summary>
+      <nav aria-label={getDictionary(locale).langSwitch} className="locale-dropdown__menu">
+        {locales.map((code) => (
           <Link
-            aria-current={code === locale ? 'true' : undefined}
-            className={cn(
-              'transition-colors',
-              code === locale ? 'text-ink' : 'text-ink-soft hover:text-son-deep',
-            )}
+            aria-current={code === locale ? 'page' : undefined}
+            className={code === locale ? 'locale-dropdown__option locale-dropdown__option--active' : 'locale-dropdown__option'}
             href={`/${code}${rest}`}
             hrefLang={code}
+            key={code}
             title={localeLabels[code]}
           >
-            {localeShortLabels[code]}
+            <span>{localeShortLabels[code]}</span>
+            <span>{localeLabels[code]}</span>
           </Link>
-        </Fragment>
-      ))}
-    </nav>
+        ))}
+      </nav>
+    </details>
   )
 }
