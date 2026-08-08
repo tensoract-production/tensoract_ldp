@@ -8,10 +8,10 @@ import { getPayload } from 'payload'
 import React from 'react'
 import { notFound } from 'next/navigation'
 
-import { locales, toLocale } from '@/i18n/config'
+import { toLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 
-export const revalidate = 600
+export const dynamic = 'force-dynamic'
 
 type Args = {
   params: Promise<{
@@ -66,24 +66,4 @@ export async function generateMetadata({ params }: Args): Promise<Metadata> {
   return {
     title: `${dict.blog.title} — ${pageNumber || ''} — Tensoract`,
   }
-}
-
-export async function generateStaticParams() {
-  const payload = await getPayload({ config: configPromise })
-  const { totalDocs } = await payload.count({
-    collection: 'posts',
-    overrideAccess: false,
-  })
-
-  const totalPages = Math.ceil(totalDocs / 12)
-
-  const pages: { locale: string; pageNumber: string }[] = []
-
-  for (const locale of locales) {
-    for (let i = 1; i <= totalPages; i++) {
-      pages.push({ locale, pageNumber: String(i) })
-    }
-  }
-
-  return pages
 }

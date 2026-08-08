@@ -19,7 +19,7 @@ export const CollectionArchive: React.FC<Props> = ({
 }) => {
   return (
     <div className={cn('container', className)}>
-      <div className="edge-print-b">
+      <div className="border-b border-border">
         {posts?.map((result, index) => {
           if (typeof result !== 'object' || result === null) return null
 

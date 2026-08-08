@@ -5,8 +5,6 @@ import { defaultLocale, toLocale } from '@/i18n/config'
 
 const collectionPrefixMap: Partial<Record<CollectionSlug, string>> = {
   posts: '/posts',
-  products: '/products',
-  pages: '',
 }
 
 type Props = {
@@ -25,7 +23,7 @@ export const generatePreviewPath = ({ collection, slug, req }: Props) => {
 
   // Preview whichever language the editor is currently working in.
   const locale = toLocale(typeof req?.locale === 'string' ? req.locale : defaultLocale)
-  const suffix = collection === 'pages' && slug === 'home' ? '' : `/${encodedSlug}`
+  const suffix = `/${encodedSlug}`
 
   const encodedParams = new URLSearchParams({
     path: `/${locale}${collectionPrefixMap[collection]}${suffix}`,

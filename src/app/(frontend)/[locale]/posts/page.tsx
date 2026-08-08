@@ -10,8 +10,7 @@ import React from 'react'
 import { toLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 
-export const dynamic = 'force-static'
-export const revalidate = 600
+export const dynamic = 'force-dynamic'
 
 type Args = {
   params: Promise<{ locale: string }>
@@ -45,7 +44,7 @@ export default async function Page({ params }: Args) {
 
       <div className="pb-16">
         {posts.docs.length === 0 ? (
-          <div className="container text-ink-soft">{dict.blog.empty}</div>
+          <div className="container text-muted-foreground">{dict.blog.empty}</div>
         ) : (
           <EditorialArchive locale={locale} posts={posts.docs} />
         )}

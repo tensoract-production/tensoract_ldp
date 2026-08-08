@@ -1,107 +1,73 @@
 # Tensoract
 
-Website giới thiệu công ty Tensoract Co., Ltd — Next.js 16 + Payload CMS 3, song ngữ
-Việt / Anh, nội dung quản lý hoàn toàn trong CMS.
+Website công ty Tensoract — Next.js 16 + Payload CMS 3, song ngữ Việt/Anh.
+
+Branch `des_v1` hiện chứa V2 wireframe: homepage code-native ưu tiên cấu trúc nội dung;
+Payload chỉ quản lý blog.
 
 ## Chạy tại máy
 
-Cần Node `^18.20.2` hoặc `>=20.9.0`, và một MongoDB đang chạy.
+Cần Node `^18.20.2` hoặc `>=20.9.0` và PostgreSQL.
 
 ```bash
-# 1. Biến môi trường
 cp .env.example .env
-#    sửa DATABASE_URL, PAYLOAD_SECRET, PREVIEW_SECRET trong .env
-
-# 2. MongoDB (dùng docker-compose có sẵn)
-docker compose up -d mongo
-
-# 3. Cài gói và chạy
+docker compose up -d postgres
 npm install
 npm run dev
 ```
 
-Mở http://localhost:3000 — đường dẫn không có tiền tố ngôn ngữ sẽ tự chuyển sang `/vi`.
+Mở http://localhost:3000. Route không có locale tự chuyển sang `/vi`.
+Payload Admin nằm tại http://localhost:3000/admin.
 
-### Nạp nội dung mẫu
+## Lệnh chính
 
-Lần đầu chạy, database trống. Vào http://localhost:3000/admin, tạo tài khoản quản trị
-đầu tiên, rồi bấm nút **Seed your database** trên dashboard. Nó nạp toàn bộ trang, sản
-phẩm, bài viết và cấu hình header/footer cho cả hai ngôn ngữ.
-
-## Lệnh hay dùng
-
-| Lệnh | Việc |
+| Lệnh | Công việc |
 |---|---|
-| `npm run dev` | Chạy dev server |
-| `npm run build` | Build production (kèm sinh sitemap) |
-| `npm start` | Chạy bản đã build |
-| `npm run generate:types` | Sinh lại `src/payload-types.ts` sau khi đổi schema Payload |
-| `npm run test:int` | Test tích hợp (Vitest) |
-| `npm run test:e2e` | Test đầu-cuối (Playwright) |
-| `npm run lint` | ESLint |
+| `npm run dev` | Chạy development server |
+| `npm run build` | Build production và sitemap |
+| `npm start` | Chạy production build |
+| `npm run generate:types` | Sinh lại Payload types sau khi đổi schema |
+| `npm run generate:importmap` | Cập nhật import map cho Payload Admin |
+| `npm run lint` | Chạy ESLint |
+| `npm run test:int` | Chạy Vitest integration tests |
+| `npm run test:e2e` | Chạy Playwright end-to-end tests |
 
-Đổi bất kỳ file nào trong `src/collections`, `src/blocks/*/config.ts`, `src/Header`,
-`src/Footer` thì phải chạy lại `npm run generate:types`.
+## Kiến trúc V2
 
-## Cấu trúc dự án
-
-```
+```text
 src/
 ├── app/
-│   ├── (frontend)/
-│   │   ├── [locale]/          Toàn bộ trang công khai, dưới /vi và /en
-│   │   │   ├── page.tsx           Trang chủ
-│   │   │   ├── [slug]/            Trang tĩnh từ collection Pages
-│   │   │   ├── products/          Danh sách và chi tiết sản phẩm
-│   │   │   ├── posts/             Blog, có phân trang
-│   │   │   └── search/            Tìm kiếm
-│   │   ├── next/              Route preview, exit-preview, seed
-│   │   ├── (sitemaps)/        sitemap XML cho pages và posts
-│   │   └── globals.css        Style toàn cục của giao diện hiện tại (legacy)
-│   └── (payload)/             Admin panel và REST/GraphQL API
-│
-├── collections/           Pages · Posts · Products · Media · Categories · Users
-├── Header/ · Footer/      Hai global: cấu hình + component
-│
-├── blocks/                Block dựng trang, mỗi thư mục gồm config.ts + Component.tsx
-│   ├── ManifestHero       Hero trang chủ
-│   ├── ManifestStrip      Dòng chỉ số dạng chữ
-│   ├── ProductLabels      Danh mục sản phẩm
-│   ├── Approach           Cách làm việc
-│   ├── Statement          Câu tuyên ngôn lớn
-│   ├── Awards             Giải thưởng, có con dấu
-│   ├── Partners           Đối tác
-│   └── …                  CallToAction, Content, MediaBlock, Form, Archive
-│
-├── components/            Component dùng chung
-│   ├── Woodblock          Component đồ họa của giao diện hiện tại (legacy)
-│   ├── Section            Khung section và tiêu đề
-│   ├── ProductCard        Dòng sản phẩm trong danh mục
-│   ├── Reveal             Hiệu ứng hiện dần khi cuộn
-│   └── ui/                Nút, input, select… (shadcn)
-│
-├── i18n/                  Danh sách locale và từ điển chuỗi giao diện
-├── endpoints/seed/        Script nạp nội dung mẫu song ngữ
-├── utilities/             Truy vấn Payload, sinh href, metadata
-├── proxy.ts               Chuyển hướng đường dẫn không tiền tố sang /vi
-└── payload.config.ts      Cấu hình Payload, khai báo locale vi/en
+│   ├── (frontend)/[locale]/
+│   │   ├── page.tsx             Homepage VI/EN
+│   │   └── posts/               Danh sách, phân trang và chi tiết blog
+│   └── (payload)/               Payload Admin, REST và GraphQL API
+├── components/
+│   └── WireframeHomepage/       Storytelling homepage gồm 10 content sections
+├── collections/
+│   ├── Posts/                   Bài blog
+│   ├── Categories.ts            Chuyên mục blog
+│   ├── Authors.ts               Hồ sơ tác giả public
+│   ├── Media.ts                 Ảnh và tệp blog
+│   └── Users/                   Tài khoản đăng nhập admin, không phải content
+├── Header/Component.tsx         Navbar code-native
+├── Footer/Component.tsx         Footer code-native
+├── i18n/                        Locale và UI dictionary
+└── payload.config.ts            Payload chỉ tập trung vào blog
 ```
 
-### Vài điểm cần biết
+Homepage marketing không được CMS hóa ở giai đoạn wireframe. Nội dung và placeholder
+nằm trong `src/components/WireframeHomepage` để review hierarchy nhanh, không phụ thuộc
+database ngoài ba bài Insights mới nhất.
 
-**Song ngữ.** Mọi trang công khai nằm dưới `/[locale]`. Payload bật localization với
-`vi` mặc định và `en` fallback về `vi` khi chưa dịch. Field nào cần dịch thì đánh
-`localized: true` trong config — quên đánh thì bản tiếng Anh sẽ ghi đè bản tiếng Việt.
+## Tài liệu
 
-**Thêm block mới.** Tạo `src/blocks/TenBlock/{config.ts,Component.tsx}`, khai báo vào
-mảng `blocks` trong `src/collections/Pages/index.ts`, đăng ký vào `blockComponents`
-trong `src/blocks/RenderBlocks.tsx`, rồi chạy `generate:types`.
+- `docs/PRODUCT.md` — định hướng sản phẩm, nhóm người xem và các dữ kiện đã xác minh.
+- `docs/DESIGN.md` — baseline wireframe và storytelling flow 12 phần của homepage.
+- `docs/PLAN.md` — kế hoạch triển khai V2 theo từng giai đoạn.
 
-**Đường dẫn nội bộ.** Trong CMS cứ viết `/products`, không cần tiền tố ngôn ngữ —
-`src/utilities/hrefFor.ts` tự thêm locale đang render.
+## Lưu ý dữ liệu
 
-## Tài liệu khác
-
-- `docs/PRODUCT.md` — sự thật về sản phẩm và công ty: đối tượng, định vị, dữ kiện đã
-  xác minh và dữ kiện cố tình để trống.
-- `docs/DESIGN.md` — trạng thái phiên bản thiết kế cũ và nơi sẽ soạn đặc tả V2.
+V2 chuyển database adapter từ MongoDB sang PostgreSQL và thay quan hệ tác giả của Posts
+từ `Users` sang `Authors`. Dữ liệu MongoDB cũ không được tự động chuyển sang PostgreSQL;
+nếu cần giữ dữ liệu production phải thực hiện migration riêng. Các collection V1 không
+còn được đăng ký trong Payload config.

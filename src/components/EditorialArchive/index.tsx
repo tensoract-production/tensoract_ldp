@@ -23,7 +23,7 @@ const categoryLine = (post: CardPostData) =>
     .join(', ')
 
 const ReadMark: React.FC<{ label: string }> = ({ label }) => (
-  <span className="mt-5 inline-flex items-center gap-2 text-ink transition-colors group-hover:text-son-deep">
+  <span className="mt-5 inline-flex items-center gap-2 text-foreground">
     {label}
     <ArrowRight className="transition-transform duration-200 group-hover:translate-x-1" />
   </span>
@@ -43,17 +43,17 @@ export const EditorialArchive: React.FC<{
   return (
     <div className={cn('container', className)}>
       {/* Lead */}
-      <article className="group edge-print-b pb-14">
+      <article className="group border-b border-border pb-14">
         <Link className="grid gap-8 pt-12 md:grid-cols-12 md:gap-10" href={href(lead)}>
           <div className="md:col-span-7">
             {categoryLine(lead) && (
-              <p className="record text-son-deep">{categoryLine(lead)}</p>
+              <p className="wire-label">{categoryLine(lead)}</p>
             )}
-            <h2 className="serif mt-4 text-[clamp(2.1rem,5vw,3.6rem)] transition-colors group-hover:text-son-deep">
+            <h2 className="wire-title mt-4 text-[clamp(2.1rem,5vw,3.6rem)]">
               {lead.title}
             </h2>
             {lead.meta?.description && (
-              <p className="measure mt-5 text-lg leading-relaxed text-ink-soft">
+              <p className="measure mt-5 text-lg leading-relaxed text-muted-foreground">
                 {lead.meta.description}
               </p>
             )}
@@ -63,7 +63,7 @@ export const EditorialArchive: React.FC<{
           {lead.meta?.image && typeof lead.meta.image !== 'string' && (
             <div className="md:col-span-5">
               <Media
-                imgClassName="aspect-[5/4] w-full border border-rule object-cover"
+                imgClassName="aspect-[5/4] w-full border border-border object-cover"
                 resource={lead.meta.image}
                 size="40vw"
               />
@@ -87,21 +87,21 @@ export const EditorialArchive: React.FC<{
           {rest.map((post, i) => (
             <article
               className={cn(
-                'group edge-print-b py-10 md:edge-print-b md:py-12',
+                'group border-b border-border py-10 md:py-12',
                 // Printed column rules between, not around.
-                i > 0 && 'md:border-l md:border-rule md:pl-10',
+                i > 0 && 'md:border-l md:border-border md:pl-10',
               )}
               key={post.slug}
             >
               <Link className="block" href={href(post)}>
                 {categoryLine(post) && (
-                  <p className="record text-ink-soft">{categoryLine(post)}</p>
+                  <p className="wire-label">{categoryLine(post)}</p>
                 )}
-                <h3 className="subhead mt-3 transition-colors group-hover:text-son-deep">
+                <h3 className="subhead mt-3">
                   {post.title}
                 </h3>
                 {post.meta?.description && (
-                  <p className="mt-3 leading-relaxed text-ink-soft">{post.meta.description}</p>
+                  <p className="mt-3 leading-relaxed text-muted-foreground">{post.meta.description}</p>
                 )}
                 <ReadMark label={dict.blog.readPost} />
               </Link>
