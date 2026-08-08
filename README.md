@@ -5,9 +5,40 @@ Website công ty Tensoract — Next.js 16 + Payload CMS 3, song ngữ Việt/Anh
 Branch `des_v1` hiện chứa V2 wireframe: homepage code-native ưu tiên cấu trúc nội dung;
 Payload chỉ quản lý blog.
 
-## Chạy tại máy
+## Chạy bằng Docker
 
-Cần Node `^18.20.2` hoặc `>=20.9.0` và PostgreSQL.
+Docker Compose chạy production build của Next.js/Payload cùng PostgreSQL 16.
+
+```bash
+cp .env.example .env
+```
+
+Sinh ba secret độc lập và một mật khẩu PostgreSQL URL-safe, sau đó điền vào `.env`:
+
+```bash
+openssl rand -hex 32
+```
+
+Đặt `DATABASE_URL` khi chạy ứng dụng trực tiếp trên máy, ví dụ với mật khẩu vừa tạo:
+
+```text
+postgresql://payload:YOUR_POSTGRES_PASSWORD@127.0.0.1:5432/tensoract
+```
+
+Khởi động toàn bộ stack:
+
+```bash
+docker compose up --build -d
+docker compose ps
+docker compose logs -f payload
+```
+
+Mặc định app và PostgreSQL chỉ bind vào `127.0.0.1`. Mở
+http://localhost:3000; Payload Admin nằm tại http://localhost:3000/admin.
+
+## Chạy trực tiếp tại máy
+
+Cần Node `>=20.9.0` và PostgreSQL.
 
 ```bash
 cp .env.example .env
@@ -19,18 +50,32 @@ npm run dev
 Mở http://localhost:3000. Route không có locale tự chuyển sang `/vi`.
 Payload Admin nằm tại http://localhost:3000/admin.
 
+## Lưu ý bảo mật khi triển khai
+
+- Không commit `.env`; Git chỉ theo dõi `.env.example` không chứa credential.
+- Dùng secret ngẫu nhiên khác nhau, tối thiểu 32 ký tự cho Payload, cron và preview.
+- Giữ PostgreSQL ở `127.0.0.1`; không public cổng `5432` ra Internet.
+- Đặt reverse proxy có HTTPS phía trước app. Chỉ đổi `APP_BIND_ADDRESS` khi hạ tầng
+  thực sự yêu cầu và đã có firewall.
+- Backup volume `postgres_data` định kỳ. Upload nằm trong `media_data`; production
+  nhiều replica nên chuyển sang object storage như S3 thay vì filesystem cục bộ.
+- Image chạy bằng user không phải root và filesystem read-only. Không mount source
+  code hoặc Docker socket vào container production.
+- Docker Compose phù hợp local/single-host. Production cần quản lý secret của nền
+  tảng, TLS, rate limiting, backup và giám sát riêng.
+
 ## Lệnh chính
 
-| Lệnh | Công việc |
-|---|---|
-| `npm run dev` | Chạy development server |
-| `npm run build` | Build production và sitemap |
-| `npm start` | Chạy production build |
-| `npm run generate:types` | Sinh lại Payload types sau khi đổi schema |
-| `npm run generate:importmap` | Cập nhật import map cho Payload Admin |
-| `npm run lint` | Chạy ESLint |
-| `npm run test:int` | Chạy Vitest integration tests |
-| `npm run test:e2e` | Chạy Playwright end-to-end tests |
+| Lệnh                         | Công việc                                 |
+| ---------------------------- | ----------------------------------------- |
+| `npm run dev`                | Chạy development server                   |
+| `npm run build`              | Build production và sitemap               |
+| `npm start`                  | Chạy production build                     |
+| `npm run generate:types`     | Sinh lại Payload types sau khi đổi schema |
+| `npm run generate:importmap` | Cập nhật import map cho Payload Admin     |
+| `npm run lint`               | Chạy ESLint                               |
+| `npm run test:int`           | Chạy Vitest integration tests             |
+| `npm run test:e2e`           | Chạy Playwright end-to-end tests          |
 
 ## Kiến trúc V2
 

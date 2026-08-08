@@ -23,12 +23,12 @@
     "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
   },
   "dependencies": {
-    "@payloadcms/admin-bar": "3.87.0",
-    "@payloadcms/db-postgres": "^3.87.0",
-    "@payloadcms/live-preview-react": "3.87.0",
-    "@payloadcms/next": "3.87.0",
-    "@payloadcms/richtext-lexical": "3.87.0",
-    "@payloadcms/ui": "3.87.0",
+    "@payloadcms/admin-bar": "3.87.1",
+    "@payloadcms/db-postgres": "3.87.1",
+    "@payloadcms/live-preview-react": "3.87.1",
+    "@payloadcms/next": "3.87.1",
+    "@payloadcms/richtext-lexical": "3.87.1",
+    "@payloadcms/ui": "3.87.1",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-select": "^2.0.0",
@@ -41,14 +41,14 @@
     "graphql": "^16.8.2",
     "gsap": "^3.15.0",
     "lucide-react": "0.563.0",
-    "next": "16.2.6",
+    "next": "16.3.0",
     "next-sitemap": "^4.2.3",
-    "payload": "3.87.0",
+    "payload": "3.87.1",
     "prism-react-renderer": "^2.3.1",
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "react-hook-form": "7.71.1",
-    "sharp": "0.34.2",
+    "sharp": "0.35.3",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
@@ -64,19 +64,19 @@
     "@vitejs/plugin-react": "4.5.2",
     "autoprefixer": "^10.4.19",
     "eslint": "^9.16.0",
-    "eslint-config-next": "16.2.6",
+    "eslint-config-next": "16.3.0",
     "jsdom": "28.0.0",
-    "postcss": "^8.4.38",
+    "postcss": "8.5.26",
     "prettier": "^3.4.2",
     "tailwindcss": "^4.1.18",
     "tsx": "4.22.4",
     "tw-animate-css": "^1.4.0",
     "typescript": "5.7.3",
     "vite-tsconfig-paths": "6.0.5",
-    "vitest": "4.0.18"
+    "vitest": "4.1.10"
   },
   "engines": {
-    "node": "^18.20.2 || >=20.9.0",
+    "node": ">=20.9.0",
     "pnpm": "^9 || ^10 || ^11"
   },
   "pnpm": {
@@ -85,5 +85,11 @@
       "esbuild",
       "unrs-resolver"
     ]
+  },
+  "allowScripts": {
+    "esbuild@0.18.20": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.28.1": true,
+    "unrs-resolver@1.12.2": true
   }
 }
