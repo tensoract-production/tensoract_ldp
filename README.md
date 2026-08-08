@@ -57,7 +57,7 @@ src/
 │   │   │   └── search/            Tìm kiếm
 │   │   ├── next/              Route preview, exit-preview, seed
 │   │   ├── (sitemaps)/        sitemap XML cho pages và posts
-│   │   └── globals.css        Design token và lớp nền tảng
+│   │   └── globals.css        Style toàn cục của giao diện hiện tại (legacy)
 │   └── (payload)/             Admin panel và REST/GraphQL API
 │
 ├── collections/           Pages · Posts · Products · Media · Categories · Users
@@ -74,7 +74,7 @@ src/
 │   └── …                  CallToAction, Content, MediaBlock, Form, Archive
 │
 ├── components/            Component dùng chung
-│   ├── Woodblock          Bộ minh hoạ khắc gỗ dạng SVG
+│   ├── Woodblock          Component đồ họa của giao diện hiện tại (legacy)
 │   ├── Section            Khung section và tiêu đề
 │   ├── ProductCard        Dòng sản phẩm trong danh mục
 │   ├── Reveal             Hiệu ứng hiện dần khi cuộn
@@ -104,4 +104,4 @@ trong `src/blocks/RenderBlocks.tsx`, rồi chạy `generate:types`.
 
 - `docs/PRODUCT.md` — sự thật về sản phẩm và công ty: đối tượng, định vị, dữ kiện đã
   xác minh và dữ kiện cố tình để trống.
-- `docs/DESIGN.md` — hệ thống thiết kế: bảng màu, thang chữ, nhịp khoảng cách.
+- `docs/DESIGN.md` — trạng thái phiên bản thiết kế cũ và nơi sẽ soạn đặc tả V2.
