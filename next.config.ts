@@ -28,6 +28,7 @@ if (NEXT_PUBLIC_SERVER_URL.startsWith('https://')) {
 }
 
 const nextConfig: NextConfig = {
+  agentRules: false,
   output: 'standalone',
   poweredByHeader: false,
   headers: async () => [
@@ -46,8 +47,14 @@ const nextConfig: NextConfig = {
       {
         pathname: '/api/media/file/**',
       },
+      {
+        pathname: '/partners/**',
+      },
+      {
+        pathname: '/assets/**',
+      },
     ],
-    qualities: [100],
+    qualities: [85, 100],
     remotePatterns: [
       ...[NEXT_PUBLIC_SERVER_URL /* 'https://example.com' */].map((item) => {
         const url = new URL(item)

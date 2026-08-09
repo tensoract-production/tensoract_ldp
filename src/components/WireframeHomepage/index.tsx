@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { TensoractHero } from '@/components/TensoractHero'
 import type { Locale } from '@/i18n/config'
 import type { Post } from '@/payload-types'
 
@@ -8,12 +9,9 @@ type Insight = Pick<Post, 'id' | 'meta' | 'publishedAt' | 'slug' | 'title'>
 const content = {
   vi: {
     hero: {
-      label: 'Tensoract / Technology & SaaS',
-      title: 'Xây dựng sản phẩm công nghệ từ những vấn đề thực tế.',
-      body: 'Tensoract phát triển các sản phẩm SaaS và AI cho hoạt động thương mại, bắt đầu từ những vấn đề đội ngũ quan sát được trong thực tế.',
-      primary: 'Khám phá Ecombox',
-      secondary: 'Tìm hiểu Tensoract',
+      body: 'SaaS và AI từ những bài toán vận hành thực tế.',
       affiliations: 'Đối tác và tổ chức đồng hành',
+      imageAlt: 'Ecombox trình bày tại Demo Day UII trước khán giả trong hội trường.',
     },
     about: {
       label: '01 / Tensoract',
@@ -73,7 +71,11 @@ const content = {
     investor: { label: '09 / Investors & partnerships', title: 'Cùng trao đổi về chặng đường tiếp theo.', body: 'Tensoract chào đón các đối tác và nhà đầu tư muốn tìm hiểu sâu hơn về sản phẩm, thị trường và hướng phát triển.', cta: '[Kênh liên hệ đang xác nhận]' },
   },
   en: {
-    hero: { label: 'Tensoract / Technology & SaaS', title: 'Building technology products from real-world problems.', body: 'Tensoract develops SaaS and AI products for commerce, starting with problems the team encounters in real operations.', primary: 'Explore Ecombox', secondary: 'About Tensoract', affiliations: 'Partners and supporting organizations' },
+    hero: {
+      body: 'SaaS and AI from real operational problems.',
+      affiliations: 'Partners and supporting organizations',
+      imageAlt: 'Ecombox presenting at Demo Day UII in front of an auditorium audience.',
+    },
     about: { label: '01 / Tensoract', title: 'We build products from real-world problems.', body: ['Tensoract is a technology company founded in 2022, focused on SaaS, AI, and products serving commerce operations.', 'From operational problems, the team develops solutions with the potential to become independent products.'], transition: 'One product shaped by this approach is Ecombox.', facts: [['Founded', '2022'], ['Focus', 'SaaS / AI / Commerce'], ['Based in', 'Vietnam']] },
     product: { label: '02 / Flagship product', title: 'Ecombox', headline: 'Creating a record for a critical operational process.', body: 'Ecombox creates an AI record of the packing process, connects data to order codes, and is deployed around enterprise operations.', capabilities: ['Packing process records', 'Data linked to order codes', 'Enterprise deployment and handover'], cta: '[Product URL awaiting confirmation]' },
     recognition: { label: '03 / Awards & recognition', title: 'From product to validation.', intro: 'Only awards, programs, or outcomes that can be verified will be published here.', items: [['2024', 'Startup Wheel', 'The founder presented Ecombox at the program. Outcome awaiting verification.'], ['[Year]', '[Award / program]', '[Information awaiting verification]']] },
@@ -86,7 +88,14 @@ const content = {
   },
 } as const
 
-const affiliations = ['Google Cloud', 'Microsoft', 'AWS', 'Cloudflare', 'Startup Wheel', 'VinUniversity']
+const affiliations = [
+  { name: 'Google Cloud', logo: '/partners/google-cloud.png', width: 560, height: 97 },
+  { name: 'Microsoft', logo: '/partners/microsoft.svg', width: 21, height: 21, showName: true },
+  { name: 'AWS', logo: '/partners/aws.png', width: 168, height: 102 },
+  { name: 'Cloudflare', logo: '/partners/cloudflare.png', width: 512, height: 173 },
+  { name: 'Startup Wheel', logo: '/partners/startup-wheel.png', width: 40, height: 40, showName: true },
+  { name: 'VinUniversity', logo: '/partners/vinuniversity.png', width: 350, height: 214 },
+] as const
 
 function Heading({ intro, label, title }: { intro?: string; label: string; title: string }) {
   return <div className="wire-heading"><p className="wire-label">{label}</p><h2>{title}</h2>{intro && <p>{intro}</p>}</div>
@@ -96,16 +105,7 @@ export function WireframeHomepage({ locale, posts }: { locale: Locale; posts: In
   const copy = content[locale]
 
   return <div className="wire-home">
-    <section className="wire-hero">
-      <div className="wire-container wire-hero__grid">
-        <div><p className="wire-label">{copy.hero.label}</p><h1>{copy.hero.title}</h1><p className="wire-lead">{copy.hero.body}</p><div className="wire-actions"><Link className="wire-button wire-button--primary" href="#ecombox">{copy.hero.primary}</Link><Link className="wire-button" href="#about">{copy.hero.secondary}</Link></div></div>
-        <div aria-label="Company or product image placeholder" className="wire-placeholder">16:10 COMPANY / PRODUCT IMAGE</div>
-      </div>
-      <div className="wire-container wire-supporters wire-supporters--hero">
-        <p className="wire-label">{copy.hero.affiliations}</p>
-        <ul>{affiliations.map((name) => <li key={name}>{name}</li>)}</ul>
-      </div>
-    </section>
+    <TensoractHero affiliations={affiliations} copy={copy.hero} />
 
     <section className="wire-section" id="about">
       <div className="wire-container wire-about"><div><Heading label={copy.about.label} title={copy.about.title} />{copy.about.body.map((paragraph) => <p className="wire-about__copy" key={paragraph}>{paragraph}</p>)}<p className="wire-transition">{copy.about.transition} ↓</p></div><dl className="wire-facts">{copy.about.facts.map(([label, value]) => <div key={label}><dt className="wire-label">{label}</dt><dd>{value}</dd></div>)}</dl></div>
