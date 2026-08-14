@@ -9,9 +9,10 @@ import { getDictionary } from '@/i18n/dictionaries'
 import { cn } from '@/utilities/ui'
 
 /** Keep the current route while swapping only its locale segment. */
-export const LocaleSwitcher: React.FC<{ locale: Locale; className?: string }> = ({
+export const LocaleSwitcher: React.FC<{ locale: Locale; className?: string; onNavigate?: () => void }> = ({
   className,
   locale,
+  onNavigate,
 }) => {
   const pathname = usePathname()
   const rest = pathname.replace(new RegExp(`^/(${locales.join('|')})(?=/|$)`), '')
@@ -30,6 +31,7 @@ export const LocaleSwitcher: React.FC<{ locale: Locale; className?: string }> = 
             href={`/${code}${rest}`}
             hrefLang={code}
             key={code}
+            onClick={onNavigate}
             title={localeLabels[code]}
           >
             <span>{localeShortLabels[code]}</span>
