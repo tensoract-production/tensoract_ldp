@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { draftMode } from 'next/headers'
 import React from 'react'
@@ -50,4 +50,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
   openGraph: mergeOpenGraph(),
   twitter: { card: 'summary_large_image' },
+}
+
+export const viewport: Viewport = {
+  initialScale: 1,
+  viewportFit: 'cover',
+  width: 'device-width',
 }

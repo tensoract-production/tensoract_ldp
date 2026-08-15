@@ -29,6 +29,12 @@ if (NEXT_PUBLIC_SERVER_URL.startsWith('https://')) {
 
 const nextConfig: NextConfig = {
   agentRules: false,
+  // Local browser tools may use 127.0.0.1 while Next starts on localhost.
+  // Keep this development-only allowlist explicit so HMR and client chunks
+  // remain protected in deployed environments.
+  ...(process.env.NODE_ENV === 'development'
+    ? { allowedDevOrigins: ['localhost', '127.0.0.1'] }
+    : {}),
   output: 'standalone',
   poweredByHeader: false,
   headers: async () => [

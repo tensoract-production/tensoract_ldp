@@ -74,7 +74,7 @@ export const Card: React.FC<{
           )}
 
           {titleToUse && (
-            <h3 className="wire-title text-[clamp(1.5rem,2.8vw,2rem)] transition-colors group-hover:text-foreground">
+            <h3 className="wire-title text-[clamp(1.25rem,2.8vw,2rem)] transition-colors group-hover:text-foreground">
               <Link className="outline-none" href={href}>
                 {titleToUse}
               </Link>

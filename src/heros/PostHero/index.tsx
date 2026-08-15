@@ -22,16 +22,16 @@ export const PostHero: React.FC<{
     .filter(Boolean)
 
   return (
-    <header className="border-b border-border pt-16 pb-14 md:pt-24">
+    <header className="border-b border-border pt-12 pb-10 md:pt-24 md:pb-14">
       <div className="container">
         <div className="mx-auto max-w-[46rem]">
           {categoryNames.length > 0 && (
             <p className="wire-label">{categoryNames.join(', ')}</p>
           )}
 
-          <h1 className="wire-title mt-5 text-[clamp(2.1rem,5.2vw,3.6rem)]">{title}</h1>
+          <h1 className="wire-title mt-5 text-[clamp(1.85rem,5.2vw,3.6rem)]">{title}</h1>
 
-          <dl className="mt-10 flex flex-wrap gap-x-12 gap-y-4 border-t border-border pt-5">
+          <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-4 border-t border-border pt-5 md:mt-10 md:gap-x-12">
             {authorNames.length > 0 && (
               <div>
                 <dt className="wire-label">
@@ -54,7 +54,7 @@ export const PostHero: React.FC<{
         </div>
 
         {heroImage && typeof heroImage !== 'string' && (
-          <div className="mx-auto mt-14 max-w-[54rem] border border-border">
+          <div className="mx-auto mt-10 max-w-[54rem] border border-border md:mt-14">
             <Media
               imgClassName="w-full object-cover"
               priority

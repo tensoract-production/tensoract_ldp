@@ -49,11 +49,11 @@ export const EditorialArchive: React.FC<{
             {categoryLine(lead) && (
               <p className="wire-label">{categoryLine(lead)}</p>
             )}
-            <h2 className="wire-title mt-4 text-[clamp(2.1rem,5vw,3.6rem)]">
+            <h2 className="wire-title mt-4 text-[clamp(1.8rem,5vw,3.6rem)]">
               {lead.title}
             </h2>
             {lead.meta?.description && (
-              <p className="measure mt-5 text-lg leading-relaxed text-muted-foreground">
+              <p className="measure mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
                 {lead.meta.description}
               </p>
             )}
