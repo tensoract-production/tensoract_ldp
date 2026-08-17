@@ -168,8 +168,21 @@ export function WireframeHomepage({ locale, posts }: { locale: Locale; posts: In
               sizes="(max-width: 48rem) calc(100vw - 2rem), min(58vw, 48rem)"
               src="/assets/demo-day-uii/img-2639.jpg"
             />
-            <figcaption>{copy.product.imageNote}</figcaption>
           </figure>
+
+          <div aria-hidden="true" className="wire-ecombox__cutout" data-brand-cutout>
+            <Image
+              alt=""
+              className="wire-ecombox__cutout-image"
+              fill
+              loading="eager"
+              quality={90}
+              sizes="(max-width: 48rem) calc(100vw - 2rem), min(58vw, 48rem)"
+              src="/assets/demo-day-uii/ecombox-duo-cutout.png"
+            />
+          </div>
+
+          <p className="wire-ecombox__note" data-brand-note>{copy.product.imageNote}</p>
 
           <div className="wire-ecombox__story" data-brand-story>
             <h3>{copy.product.headline}</h3>

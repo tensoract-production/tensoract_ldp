@@ -17,7 +17,8 @@ const INCOMING_STAGGER_AMOUNT = 0.18
 const OUTGOING_DURATION = 0.48
 const OUTGOING_STAGGER_AMOUNT = 0.18
 const PANEL_SWITCH_POINT = 0.96
-const ECOMBOX_HOLD_EXTENSION = 0.55
+const ECOMBOX_HOLD_EXTENSION = 1.6
+const ECOMBOX_REVEAL_DURATION = 2.4
 const SECTION_HOLD_DURATION = 0.9
 const SECTION_SETTLE_POINT = 1.56
 const SECTION_STEP_DURATION = 2.4
@@ -35,14 +36,16 @@ const getSectionAlpha = (element: HTMLElement) => {
 
 const getBrandSequence = (panel: ParentNode) => {
   const letters = Array.from(panel.querySelectorAll<HTMLElement>('[data-brand-letter]'))
+  const cutout = panel.querySelector<HTMLElement>('[data-brand-cutout]')
   const media = panel.querySelector<HTMLElement>('[data-brand-media]')
+  const note = panel.querySelector<HTMLElement>('[data-brand-note]')
   const story = panel.querySelector<HTMLElement>('[data-brand-story]')
   const tensoract = panel.querySelector<HTMLElement>('[data-brand-tensoract]')
-  const items = [media, story, tensoract, ...letters].filter(
+  const items = [media, cutout, note, story, tensoract, ...letters].filter(
     (item): item is HTMLElement => item !== null,
   )
 
-  return { items, letters, media, story, tensoract }
+  return { cutout, items, letters, media, note, story, tensoract }
 }
 
 export function SectionScrollTransitions({ children }: { children: ReactNode }) {
@@ -148,12 +151,9 @@ export function SectionScrollTransitions({ children }: { children: ReactNode }) 
         const header = document.querySelector<HTMLElement>('.wire-header')
 
         let activePanelIndex = -1
-        let brandRevealTimelines: Array<gsap.core.Timeline | undefined> = []
 
         const setActivePanel = (nextIndex: number) => {
           if (nextIndex === activePanelIndex) return
-
-          brandRevealTimelines[activePanelIndex]?.pause()
 
           panels.forEach((panel, index) => {
             const isActive = index === nextIndex
@@ -169,7 +169,6 @@ export function SectionScrollTransitions({ children }: { children: ReactNode }) 
 
           activePanelIndex = nextIndex
           document.documentElement.dataset.activeSection = panels[nextIndex]?.id ?? ''
-          brandRevealTimelines[nextIndex]?.restart()
         }
 
         const updateMeasurements = () => {
@@ -195,7 +194,7 @@ export function SectionScrollTransitions({ children }: { children: ReactNode }) 
           autoAlpha: 0,
           willChange: 'opacity',
         })
-        brandSequences.forEach(({ letters, media, story, tensoract }) => {
+        brandSequences.forEach(({ cutout, letters, media, note, story, tensoract }) => {
           if (media) {
             gsap.set(media, {
               autoAlpha: 0,
@@ -211,6 +210,15 @@ export function SectionScrollTransitions({ children }: { children: ReactNode }) 
               yPercent: 115,
             })
           }
+          if (cutout) {
+            gsap.set(cutout, {
+              autoAlpha: 0,
+              scale: 0.985,
+              willChange: 'transform, opacity',
+              y: 48,
+            })
+          }
+          if (note) gsap.set(note, { autoAlpha: 0, willChange: 'opacity', y: 8 })
           if (story) {
             gsap.set(story, {
               autoAlpha: 0,
@@ -225,32 +233,6 @@ export function SectionScrollTransitions({ children }: { children: ReactNode }) 
               y: 150,
             })
           }
-        })
-        brandRevealTimelines = brandSequences.map(({ items, letters, media, story, tensoract }) => {
-          if (!items.length || !media || !story || !tensoract || !letters.length) return undefined
-
-          return gsap
-            .timeline({ paused: true })
-            .to(media, {
-              autoAlpha: 1,
-              duration: 0.5,
-              ease: 'power2.out',
-              scale: 1,
-              y: 0,
-            })
-            .to(
-              letters,
-              {
-                autoAlpha: 1,
-                duration: 0.52,
-                ease: 'power3.out',
-                stagger: { amount: 0.2, from: 'start' },
-                yPercent: 0,
-              },
-              0.52,
-            )
-            .to(story, { autoAlpha: 1, duration: 0.4, ease: 'power2.out', y: 0 }, 1.1)
-            .to(tensoract, { autoAlpha: 1, duration: 0.5, ease: 'power2.out', y: 0 }, 1.3)
         })
         setActivePanel(0)
 
@@ -300,6 +282,7 @@ export function SectionScrollTransitions({ children }: { children: ReactNode }) 
           const previousFadeOnlyItems = fadeOnlyItems[index]
           const incomingSlideItems = slideItems[index + 1]
           const incomingFadeOnlyItems = fadeOnlyItems[index + 1]
+          const incomingBrand = brandSequences[index + 1]
           const incomingBackground = backgrounds[index + 1]
           const incomingHeaderColor = panels[index + 1]?.dataset.sectionHeaderColor ?? '#ffffff'
           if (previousSlideItems.length) {
@@ -373,7 +356,63 @@ export function SectionScrollTransitions({ children }: { children: ReactNode }) 
               transitionStart + PANEL_SWITCH_POINT,
             )
           }
-          timeline.addLabel(`section-${index + 1}`, transitionStart + SECTION_SETTLE_POINT)
+
+          const brandRevealStart = transitionStart + PANEL_SWITCH_POINT
+          if (
+            incomingBrand?.cutout &&
+            incomingBrand.media &&
+            incomingBrand.note &&
+            incomingBrand.story &&
+            incomingBrand.tensoract &&
+            incomingBrand.letters.length
+          ) {
+            timeline
+              .to(incomingBrand.media, {
+                autoAlpha: 1,
+                duration: 0.72,
+                ease: 'power2.out',
+                scale: 1,
+                y: 0,
+              }, brandRevealStart)
+              .to(incomingBrand.cutout, {
+                autoAlpha: 1,
+                duration: 0.72,
+                ease: 'power2.out',
+                scale: 1,
+                y: 0,
+              }, brandRevealStart)
+              .to(incomingBrand.note, {
+                autoAlpha: 1,
+                duration: 0.36,
+                ease: 'power2.out',
+                y: 0,
+              }, brandRevealStart + 0.42)
+              .to(incomingBrand.letters, {
+                autoAlpha: 1,
+                duration: 0.8,
+                ease: 'power3.out',
+                stagger: { amount: 0.36, from: 'start' },
+                yPercent: 0,
+              }, brandRevealStart + 0.62)
+              .to(incomingBrand.story, {
+                autoAlpha: 1,
+                duration: 0.55,
+                ease: 'power2.out',
+                y: 0,
+              }, brandRevealStart + 1.45)
+              .to(incomingBrand.tensoract, {
+                autoAlpha: 1,
+                duration: 0.65,
+                ease: 'power2.out',
+                y: 0,
+              }, brandRevealStart + 1.75)
+          }
+          timeline.addLabel(
+            `section-${index + 1}`,
+            incomingBrand?.items.length
+              ? brandRevealStart + ECOMBOX_REVEAL_DURATION
+              : transitionStart + SECTION_SETTLE_POINT,
+          )
         })
 
         const syncActivePanel = () => {
@@ -429,7 +468,6 @@ export function SectionScrollTransitions({ children }: { children: ReactNode }) 
           ScrollTrigger.removeEventListener('refreshInit', handleRefreshInit)
           scrollTrigger.kill()
           timeline.kill()
-          brandRevealTimelines.forEach((reveal) => reveal?.kill())
           panels.forEach((panel) => {
             panel.inert = false
             panel.removeAttribute('aria-hidden')
@@ -488,16 +526,19 @@ export function SectionScrollTransitions({ children }: { children: ReactNode }) 
         if (!brandPanel) return
 
         const brand = getBrandSequence(brandPanel)
-        if (!brand.media || !brand.story || !brand.tensoract || !brand.letters.length) return
+        if (!brand.cutout || !brand.media || !brand.note || !brand.story || !brand.tensoract || !brand.letters.length) return
 
         gsap.set(brand.media, { autoAlpha: 0, scale: 0.985, y: 40 })
         gsap.set(brand.letters, { autoAlpha: 0, yPercent: 115 })
+        gsap.set(brand.cutout, { autoAlpha: 0, scale: 0.985, y: 48 })
+        gsap.set(brand.note, { autoAlpha: 0, y: 8 })
         gsap.set(brand.story, { autoAlpha: 0, y: 32 })
         gsap.set(brand.tensoract, { autoAlpha: 0, y: 100 })
 
         const reveal = gsap.timeline({
           scrollTrigger: {
-            once: true,
+            end: 'bottom 12%',
+            scrub: 0.6,
             start: 'top 88%',
             trigger: brandPanel,
           },
@@ -506,27 +547,29 @@ export function SectionScrollTransitions({ children }: { children: ReactNode }) 
         reveal
           .to(brand.media, {
             autoAlpha: 1,
-            duration: 0.5,
+            duration: 0.72,
             ease: 'power2.out',
             scale: 1,
             y: 0,
           })
+          .to(brand.cutout, { autoAlpha: 1, duration: 0.72, ease: 'power2.out', scale: 1, y: 0 }, 0)
+          .to(brand.note, { autoAlpha: 1, duration: 0.36, ease: 'power2.out', y: 0 }, 0.42)
           .to(
             brand.letters,
             {
               autoAlpha: 1,
-              duration: 0.52,
+              duration: 0.8,
               ease: 'power3.out',
-              stagger: { amount: 0.2, from: 'start' },
+              stagger: { amount: 0.36, from: 'start' },
               yPercent: 0,
             },
-            0.52,
+            0.62,
           )
-          .to(brand.story, { autoAlpha: 1, duration: 0.4, ease: 'power2.out', y: 0 }, 1.1)
+          .to(brand.story, { autoAlpha: 1, duration: 0.55, ease: 'power2.out', y: 0 }, 1.45)
           .to(
             brand.tensoract,
-            { autoAlpha: 1, duration: 0.5, ease: 'power2.out', y: 0 },
-            1.3,
+            { autoAlpha: 1, duration: 0.65, ease: 'power2.out', y: 0 },
+            1.75,
           )
 
         return () => {
