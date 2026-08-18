@@ -592,6 +592,11 @@ html[data-section-stack='enabled'] { scroll-behavior: auto; }
   font-size: clamp(0.75rem, 1.2vw, 0.85rem);
   letter-spacing: 0.04em;
 }
+.wire-awards-wave__tail {
+  --wire-section-viewport-offset: 4.625rem;
+  height: calc(100svh - var(--wire-section-viewport-offset) + 28rem);
+  background: var(--background);
+}
 .wire-journey { display: grid; grid-template-columns: repeat(5, 1fr); margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--border); }
 .wire-journey li { min-height: 17rem; padding: 1.5rem; border-bottom: 1px solid var(--border); border-left: 1px solid var(--border); }
 .wire-journey li:last-child { border-right: 1px solid var(--border); }
@@ -789,6 +794,10 @@ html[data-section-stack='enabled'] { scroll-behavior: auto; }
     line-height: 0.78;
   }
   .wire-awards-wave__images { padding-block: clamp(0.5rem, 2vh, 1.5rem) 16vh; }
+  .wire-awards-wave__tail {
+    --wire-section-viewport-offset: 4.5rem;
+    height: calc(100svh - var(--wire-section-viewport-offset) + 20rem);
+  }
   .wire-journey { grid-template-columns: 1fr; }
   .wire-journey li { min-height: auto; padding: 1.25rem; border-right: 1px solid var(--border); }
   .wire-journey h3 { margin-top: 1.25rem; }

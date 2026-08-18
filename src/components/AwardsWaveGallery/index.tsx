@@ -312,7 +312,7 @@ export function AwardsWaveGallery({
 
     const headerTrigger = ScrollTrigger.create({
       trigger: section,
-      start: 'top 20%',
+      start: 'top 55%',
       end: 'bottom 80%',
       onToggle: (self) => {
         const header = document.querySelector<HTMLElement>('.wire-header')

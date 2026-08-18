@@ -246,6 +246,8 @@ export function WireframeHomepage({ locale, posts }: { locale: Locale; posts: In
       title={copy.recognition.title}
     />
 
+    <div aria-hidden="true" className="wire-awards-wave__tail" />
+
     <SectionScrollTransitions>
       <section className="wire-section wire-section--muted" data-section-panel id="journey">
         <SectionBackground />
