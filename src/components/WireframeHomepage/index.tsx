@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { AwardsWaveGallery } from '@/components/AwardsWaveGallery'
+import type { AwardSlide } from '@/components/AwardsWaveGallery'
 import { SectionScrollTransitions } from '@/components/SectionScrollTransitions'
 import { TensoractHero } from '@/components/TensoractHero'
 import type { Locale } from '@/i18n/config'
@@ -94,6 +96,39 @@ const affiliations = [
 
 const ecomboxLetters = [...'ECOMBOX']
 
+const awardSlidePool = [
+  '/assets/demo-day-uii/img-2007.jpg',
+  '/assets/demo-day-uii/img-5057.jpg',
+  '/assets/demo-day-uii/img-5065.jpg',
+  '/assets/demo-day-uii/vnp-0106.jpg',
+  '/assets/demo-day-uii/vnp-0114.jpg',
+  '/assets/demo-day-uii/vnp-0150.jpg',
+  '/assets/demo-day-uii/muoimedia-04015.jpg',
+  '/assets/demo-day-uii/muoimedia-04781.jpg',
+  '/assets/demo-day-uii/team-ecombox-champion-01.jpg',
+  '/assets/demo-day-uii/team-ecombox-champion-02.jpg',
+  '/assets/demo-day-uii/phk-00922.jpg',
+  '/assets/demo-day-uii/r6ne-7178.jpg',
+] as const
+
+const buildAwardSlides = (
+  items: ReadonlyArray<readonly [string, string, string]>,
+): AwardSlide[] => {
+  const captioned: AwardSlide[] = items.slice(0, awardSlidePool.length).map(
+    ([year, name, detail], index): AwardSlide => ({
+      alt: name,
+      detail,
+      image: awardSlidePool[index]!,
+      name,
+      year,
+    }),
+  )
+  const padding: AwardSlide[] = awardSlidePool
+    .slice(captioned.length)
+    .map((image) => ({ alt: '', image }))
+  return [...captioned, ...padding]
+}
+
 function SectionBackground() {
   return <div aria-hidden="true" className="wire-section__background" data-section-background />
 }
@@ -141,6 +176,7 @@ export function WireframeHomepage({ locale, posts }: { locale: Locale; posts: In
         className="wire-section wire-ecombox-section"
         data-brand-reveal
         data-section-header-color="#ffedd5"
+        data-section-hold="1.6"
         data-section-panel
         id="ecombox"
       >
@@ -202,12 +238,15 @@ export function WireframeHomepage({ locale, posts }: { locale: Locale; posts: In
           </div>
         </div>
       </section>
+    </SectionScrollTransitions>
 
-      <section className="wire-section" data-section-panel id="recognition">
-        <SectionBackground />
-        <div className="wire-container"><Heading intro={copy.recognition.intro} title={copy.recognition.title} /><div className="wire-recognition">{copy.recognition.items.map(([year, name, detail]) => <article data-section-animate key={`${year}-${name}`}><span className="wire-index">{year}</span><h3>{name}</h3><p>{detail}</p></article>)}</div></div>
-      </section>
+    <AwardsWaveGallery
+      intro={copy.recognition.intro}
+      slides={buildAwardSlides(copy.recognition.items)}
+      title={copy.recognition.title}
+    />
 
+    <SectionScrollTransitions>
       <section className="wire-section wire-section--muted" data-section-panel id="journey">
         <SectionBackground />
         <div className="wire-container"><Heading title={copy.journey.title} /><ol className="wire-journey">{copy.journey.items.map(([year, title, body]) => <li data-section-animate key={year}><span>{year}</span><h3>{title}</h3><p>{body}</p></li>)}</ol></div>

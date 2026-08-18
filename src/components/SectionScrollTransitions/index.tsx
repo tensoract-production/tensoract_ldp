@@ -17,7 +17,6 @@ const INCOMING_STAGGER_AMOUNT = 0.18
 const OUTGOING_DURATION = 0.48
 const OUTGOING_STAGGER_AMOUNT = 0.18
 const PANEL_SWITCH_POINT = 0.96
-const ECOMBOX_HOLD_EXTENSION = 1.6
 const ECOMBOX_REVEAL_DURATION = 2.4
 const SECTION_HOLD_DURATION = 0.9
 const SECTION_SETTLE_POINT = 1.56
@@ -32,6 +31,11 @@ const getTransitionDistance = (element: HTMLElement) => {
 const getSectionAlpha = (element: HTMLElement) => {
   const alpha = Number.parseFloat(element.dataset.sectionAlpha ?? '')
   return Number.isFinite(alpha) ? alpha : 1
+}
+
+const getSectionHold = (element: HTMLElement) => {
+  const hold = Number.parseFloat(element.dataset.sectionHold ?? '')
+  return Number.isFinite(hold) ? hold : 0
 }
 
 const getBrandSequence = (panel: ParentNode) => {
@@ -90,7 +94,9 @@ export function SectionScrollTransitions({ children }: { children: ReactNode }) 
         if (!hash || scrollStackToHash?.(hash)) return
 
         const target = document.getElementById(decodeURIComponent(hash))
-        if (target) scrollElementIntoView(target)
+        if (!target) return
+        if (target.closest('[data-section-stack="enabled"]')) return
+        scrollElementIntoView(target)
       }
       let hashNavigationFrame = 0
       const scheduleHashScroll = () => {
@@ -243,8 +249,8 @@ export function SectionScrollTransitions({ children }: { children: ReactNode }) 
 
         for (let index = 0; index < transitionCount; index += 1) {
           transitionStarts.push(timelineDuration)
-          timelineDuration +=
-            SECTION_STEP_DURATION + (index === 0 ? ECOMBOX_HOLD_EXTENSION : 0)
+          const incomingPanel = panels[index + 1]
+          timelineDuration += SECTION_STEP_DURATION + getSectionHold(incomingPanel!)
         }
         const timeline = gsap.timeline()
 

@@ -265,7 +265,6 @@ html[data-section-stack='enabled'] .wire-header { transition: none; }
 }
 .wire-section-flow[data-section-stack='enabled'] :is(
   .wire-list,
-  .wire-recognition,
   .wire-journey
 ) {
   border-top: 0;
@@ -527,11 +526,72 @@ html[data-section-stack='enabled'] { scroll-behavior: auto; }
 .wire-product { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr); gap: clamp(2.5rem, 7vw, 6rem); align-items: center; }
 .wire-product h3 { margin: 0 0 1rem; font-size: clamp(1.5rem, 3vw, 2.75rem); line-height: 1.08; letter-spacing: -0.04em; text-wrap: balance; }
 .wire-product > div:last-child > p { color: var(--muted-foreground); font-size: clamp(0.95rem, 1.5vw, 1.05rem); }
-.wire-recognition { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--border); }
-.wire-recognition article { min-height: 14rem; padding: 1.5rem 2rem 1.5rem 0; border-bottom: 1px solid var(--border); }
-.wire-recognition article + article { padding-left: 2rem; border-left: 1px solid var(--border); }
-.wire-recognition h3 { margin: 2rem 0 0.75rem; font-size: clamp(1.1rem, 1.8vw, 1.4rem); }
-.wire-recognition p { color: var(--muted-foreground); }
+.wire-awards-wave {
+  position: relative;
+  z-index: 1;
+  overflow: clip;
+  background: var(--background);
+}
+.wire-awards-wave__heading {
+  padding-block: clamp(2.5rem, 6vh, 4rem);
+}
+.wire-awards-wave__images {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-block: clamp(1rem, 4vh, 3rem) 14vh;
+}
+.wire-awards-wave__item {
+  position: relative;
+  overflow: visible;
+  width: min(100%, 52rem);
+  aspect-ratio: 16 / 9;
+}
+.wire-awards-wave__frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transform-origin: 50% 50%;
+  background: #d9dce0;
+}
+.wire-awards-wave__frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: 50% 50%;
+}
+.wire-awards-wave__frame.is-render-active {
+  will-change: transform, opacity;
+}
+.wire-awards-wave__frame.is-render-active img {
+  will-change: transform;
+}
+.wire-awards-wave__caption {
+  position: fixed;
+  z-index: 30;
+  right: max(clamp(1rem, 3vw, 3rem), env(safe-area-inset-right));
+  bottom: max(clamp(1rem, 3vw, 3rem), env(safe-area-inset-bottom));
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition:
+    opacity 160ms ease,
+    visibility 160ms step-end;
+}
+.wire-awards-wave__caption.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 160ms ease,
+    visibility 0ms step-start;
+}
+.wire-awards-wave__caption span {
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+  letter-spacing: 0.04em;
+}
 .wire-journey { display: grid; grid-template-columns: repeat(5, 1fr); margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--border); }
 .wire-journey li { min-height: 17rem; padding: 1.5rem; border-bottom: 1px solid var(--border); border-left: 1px solid var(--border); }
 .wire-journey li:last-child { border-right: 1px solid var(--border); }
@@ -728,9 +788,7 @@ html[data-section-stack='enabled'] { scroll-behavior: auto; }
     font-size: clamp(7.5rem, 34vw, 11rem);
     line-height: 0.78;
   }
-  .wire-recognition { grid-template-columns: 1fr; }
-  .wire-recognition article { min-height: 0; padding: 1.25rem 0; }
-  .wire-recognition article + article { padding-left: 0; border-left: 0; }
+  .wire-awards-wave__images { padding-block: clamp(0.5rem, 2vh, 1.5rem) 16vh; }
   .wire-journey { grid-template-columns: 1fr; }
   .wire-journey li { min-height: auto; padding: 1.25rem; border-right: 1px solid var(--border); }
   .wire-journey h3 { margin-top: 1.25rem; }
@@ -746,6 +804,20 @@ html[data-section-stack='enabled'] { scroll-behavior: auto; }
 
 @media (hover: none), (pointer: coarse) {
   .wire-section-flow > .wire-section { min-height: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wire-awards-wave__frame {
+    transform: none !important;
+    will-change: auto;
+  }
+  .wire-awards-wave__frame img {
+    transform: none !important;
+    will-change: auto;
+  }
+  .wire-awards-wave__caption {
+    transition: none;
+  }
 }
 
 @media (min-width: 40rem) and (max-width: 48rem) {
