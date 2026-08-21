@@ -214,7 +214,7 @@ export function WireframeHomepage({ locale, posts }: { locale: Locale; posts: In
               loading="eager"
               quality={90}
               sizes="(max-width: 48rem) calc(100vw - 2rem), min(58vw, 48rem)"
-              src="/assets/demo-day-uii/ecombox-duo-cutout.png"
+              src="/assets/demo-day-uii/ecombox-duo-cutout.webp"
             />
           </div>
 
